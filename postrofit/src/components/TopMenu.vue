@@ -30,7 +30,7 @@ export default {};
   /* UI Properties */
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 30px #0303034d;
+  box-shadow: 0px 3px 6px #0303034d;
   border-radius: 9px;
   opacity: 1;
 }
