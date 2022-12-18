@@ -11,7 +11,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    clickedItem: Object,
+  },
+  data() {
+    return {
+      top: this.clickedItem.top - 50 + "px",
+      left: this.clickedItem.left + 45 + "px",
+    };
+  },
+};
 </script>
 
 <style>
@@ -19,8 +29,11 @@ export default {};
   display: flex;
   position: absolute;
   /* Layout Properties */
-  top: 456px;
-  left: 178px;
+
+  top: v-bind(top);
+  left: v-bind(left);
+  /* top: 456px; */
+  /* left: 178px; */
   width: 113px;
   height: 43px;
   /* UI Properties */
