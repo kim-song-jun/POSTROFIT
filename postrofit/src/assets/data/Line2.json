@@ -1,0 +1,362 @@
+{
+  "line": 2,
+  "stations": [
+    {
+      "name": "충정로",
+      "left": 56,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [5]
+    },
+    {
+      "name": "시청",
+      "left": 110,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [1]
+    },
+    {
+      "name": "을지로입구",
+      "left": 161,
+      "top": 296,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "을지로 3가",
+      "left": 213,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [3]
+    },
+    {
+      "name": "을지로 4가",
+      "left": 265,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [5]
+    },
+    {
+      "name": "동대문역사문화공원",
+      "left": 318,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [4, 5]
+    },
+    {
+      "name": "신당",
+      "left": 369,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [6]
+    },
+    {
+      "name": "상왕십리",
+      "left": 420,
+      "top": 296,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "왕십리",
+      "left": 473,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [5, "경의중앙", "분당"]
+    },
+    {
+      "name": "한양대",
+      "left": 525,
+      "top": 296,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "뚝섬",
+      "left": 577,
+      "top": 296,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "성수",
+      "left": 630,
+      "top": 296,
+      "isTransfer": true,
+      "transferStation": [2]
+    },
+    {
+      "name": "건대입구",
+      "left": 630,
+      "top": 341,
+      "isTransfer": true,
+      "transferStation": [7]
+    },
+    {
+      "name": "구의",
+      "left": 630,
+      "top": 387,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "강변",
+      "left": 630,
+      "top": 432,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "잠실나루",
+      "left": 630,
+      "top": 476,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "잠실",
+      "left": 630,
+      "top": 521,
+      "isTransfer": true,
+      "transferStation": [8]
+    },
+    {
+      "name": "잠실새내",
+      "left": 630,
+      "top": 566,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "종합운동장",
+      "left": 630,
+      "top": 613,
+      "isTransfer": true,
+      "transferStation": [9]
+    },
+    {
+      "name": "삼성",
+      "left": 630,
+      "top": 655,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "선릉",
+      "left": 630,
+      "top": 700,
+      "isTransfer": true,
+      "transferStation": ["분당"]
+    },
+    {
+      "name": "역삼",
+      "left": 593,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "강남",
+      "left": 548,
+      "top": 734,
+      "isTransfer": true,
+      "transferStation": ["신분당"]
+    },
+    {
+      "name": "교대",
+      "left": 505,
+      "top": 734,
+      "isTransfer": true,
+      "transferStation": [3]
+    },
+    {
+      "name": "서초",
+      "left": 462,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "방배",
+      "left": 419,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "사당",
+      "left": 378,
+      "top": 734,
+      "isTransfer": true,
+      "transferStation": [4]
+    },
+    {
+      "name": "낙성대",
+      "left": 334,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "서울대입구",
+      "left": 291,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "봉천",
+      "left": 248,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "신림",
+      "left": 207,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "신대방",
+      "left": 164,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "구로디지털단지",
+      "left": 119,
+      "top": 734,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "대림",
+      "left": 77,
+      "top": 734,
+      "isTransfer": true,
+      "transferStation": [7]
+    },
+    {
+      "name": "신도림",
+      "left": 15,
+      "top": 734,
+      "isTransfer": true,
+      "transferStation": [1]
+    },
+    {
+      "name": "문래",
+      "left": 15,
+      "top": 671,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "영등포구청",
+      "left": 15,
+      "top": 626,
+      "isTransfer": true,
+      "transferStation": [5]
+    },
+    {
+      "name": "당산",
+      "left": 15,
+      "top": 580,
+      "isTransfer": true,
+      "transferStation": [9]
+    },
+    {
+      "name": "합정",
+      "left": 15,
+      "top": 537,
+      "isTransfer": true,
+      "transferStation": [6]
+    },
+    {
+      "name": "홍대입구",
+      "left": 15,
+      "top": 491,
+      "isTransfer": true,
+      "transferStation": ["경의중앙", "공항"]
+    },
+    {
+      "name": "신촌",
+      "left": 15,
+      "top": 447,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "이대",
+      "left": 15,
+      "top": 403,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "아현",
+      "left": 15,
+      "top": 357,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "도림천",
+      "left": 15,
+      "top": 793,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "양천구청",
+      "left": 54,
+      "top": 828,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "신정네거리",
+      "left": 99,
+      "top": 830,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "까치산",
+      "left": 148,
+      "top": 829,
+      "isTransfer": true,
+      "transferStation": [5]
+    },
+    {
+      "name": "용답",
+      "left": 630,
+      "top": 231,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "신답",
+      "left": 593,
+      "top": 130,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "용두",
+      "left": 550,
+      "top": 128,
+      "isTransfer": false,
+      "transferStation": []
+    },
+    {
+      "name": "신설동",
+      "left": 503,
+      "top": 128,
+      "isTransfer": true,
+      "transferStation": [1]
+    }
+  ]
+}
