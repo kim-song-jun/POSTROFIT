@@ -1,6 +1,6 @@
 <template>
-  <!-- <line-2></line-2> -->
   <Test></Test>
+  <!-- <line-2></line-2> -->
 </template>
 
 <script>

@@ -1,7 +1,6 @@
 <template>
   <div class="mainPage_container">
     <TopMenu></TopMenu>
-    <StationSelect></StationSelect>
     <div class="mainPage_bottom_menu_container">
       <MenuBar></MenuBar>
       <div class="mainPage_bottom_menu_content">
@@ -56,13 +55,13 @@
 
 <script>
 import TopMenu from "../components/TopMenu.vue";
-import StationSelect from "../components/stationSelect.vue";
+// import StationSelect from "../components/stationSelect.vue";
 import MenuBar from "../components/MenuBar.vue";
 
 export default {
   components: {
     TopMenu,
-    StationSelect,
+    // StationSelect,
     MenuBar,
   },
 };
