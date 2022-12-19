@@ -13,17 +13,17 @@
     </div>
     <div class="userPage_text">
       요금:
-      <span class="usingLocker_point_text">2000원</span> / 4시간
+      <span class="userPage_point_text">2000원</span> / 4시간
     </div>
     <div class="usingLocker_empty"></div>
     <div class="userPage_text">
       사이즈:
-      <span class="usingLocker_point_text">중형</span>
+      <span class="userPage_point_text">중형</span>
     </div>
     <div class="usingLocker_empty2"></div>
     <div class="userPage_text4">보관 기간</div>
     <div class="userPage_text3 usingLocker_time">
-      2022/10/16 <span class="usingLocker_point_text">12:12:13</span> ~
+      2022/10/16 <span class="userPage_point_text">12:12:13</span> ~
     </div>
     <div class="userPage_text4 usingLocker_term">현재까지</div>
   </div>
@@ -42,10 +42,6 @@ export default {};
   height: 5vw;
   width: 100%;
 }
-.usingLocker_point_text {
-  /* UI Properties */
-  color: #6fbb69;
-}
 .usingLocker_container {
   margin-top: 1.3vw;
   padding: 5vw;
@@ -62,6 +58,21 @@ export default {};
 }
 .usingLocker_about {
   margin-bottom: 4.5vw;
+}
+.usingLocker_line_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  /* Layout Properties */
+  top: 5.5vw;
+  left: 4vw;
+  width: 9vw;
+  height: 9vw;
+  /* UI Properties */
+  /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
+  background: #6fbb69 0% 0% no-repeat padding-box;
+  border-radius: 5vw;
 }
 .usingLocker_textbox2 {
   margin-left: 10.5vw;
