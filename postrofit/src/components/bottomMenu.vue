@@ -54,15 +54,8 @@ export default {
 <style>
 .bottomMenu_container {
   position: fixed;
-  /* bottom: 0; */
-  /* position: absolute; */
-  /* width: 200px; */
-  /* height: 100px; */
-  /* Layout Properties */
-  /* top: 231px; */
   bottom: 0px;
   left: 0px;
-  /* margin: 0 auto; */
   width: 100vw;
   height: 50vw;
   /* UI Properties */
@@ -105,8 +98,6 @@ export default {
   align-items: center;
   box-sizing: border-box;
   /* Layout Properties */
-  /* top: 61px; */
-  /* left: 79px; */
   width: 29vw;
   height: 7.5vw;
   /* UI Properties */
@@ -129,8 +120,6 @@ export default {
   align-items: center;
   margin-right: 5vw;
   /* Layout Properties */
-  /* top: 885px; */
-  /* left: 25px; */
   width: 11vw;
   height: 3vw;
   /* UI Properties */
@@ -152,9 +141,6 @@ export default {
 .bottomMenu_size {
   margin-bottom: 2vw;
   /* Layout Properties */
-  /* top: 859px; */
-  /* left: 82px; */
-  /* width: 61px; */
   height: 5vw;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
