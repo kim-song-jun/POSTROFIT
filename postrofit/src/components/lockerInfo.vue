@@ -42,16 +42,16 @@ export default {};
 
 <style>
 .lockerInfo_container {
-  padding: 18px 0px 24px 43px;
+  padding: 4.5vw 0vw 6vw 11vw;
 }
 .lockerInfo_locker {
-  margin-bottom: 42px;
-  height: 342px;
-  width: 500px;
+  margin-bottom: 10.5vw;
+  height: 85.5vw;
+  width: 125vw;
   background: gray;
 }
 .lockerInfo_state {
-  margin-left: 6px;
+  margin-left: 1.5vw;
   display: flex;
 }
 .lockerInfo_state_column {
@@ -60,18 +60,16 @@ export default {};
 }
 .lockerInfo_state_row {
   display: flex;
-  margin: 0px 0px 10px;
+  margin: 0vw 0vw 2.5vw;
 }
 .lockerInfo_state_color {
-  margin: 0px 5px 0px 0px;
+  margin-right: 1.2vw;
   /* Layout Properties */
-  /* top: 549px; */
-  /* left: 49px; */
-  width: 29px;
-  height: 18px;
+  width: 7.2vw;
+  height: 4.5vw;
   /* UI Properties */
   /* background: 0% 0% no-repeat padding-box; */
-  border-radius: 5px;
+  border-radius: 1.2vw;
   opacity: 1;
 }
 .lockerInfo_state_using {
@@ -93,17 +91,12 @@ export default {};
   background: #ffc702 0% 0% no-repeat padding-box;
 }
 .lockerInfo_state_desc {
-  margin: 0px 5px 0px 0px;
-  /* Layout Properties */
-  /* top: 550px; */
-  /* left: 83px; */
-  /* width: 36px; */
-  /* height: 16px; */
+  margin-right: 1.2vw;
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     12px/16px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-707070);
+  color: var(--unnamed-color-707070); */
   text-align: left;
   font: normal normal bold 12px/16px Roboto;
   letter-spacing: 0px;

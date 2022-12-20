@@ -21,57 +21,59 @@ export default {
 <style>
 .topMenu_container {
   position: fixed;
-  width: 200px;
-  height: 100px;
   /* Layout Properties */
-  top: 44px;
-  left: 13px;
-  /* margin: 0 auto; */
-  width: 395px;
-  height: 69px;
+  top: 5vw;
+  left: 3.5vw;
+  width: 93vw;
+  height: 17.5vw;
   /* UI Properties */
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #0303034d;
-  border-radius: 9px;
+  border-radius: 5vw;
   opacity: 1;
 }
 .topMenu_content {
-  width: 365px;
+  width: 86vw;
   display: flex;
   /* justify-content: center; */
   align-items: center;
   position: absolute;
   /* Layout Properties */
-  top: 15px;
-  left: 15px;
+  top: 5vw;
+  left: 4vw;
 }
 .topMenu_user_circle {
-  width: 40px;
-  height: 40px;
+  width: 7.5vw;
+  height: 7.5vw;
   /* UI Properties */
   background: transparent 0% 0% no-repeat padding-box;
-  border-radius: 26px;
+  border-radius: 5vw;
   opacity: 1;
 }
 .topMenu_stations {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   width: 100%;
 }
 .topMenu_bar {
   border-right: 1.5px darkgray solid;
-  height: 34px;
-  margin: 0 10px;
+  height: 7.5vw;
+  margin: 0vw 2.5vw;
+}
+.topMenu_arrow {
+  width: 6.2vw;
+  height: 4.2vw;
 }
 .topMenu_source,
 .topMenu_destination {
   margin: 0;
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-20) / 26px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-707070);
+  color: var(--unnamed-color-707070); */
   text-align: left;
   font: normal normal bold 20px/26px Roboto;
   letter-spacing: 0px;
