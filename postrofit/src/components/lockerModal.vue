@@ -26,7 +26,7 @@ export default {};
   left: 0;
   z-index: 1;
 
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .lockerModal_container {
   margin: 195px auto 0px;
