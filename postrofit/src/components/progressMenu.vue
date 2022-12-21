@@ -43,19 +43,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12.5vw 12.5vw 4vw;
-  /* margin: 10.5vw 0vw 0vw; */
+  padding: 12.5vw 12.5vw 2vw;
 }
 .progressMenu_graybar {
   position: absolute;
-  /* Layout Properties */
   top: 26.5vw;
-  left: 8vw;
+  left: 8.5vw;
   z-index: -1;
+  /* Layout Properties */
   width: 83vw;
   height: 2vw;
   /* UI Properties */
-  background: var(--unnamed-color-d8d6d6) 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-d8d6d6) 0% 0% no-repeat padding-box; */
   background: #d8d6d6 0% 0% no-repeat padding-box;
   border-radius: 30vw;
   opacity: 1;
@@ -80,7 +79,7 @@ export default {
   width: 9.5vw;
   height: 9.5vw;
   /* UI Properties */
-  background: var(--unnamed-color-707070) 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-707070) 0% 0% no-repeat padding-box; */
   background: #707070 0% 0% no-repeat padding-box;
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-20) / 26px Roboto;
@@ -93,7 +92,7 @@ export default {
   opacity: 1;
 }
 .progressMenu_desc {
-  padding: 0vw 0vw 4vw;
+  padding: 0vw 0vw 2vw;
   min-width: 60px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)

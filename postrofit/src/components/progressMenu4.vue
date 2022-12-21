@@ -43,8 +43,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12.5vw 12.5vw 4vw;
-  /* margin: 10.5vw 0vw 0vw; */
+  padding: 12.5vw 12.5vw 2vw;
 }
 .progressMenu_graybar {
   position: absolute;
@@ -91,7 +90,7 @@ export default {
   opacity: 1;
 }
 .progressMenu_desc {
-  padding: 0vw 0vw 4vw;
+  padding: 0vw 0vw 2vw;
   min-width: 60px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
