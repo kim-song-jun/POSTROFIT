@@ -26,25 +26,23 @@ export default {};
   left: 0;
   z-index: 1;
 
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .lockerModal_container {
-  margin: 195px auto 0px;
+  margin: 48.8vw auto 0vw;
   /* Layout Properties */
-  /* top: 218px; */
-  /* left: 32px; */
-  width: 356px;
-  height: 371px;
+  width: 89vw;
+  height: 92.8vw;
   /* UI Properties */
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 10px;
+  border-radius: 2.5vw;
   opacity: 1;
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     30px/39px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-707070);
+  color: var(--unnamed-color-707070); */
   text-align: center;
   font: normal normal bold 30px/39px Roboto;
   letter-spacing: 0px;
@@ -52,13 +50,13 @@ export default {};
   opacity: 1;
 }
 .lockerModal_title {
-  padding: 42px 0px 10px;
+  padding: 10.5vw 0vw 2.5vw;
 }
 .lockerModal_warning {
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal normal 16px/21px Roboto;
+  /* font: var(--unnamed-font-style-normal) normal normal 16px/21px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-6fbb69);
+  color: var(--unnamed-color-6fbb69); */
   text-align: center;
   font: normal normal normal 16px/21px Roboto;
   letter-spacing: 0px;
@@ -66,15 +64,15 @@ export default {};
   opacity: 1;
 }
 .lockerModal_location {
-  margin: 54px 0px 10px;
+  margin: 13.5vw 0vw 2.5vw;
 }
 .lockerModal_passwd {
-  margin-bottom: 44px;
+  margin-bottom: 11vw;
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     30px/39px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-6fbb69);
+  color: var(--unnamed-color-6fbb69); */
   text-align: center;
   font: normal normal bold 30px/39px Roboto;
   letter-spacing: 0px;
@@ -84,20 +82,18 @@ export default {};
 .lockerModal_button {
   border: none;
   /* Layout Properties */
-  /* top: 520px; */
-  /* left: 72px; */
-  width: 277px;
-  height: 46px;
+  width: 69.2vw;
+  height: 11.5vw;
   /* UI Properties */
-  background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
-  border-radius: 7px;
+  border-radius: 1.5vw;
   opacity: 1;
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-20) / 26px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-ffffff);
+  color: var(--unnamed-color-ffffff); */
   text-align: center;
   font: normal normal bold 20px/26px Roboto;
   letter-spacing: 0px;
