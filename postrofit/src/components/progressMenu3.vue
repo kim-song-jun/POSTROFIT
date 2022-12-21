@@ -6,13 +6,13 @@
       <div class="progressMenu_circle">01</div>
     </div>
     <div class="progressMenu_menu">
-      <!-- <div class="progressMenu_desc">물품 선택</div> -->
-      <!-- <div class="progressMenu_circle">02</div> -->
-      <div class="progressMenu_check">02</div>
+      <div class="progressMenu_desc">물품 선택</div>
+      <div class="progressMenu_circle">02</div>
     </div>
     <div class="progressMenu_menu">
-      <div class="progressMenu_desc">{{ progress[2] }}</div>
-      <div class="progressMenu_circle">03</div>
+      <!-- <div class="progressMenu_desc">{{ progress[2] }}</div> -->
+      <!-- <div class="progressMenu_circle">03</div> -->
+      <div class="progressMenu_check">03</div>
     </div>
     <div class="progressMenu_menu">
       <div class="progressMenu_desc">{{ progress[3] }}</div>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="progressMenu_desc_container">
-    <div class="progressMenu_now">{{ progress[1] }}</div>
+    <div class="progressMenu_now">{{ progress[2] }}</div>
     <div class="progressMenu_desc_sub">
       장소, 사이즈, 이용금액, 주의사항 확인
     </div>
@@ -131,7 +131,7 @@ export default {
 .progressMenu_desc_container {
   width: 51vw;
   height: 12vw;
-  margin-left: 13vw;
+  margin-left: 35vw;
 }
 .progressMenu_now {
   /* UI Properties */

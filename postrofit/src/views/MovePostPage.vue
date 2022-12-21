@@ -40,9 +40,7 @@ export default {
 
 <style>
 .movePost_container {
-  /* width: 420px; */
   width: 100vw;
-  /* height: 211vw; */
   position: absolute;
   top: 20px;
 }
@@ -53,11 +51,11 @@ export default {
 }
 .movePost_location {
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
     var(--unnamed-font-family-roboto);
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-707070);
+  color: var(--unnamed-color-707070); */
   text-align: left;
   font: normal normal bold 24px/32px Roboto;
   letter-spacing: 0px;
@@ -66,11 +64,11 @@ export default {
 }
 .movePost_location_sub {
   /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal
+  /* font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-10) /
     var(--unnamed-line-spacing-13) var(--unnamed-font-family-roboto);
   letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-cfcfcf);
+  color: var(--unnamed-color-cfcfcf); */
   text-align: left;
   font: normal normal normal 10px/13px Roboto;
   letter-spacing: 0px;
@@ -161,7 +159,7 @@ export default {
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
-  box-shadow: 0vw 0.8vw 1.5vw #00000029;
+  box-shadow: 0px 3px 6px #00000029;
   border-radius: 2vw;
 
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)

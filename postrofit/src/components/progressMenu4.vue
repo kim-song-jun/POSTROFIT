@@ -6,21 +6,21 @@
       <div class="progressMenu_circle">01</div>
     </div>
     <div class="progressMenu_menu">
-      <!-- <div class="progressMenu_desc">물품 선택</div> -->
-      <!-- <div class="progressMenu_circle">02</div> -->
-      <div class="progressMenu_check">02</div>
+      <div class="progressMenu_desc">물품 선택</div>
+      <div class="progressMenu_circle">02</div>
     </div>
     <div class="progressMenu_menu">
       <div class="progressMenu_desc">{{ progress[2] }}</div>
       <div class="progressMenu_circle">03</div>
     </div>
     <div class="progressMenu_menu">
-      <div class="progressMenu_desc">{{ progress[3] }}</div>
-      <div class="progressMenu_circle">04</div>
+      <!-- <div class="progressMenu_desc">{{ progress[3] }}</div> -->
+      <!-- <div class="progressMenu_circle">04</div> -->
+      <div class="progressMenu_check">04</div>
     </div>
   </div>
   <div class="progressMenu_desc_container">
-    <div class="progressMenu_now">{{ progress[1] }}</div>
+    <div class="progressMenu_now">{{ progress[3] }}</div>
     <div class="progressMenu_desc_sub">
       장소, 사이즈, 이용금액, 주의사항 확인
     </div>
@@ -64,8 +64,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Layout Properties */
-  /* width: 350px; */
   /* UI Properties */
   opacity: 1;
 }
@@ -74,7 +72,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 5vw;
-  margin: 0vw 6.5vw;
+  margin: 0vw 5.5vw;
   /* Layout Properties */
   width: 9.5vw;
   height: 9.5vw;
@@ -131,7 +129,7 @@ export default {
 .progressMenu_desc_container {
   width: 51vw;
   height: 12vw;
-  margin-left: 13vw;
+  margin-left: 38vw;
 }
 .progressMenu_now {
   /* UI Properties */
@@ -140,7 +138,7 @@ export default {
     var(--unnamed-font-family-roboto);
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-707070); */
-  text-align: center;
+  text-align: right;
   font: normal normal bold 24px/32px Roboto;
   letter-spacing: 0px;
   color: #707070;
@@ -153,7 +151,7 @@ export default {
     var(--unnamed-line-spacing-13) var(--unnamed-font-family-roboto);
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-cfcfcf); */
-  text-align: center;
+  text-align: right;
   font: normal normal normal 10px/13px Roboto;
   letter-spacing: 0px;
   color: #cfcfcf;
