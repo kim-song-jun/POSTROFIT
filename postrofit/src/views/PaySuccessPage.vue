@@ -71,6 +71,7 @@ export default {
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
   border-radius: 2vw;
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-20) / 26px Roboto;
