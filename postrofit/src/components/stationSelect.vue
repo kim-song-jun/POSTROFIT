@@ -21,6 +21,12 @@ export default {
       left: this.clickedItem.left + 45 + "px",
     };
   },
+  methods :{
+    clickedStart(){
+      this.$store.commit('setStartStation',this.clickedItem)
+      this.$store.commit('setSelectedStation',{clicked:})
+    }
+  }
 };
 </script>
 

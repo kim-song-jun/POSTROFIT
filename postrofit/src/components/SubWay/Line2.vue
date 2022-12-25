@@ -49,9 +49,12 @@ export default {
   methods: {
     clickHandler(item) {
       this.clicked = !this.clicked;
-
       // item.left = item.left + 100;
       this.clickedItem = item;
+      this.$store.commit("setSelectedStation", {
+        clicked: this.clicked,
+        clickedItem: this.clickedItem,
+      });
     },
     isTransfer(transfer) {
       if (transfer) {
