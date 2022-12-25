@@ -4,9 +4,13 @@
       <img class="topMenu_user_circle" src="../assets/images/user.png" alt="" />
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
-        <p class="topMenu_source">사당역</p>
+        <p class="topMenu_source">
+          {{ getStationName($store.state.StartStation) }}
+        </p>
         <img class="topMenu_arrow" src="../assets/images/arrow.png" alt="" />
-        <p class="topMenu_destination">강남역</p>
+        <p class="topMenu_destination">
+          {{ getStationName($store.state.EndStation) }}
+        </p>
       </div>
     </div>
   </div>
@@ -15,6 +19,14 @@
 <script>
 export default {
   props: {},
+  methods: {
+    getStationName(station) {
+      if (station.name != null && station.name != undefined) {
+        return station.name;
+      }
+      return "";
+    },
+  },
 };
 </script>
 

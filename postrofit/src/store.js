@@ -5,7 +5,8 @@ const store = createStore({
     return {
       StartStation: {},
       EndStation: {},
-      SelectedStation: { clicked: false },
+      SelectedStation: {},
+      clicked: false,
     };
   },
   mutations: {
@@ -17,6 +18,12 @@ const store = createStore({
     },
     setSelectedStation(state, selected) {
       state.SelectedStation = selected;
+    },
+    toggleClicked(state) {
+      state.clicked = !state.clicked;
+    },
+    setClicked(state, clicked) {
+      state.clicked = clicked;
     },
   },
 });

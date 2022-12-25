@@ -25,7 +25,7 @@
       />
     </map>
     <StationSelect
-      v-if="this.clicked"
+      v-if="$store.state.clicked"
       :clickedItem="this.clickedItem"
     ></StationSelect>
   </div>
@@ -41,20 +41,16 @@ export default {
   },
   data() {
     return {
-      clicked: false,
       line2: line2Data.stations,
       clickedItem: {},
     };
   },
   methods: {
     clickHandler(item) {
-      this.clicked = !this.clicked;
+      this.$store.commit("toggleClicked");
       // item.left = item.left + 100;
       this.clickedItem = item;
-      this.$store.commit("setSelectedStation", {
-        clicked: this.clicked,
-        clickedItem: this.clickedItem,
-      });
+      this.$store.commit("setSelectedStation", this.clickedItem);
     },
     isTransfer(transfer) {
       if (transfer) {
