@@ -1,6 +1,17 @@
 <template>
   <div class="lockerInfo_container">
-    <div class="lockerInfo_locker"></div>
+    <div class="lockerInfo_locker">
+      <table>
+        <tr v-for="(item, key) in this.lockerData" :key="key">
+          <td
+            class="lockerTable_cell"
+            v-for="(value, index) in item"
+            :key="index"
+            :rowspan="this.setPostSize(value)"
+          ></td>
+        </tr>
+      </table>
+    </div>
     <div class="lockerInfo_state">
       <div class="lockerInfo_state_column">
         <div class="lockerInfo_state_row">
@@ -37,18 +48,61 @@
 </template>
 
 <script>
-export default {};
+import locker from '../assets/data/locker.json';
+
+export default {
+  data() {
+    return {
+      lockerData: locker.Locker,
+      count: 1,
+    };
+  },
+  methods: {
+    setPostSize(value) {
+      if (value == 'M') {
+        return 2;
+      } else if (value == 'L') {
+        return 4;
+      }
+      return 1;
+    },
+    temp(id) {
+      console.log(id);
+    },
+  },
+};
 </script>
 
 <style>
+table {
+  border-collapse: separate;
+  border-spacing: 10px;
+  min-width: 100vw;
+  width: 125vw;
+}
+
+tr td {
+  width: 25vw;
+  height: 16vw;
+  box-shadow: 0 0 0 10px #fff;
+  border-radius: 10px;
+  background-color: #707070;
+}
+.lockerTable_cell {
+  vertical-align: text-top;
+  padding-left: 10px;
+  padding-top: 10px;
+}
 .lockerInfo_container {
   padding: 4.5vw 0vw 6vw 11vw;
 }
 .lockerInfo_locker {
   margin-bottom: 10.5vw;
-  height: 85.5vw;
-  width: 125vw;
-  background: gray;
+  /* height: 85.5vw; */
+  width: 100vw;
+  overflow-x: auto;
+  margin-left: -3vw;
+  margin-right: 3vw;
 }
 .lockerInfo_state {
   margin-left: 1.5vw;

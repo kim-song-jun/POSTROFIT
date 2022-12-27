@@ -23,8 +23,8 @@ export default {
   },
   data() {
     return {
-      top: this.clickedItem.top - 50 + "px",
-      left: this.clickedItem.left + 45 + "px",
+      top: this.clickedItem.top - 50 + 'px',
+      left: this.clickedItem.left + 45 + 'px',
     };
   },
   methods: {
@@ -34,10 +34,10 @@ export default {
         this.$store.state.SelectedStation.name ==
         this.$store.state.EndStation.name
       ) {
-        this.$store.commit("setEndStation", {});
+        this.$store.commit('setEndStation', {});
       }
-      this.$store.commit("setStartStation", this.clickedItem);
-      this.$store.commit("toggleClicked");
+      this.$store.commit('setStartStation', this.clickedItem);
+      this.$store.commit('toggleClicked');
     },
     clickedEnd() {
       // 현재 선택한 역과, 출발역이이 같을경우(ex: 사당 -> 사당)
@@ -45,10 +45,19 @@ export default {
         this.$store.state.SelectedStation.name ==
         this.$store.state.StartStation.name
       ) {
-        this.$store.commit("setStartStation", {});
+        this.$store.commit('setStartStation', {});
+        this.$store.commit('setCurrentState', 2);
       }
-      this.$store.commit("setEndStation", this.clickedItem);
-      this.$store.commit("toggleClicked");
+      this.$store.commit('setEndStation', this.clickedItem);
+      this.$store.commit('toggleClicked');
+    },
+    checkNext() {
+      if (
+        this.$store.state.EndStation.length > 0 &&
+        this.$store.state.StartStation > 0
+      ) {
+        this.$router.go();
+      }
     },
   },
 };
@@ -92,7 +101,7 @@ export default {
   opacity: 1;
 }
 .stationSelect_arrow_down_right::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
@@ -110,7 +119,7 @@ export default {
   border-radius: 10px 10px 10px 0px;
 }
 .stationSelect_arrow_down_left::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
