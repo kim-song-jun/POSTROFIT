@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
 const store = createStore({
   state() {
@@ -7,9 +7,14 @@ const store = createStore({
       EndStation: {},
       SelectedStation: {},
       clicked: false,
+      openSelected: false,
     };
   },
   mutations: {
+    setOpenSelected(state, openSelected) {
+      state.openSelected = openSelected;
+    },
+
     setStartStation(state, start) {
       state.StartStation = start;
     },
@@ -24,6 +29,13 @@ const store = createStore({
     },
     setClicked(state, clicked) {
       state.clicked = clicked;
+    },
+  },
+  actions: {
+    initStation(context) {
+      context.commit("setStartStation", {});
+      context.commit("setEndStation", {});
+      context.commit("setSelectedStation", {});
     },
   },
 });

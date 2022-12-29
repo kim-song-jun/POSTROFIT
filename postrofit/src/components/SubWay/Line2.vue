@@ -1,10 +1,9 @@
 <template>
-  <div class="Line2">
+  <div>
     <img
-      class="image"
-      usemap="#image_map"
-      @click="imageClicked"
       src="../../assets/images/노선도.png"
+      usemap="#image_map"
+      style="margin-left: 100px"
     />
 
     <map name="image_map">
@@ -26,10 +25,10 @@
 </template>
 
 <script>
-import line2Data from '../../assets/data/Line2.json';
-import StationSelect from '../stationSelect.vue';
+import line2Data from "../../assets/data/Line2.json";
+import StationSelect from "../stationSelect.vue";
 export default {
-  name: 'line-2',
+  name: "line-2",
   components: {
     StationSelect,
   },
@@ -41,14 +40,10 @@ export default {
   },
   methods: {
     clickHandler(item) {
-      console.log('@click >> Line2.vue: clickHandler(item)');
-      this.$store.commit('toggleClicked');
+      this.$store.commit("toggleClicked");
       // item.left = item.left + 100;
       this.clickedItem = item;
-      this.$store.commit('setSelectedStation', this.clickedItem);
-
-      if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      else event.isImmediatePropagationEnabled = false;
+      this.$store.commit("setSelectedStation", this.clickedItem);
     },
     isTransfer(transfer) {
       if (transfer) {
@@ -56,30 +51,11 @@ export default {
       }
       return 6;
     },
-    imageClicked() {
-      if (this.$store.state.clicked == true) {
-        this.$store.commit('toggleClicked');
-      }
-    },
   },
 };
 </script>
 
 <style>
-.Line2 {
-  overflow: auto;
-}
-.image {
-  /* width: 100%; */
-  /* min-width: 100%; */
-  margin-left: 100px;
-  /* pointer-events: none; */
-  -webkit-touch-callout: none;
-  user-select: none;
-  -webkit-user-select: none;
-
-  /* background-image: url('../../assets/images/노선도.png'); */
-}
 .line2_popup {
   background-color: black;
   color: white;
