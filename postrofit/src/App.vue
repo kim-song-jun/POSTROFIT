@@ -16,5 +16,8 @@ body {
   padding: 0;
   font-family: 'Roboto';
   color: #707070;
+  height: 100vh;
+  width: 100vh;
+  overflow: hidden;
 }
 </style>

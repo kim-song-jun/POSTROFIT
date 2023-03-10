@@ -1,26 +1,29 @@
 <template>
-  <div>
-    <img
-      src="../../assets/images/노선도.png"
-      usemap="#image_map"
-      style="margin-left: 100px"
-    />
-
-    <map name="image_map">
-      <area
-        v-for="(item, key) in this.line2"
-        :key="key"
-        :alt="item.name"
-        :title="item.name"
-        :coords="`${item.left},${item.top},${this.isTransfer(item.isTransfer)}`"
-        shape="circle"
-        @click="this.clickHandler($event, item)"
+  <div class="Line2-Containter">
+    <div class="Line2-ImageContainer">
+      <img
+        src="../../assets/images/노선도.png"
+        usemap="#image_map"
+        style="margin-left: 100px; margin-top: 100px; margin-bottom: 100px"
       />
-    </map>
-    <StationSelect
-      v-if="$store.state.clicked"
-      :clickedItem="this.clickedItem"
-    ></StationSelect>
+      <map name="image_map">
+        <area
+          v-for="(item, key) in this.line2"
+          :key="key"
+          :alt="item.name"
+          :title="item.name"
+          :coords="`${item.left},${item.top},${this.isTransfer(
+            item.isTransfer,
+          )}`"
+          shape="circle"
+          @click="this.clickHandler($event, item)"
+        />
+      </map>
+      <StationSelect
+        v-if="$store.state.clicked"
+        :clickedItem="this.clickedItem"
+      ></StationSelect>
+    </div>
   </div>
 </template>
 
@@ -61,15 +64,13 @@ export default {
 </script>
 
 <style>
-.line2_popup {
-  background-color: black;
-  color: white;
-  /* 110,296,8 */
-  border-radius: 10px;
-  width: 8px;
-  height: 8px;
-  top: 292px;
-  left: 106px;
-  position: absolute;
+.Line2-Containter {
+  overflow: auto;
+  width: 390px;
+  height: 844px;
+}
+.Line2-ImageContainer {
+  width: 100%;
+  height: 100%;
 }
 </style>

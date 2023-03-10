@@ -73,16 +73,12 @@ export default {
 <style>
 .stationSelect_container {
   display: flex;
-  position: absolute;
-  /* Layout Properties */
-
+  position: fixed;
+  z-index: 10;
   top: v-bind(top);
   left: v-bind(left);
-  /* top: 456px; */
-  /* left: 178px; */
   width: 113px;
   height: 43px;
-  /* UI Properties */
   opacity: 1;
 }
 .stationSelect_container button {
@@ -97,12 +93,8 @@ export default {
   justify-content: center;
   color: white;
   position: relative;
-  /* Layout Properties */
-  /* top: 456px; */
-  /* left: 236px; */
   width: 55px;
   height: 35px;
-  /* UI Properties */
   background: var(--unnamed-color-707070) 0% 0% no-repeat padding-box;
   background: #707070 0% 0% no-repeat padding-box;
   opacity: 1;
