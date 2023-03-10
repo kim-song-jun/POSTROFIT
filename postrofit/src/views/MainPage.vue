@@ -1,7 +1,9 @@
 <template>
-  <div class="mainPage_container">
+  <div class="MainPage-Container">
     <TopMenu></TopMenu>
-    <line-2></line-2>
+    <div class="MainPage-Line2">
+      <line-2></line-2>
+    </div>
     <bottomMenu
       v-if="this.$store.state.clicked && !this.openLocker()"
     ></bottomMenu>
@@ -42,4 +44,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.MainPage-Container {
+  width: 100vh;
+  height: 100vh;
+}
+.MainPage-Line2 {
+  width: 100vh;
+  height: 100vh;
+  overflow: auto;
+}
+</style>

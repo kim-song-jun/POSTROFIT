@@ -23,8 +23,8 @@ export default {
   },
   data() {
     return {
-      top: this.clickedItem.top - 50 + 'px',
-      left: this.clickedItem.left + 45 + 'px',
+      top: this.clickedItem.y - 43 + 'px',
+      left: this.clickedItem.x - 57 + 'px',
     };
   },
   methods: {

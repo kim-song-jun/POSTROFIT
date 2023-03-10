@@ -7,7 +7,7 @@ import LockerPage from './views/LockerPage.vue';
 const routes = [
   {
     path: '/',
-    component: MainPage,
+    component: () => import('../src/views/LoadingPage.vue'),
   },
   {
     path: '/MainPage',

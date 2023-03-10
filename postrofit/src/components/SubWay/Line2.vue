@@ -14,7 +14,7 @@
         :title="item.name"
         :coords="`${item.left},${item.top},${this.isTransfer(item.isTransfer)}`"
         shape="circle"
-        @click="this.clickHandler(item)"
+        @click="this.clickHandler($event, item)"
       />
     </map>
     <StationSelect
@@ -39,11 +39,16 @@ export default {
     };
   },
   methods: {
-    clickHandler(item) {
+    clickHandler(event, item) {
+      console.log(event.clientX);
+      console.log(event.clientY);
       this.$store.commit('toggleClicked');
       // item.left = item.left + 100;
-      this.clickedItem = item;
-      this.$store.commit('setSelectedStation', this.clickedItem);
+      this.clickedItem = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+      this.$store.commit('setSelectedStation', item);
     },
     isTransfer(transfer) {
       if (transfer) {

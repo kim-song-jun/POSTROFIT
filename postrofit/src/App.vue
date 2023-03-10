@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import '@fontsource/roboto';
 export default {
   name: 'App',
   components: {},
@@ -13,5 +14,7 @@ export default {
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Roboto';
+  color: #707070;
 }
 </style>
