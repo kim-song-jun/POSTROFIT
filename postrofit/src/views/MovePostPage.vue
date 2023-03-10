@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import MenuBar from "../components/MenuBar.vue";
-import ProgressMenu from "../components/progressMenu.vue";
+import MenuBar from '../components/MenuBar.vue';
+import ProgressMenu from '../components/progressMenu.vue';
 
 export default {
   components: {

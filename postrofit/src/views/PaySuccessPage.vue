@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import MenuBar from "../components/MenuBar.vue";
-import progressMenu from "../components/progressMenu4.vue";
-import noticeBox from "../components/noticeBox.vue";
+import MenuBar from '../components/MenuBar.vue';
+import progressMenu from '../components/progressMenu4.vue';
+import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {

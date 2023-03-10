@@ -1,15 +1,23 @@
+// eslintrc.js
+
 module.exports = {
-  root: true,
   env: {
+    browser: true,
+    es2021: true,
     node: true,
   },
-  extends: ["plugin:vue/vue3-essential", "eslint:recommended"],
+  extends: [
+    'plugin:vue/vue3-essential',
+    'google',
+    'plugin:prettier/recommended',
+  ],
+  overrides: [],
   parserOptions: {
-    parser: "@babel/eslint-parser",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
+  plugins: ['vue'],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "vue/multi-word-component-names": "off",
+    requireJsdoc: 'off',
   },
 };

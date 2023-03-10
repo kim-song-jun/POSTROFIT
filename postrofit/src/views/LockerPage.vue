@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import MenuBar from "../components/MenuBar.vue";
-import LockerInfo from "../components/lockerInfo.vue";
-import noticeBox from "../components/noticeBox.vue";
+import MenuBar from '../components/MenuBar.vue';
+import LockerInfo from '../components/lockerInfo.vue';
+import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {

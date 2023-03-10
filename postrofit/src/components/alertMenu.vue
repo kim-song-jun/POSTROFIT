@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      notation: "옮길게요 ~ 강남역 A 24호",
+      notation: '옮길게요 ~ 강남역 A 24호',
     };
   },
 };

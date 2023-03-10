@@ -16,7 +16,8 @@
       </div>
       <div class="checkBill_term">보관 기간</div>
       <div class="checkBill_date">
-        2022/10/16 <span class="checkBill_green">12:12:13</span> ~
+        2022/10/16
+        <span class="checkBill_green">12:12:13</span> ~
       </div>
     </div>
     <progressMenu></progressMenu>
@@ -28,9 +29,9 @@
 </template>
 
 <script>
-import MenuBar from "@/components/MenuBar.vue";
-import progressMenu from "@/components/progressMenu.vue";
-import noticeBox from "@/components/noticeBox.vue";
+import MenuBar from '@/components/MenuBar.vue';
+import progressMenu from '@/components/progressMenu.vue';
+import noticeBox from '@/components/noticeBox.vue';
 
 export default {
   components: {
@@ -48,15 +49,16 @@ export default {
   top: 20px;
 }
 .movePost_location_container {
-  margin: 8vw 0vw 8vw 8vw;
+  margin: 8vw 0vw;
+  margin-right: 8vw;
   width: 47vw;
   height: 11vw;
   /* UI Properties */
-  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
-    var(--unnamed-font-family-roboto);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-707070); */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) */
+  /* var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32) */
+  /* var(--unnamed-font-family-roboto); */
+  /* letter-spacing: var(--unnamed-character-spacing-0); */
+  /* color: var(--unnamed-color-707070); */
   text-align: left;
   font: normal normal bold 24px/32px Roboto;
   letter-spacing: 0px;

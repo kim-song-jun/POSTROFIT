@@ -9,7 +9,8 @@
           요금: <span class="cancelModal_size">2000원</span>
         </div>
         <div class="cancelModal_text4">
-          사이즈: <span class="cancelModal_price">소형</span>
+          사이즈:
+          <span class="cancelModal_price">소형</span>
         </div>
       </div>
       <noticeBox></noticeBox>
@@ -19,8 +20,8 @@
 </template>
 
 <script>
-import locationBox from "../components/locationBox.vue";
-import noticeBox from "../components/noticeBox.vue";
+import locationBox from '../components/locationBox.vue';
+import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {

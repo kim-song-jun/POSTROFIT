@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import lockerInfoHistory from "../components/lockerInfoHistory.vue";
-import noticeBox from "../components/noticeBox.vue";
+import lockerInfoHistory from '../components/lockerInfoHistory.vue';
+import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {

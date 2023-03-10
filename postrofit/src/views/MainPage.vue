@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import TopMenu from "../components/TopMenu.vue";
-import bottomMenu from "../components/bottomMenu.vue";
-import bottomLocker from "../components/bottomLocker.vue";
-import Line2 from "@/components/SubWay/Line2.vue";
+import TopMenu from '../components/TopMenu.vue';
+import bottomMenu from '../components/bottomMenu.vue';
+import bottomLocker from '../components/bottomLocker.vue';
+import Line2 from '@/components/SubWay/Line2.vue';
 export default {
   components: {
     TopMenu,
@@ -31,13 +31,13 @@ export default {
       ) {
         return false;
       } else {
-        this.$store.commit("setClicked", true);
+        this.$store.commit('setClicked', true);
         return true;
       }
     },
   },
   mounted() {
-    this.$store.dispatch("initStation", {});
+    this.$store.dispatch('initStation', {});
   },
 };
 </script>

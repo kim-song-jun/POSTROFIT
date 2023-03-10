@@ -23,7 +23,8 @@
     <div class="usingLocker_empty2"></div>
     <div class="userPage_text4">보관 기간</div>
     <div class="userPage_text3 usingLocker_time">
-      2022/10/16 <span class="userPage_point_text">12:12:13</span> ~
+      2022/10/16
+      <span class="userPage_point_text">12:12:13</span> ~
     </div>
     <div class="userPage_text4 usingLocker_term">현재까지</div>
   </div>

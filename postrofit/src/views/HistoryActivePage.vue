@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import locationBoxActive from "@/components/locationBoxActive.vue";
-import progressMenu from "@/components/progressMenu.vue";
-import noticeBox from "@/components/noticeBox.vue";
+import locationBoxActive from '@/components/locationBoxActive.vue';
+import progressMenu from '@/components/progressMenu.vue';
+import noticeBox from '@/components/noticeBox.vue';
 
 export default {
   components: {

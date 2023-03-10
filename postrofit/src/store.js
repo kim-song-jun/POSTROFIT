@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import {createStore} from 'vuex';
 
 const store = createStore({
   state() {
@@ -33,9 +33,9 @@ const store = createStore({
   },
   actions: {
     initStation(context) {
-      context.commit("setStartStation", {});
-      context.commit("setEndStation", {});
-      context.commit("setSelectedStation", {});
+      context.commit('setStartStation', {});
+      context.commit('setEndStation', {});
+      context.commit('setSelectedStation', {});
     },
   },
 });

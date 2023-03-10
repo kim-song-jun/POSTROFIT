@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import MenuBar from "../components/MenuBar.vue";
-import ProgressMenu from "../components/progressMenu3.vue";
-import locationBox from "../components/locationBox.vue";
-import noticeBox from "@/components/noticeBox.vue";
+import MenuBar from '../components/MenuBar.vue';
+import ProgressMenu from '../components/progressMenu3.vue';
+import locationBox from '../components/locationBox.vue';
+import noticeBox from '@/components/noticeBox.vue';
 
 export default {
   components: {

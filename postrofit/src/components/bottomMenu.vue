@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import MenuBar from "./MenuBar.vue";
+import MenuBar from './MenuBar.vue';
 
 export default {
   components: {

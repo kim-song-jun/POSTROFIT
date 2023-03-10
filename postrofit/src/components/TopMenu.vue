@@ -24,7 +24,7 @@ export default {
       if (station.name != null && station.name != undefined) {
         return station.name;
       }
-      return "";
+      return '';
     },
   },
 };

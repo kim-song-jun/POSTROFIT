@@ -23,21 +23,21 @@ export default {
   },
   data() {
     return {
-      top: this.clickedItem.top - 50 + "px",
-      left: this.clickedItem.left + 45 + "px",
+      top: this.clickedItem.top - 50 + 'px',
+      left: this.clickedItem.left + 45 + 'px',
     };
   },
   methods: {
     clickedStart() {
       // 현재 선택한 역과, 도착역이 같을경우(ex: 사당 -> 사당)
-      console.log("@click >> stationSelect.vue: clickedStart()");
+      console.log('@click >> stationSelect.vue: clickedStart()');
       if (
         this.$store.state.SelectedStation.name ==
         this.$store.state.EndStation.name
       ) {
-        this.$store.commit("setEndStation", {});
+        this.$store.commit('setEndStation', {});
       }
-      this.$store.commit("setStartStation", this.clickedItem);
+      this.$store.commit('setStartStation', this.clickedItem);
 
       if (
         Object.keys(this.$store.state.EndStation).length > 0 &&
@@ -45,18 +45,18 @@ export default {
       ) {
         return;
       }
-      this.$store.commit("toggleClicked");
+      this.$store.commit('toggleClicked');
     },
     clickedEnd() {
       // 현재 선택한 역과, 출발역이이 같을경우(ex: 사당 -> 사당)
-      console.log("@click >> stationSelect.vue: clickedEnd()");
+      console.log('@click >> stationSelect.vue: clickedEnd()');
       if (
         this.$store.state.SelectedStation.name ==
         this.$store.state.StartStation.name
       ) {
-        this.$store.commit("setStartStation", {});
+        this.$store.commit('setStartStation', {});
       }
-      this.$store.commit("setEndStation", this.clickedItem);
+      this.$store.commit('setEndStation', this.clickedItem);
 
       if (
         Object.keys(this.$store.state.EndStation).length > 0 &&
@@ -64,7 +64,7 @@ export default {
       ) {
         return;
       }
-      this.$store.commit("toggleClicked");
+      this.$store.commit('toggleClicked');
     },
   },
 };
@@ -108,7 +108,7 @@ export default {
   opacity: 1;
 }
 .stationSelect_arrow_down_right::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
@@ -126,7 +126,7 @@ export default {
   border-radius: 10px 10px 10px 0px;
 }
 .stationSelect_arrow_down_left::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;

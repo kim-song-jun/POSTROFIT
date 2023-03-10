@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import historyReceipt from "../components/historyReceipt.vue";
-import usingLocker from "../components/usingLocker.vue";
+import historyReceipt from '../components/historyReceipt.vue';
+import usingLocker from '../components/usingLocker.vue';
 
 export default {
   components: {
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      nickname: "김성준",
+      nickname: '김성준',
     };
   },
 };

@@ -17,8 +17,8 @@ export default {
   },
   data() {
     return {
-      top: this.clickedItem.top - 50 + "px",
-      left: this.clickedItem.left + 45 + "px",
+      top: this.clickedItem.top - 50 + 'px',
+      left: this.clickedItem.left + 45 + 'px',
     };
   },
 };
@@ -61,7 +61,7 @@ export default {
   letter-spacing: 0px;
 }
 .stationSelect_arrow_down_right::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
@@ -79,7 +79,7 @@ export default {
   border-radius: 2.5vw 2.5vw 2.5vw 0vw;
 }
 .stationSelect_arrow_down_left::after {
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;

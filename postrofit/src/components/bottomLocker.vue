@@ -19,13 +19,14 @@
       </div>
       <span class="bottomLocker_size">대형 0개,</span>
       <span class="bottomLocker_size">중형 5개,</span>
-      <span class="bottomLocker_size">소형 10개</span> 사용가능
+      <span class="bottomLocker_size">소형 10개</span>
+      사용가능
     </div>
   </div>
 </template>
 
 <script>
-import MenuBar from "../components/MenuBar.vue";
+import MenuBar from '../components/MenuBar.vue';
 
 export default {
   components: {

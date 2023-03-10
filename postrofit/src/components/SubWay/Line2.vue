@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import line2Data from "../../assets/data/Line2.json";
-import StationSelect from "../stationSelect.vue";
+import line2Data from '../../assets/data/Line2.json';
+import StationSelect from '../stationSelect.vue';
 export default {
-  name: "line-2",
+  name: 'line-2',
   components: {
     StationSelect,
   },
@@ -40,10 +40,10 @@ export default {
   },
   methods: {
     clickHandler(item) {
-      this.$store.commit("toggleClicked");
+      this.$store.commit('toggleClicked');
       // item.left = item.left + 100;
       this.clickedItem = item;
-      this.$store.commit("setSelectedStation", this.clickedItem);
+      this.$store.commit('setSelectedStation', this.clickedItem);
     },
     isTransfer(transfer) {
       if (transfer) {
