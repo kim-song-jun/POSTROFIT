@@ -73,7 +73,7 @@ export default {
 <style>
 .stationSelect_container {
   display: flex;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   top: v-bind(top);
   left: v-bind(left);
