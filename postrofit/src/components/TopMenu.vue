@@ -21,6 +21,7 @@ export default {
   props: {},
   methods: {
     getStationName(station) {
+      // console.log(station);
       if (station.name != null && station.name != undefined) {
         return station.name;
       }
@@ -44,6 +45,7 @@ export default {
   box-shadow: 0px 3px 6px #0303034d;
   border-radius: 5vw;
   opacity: 1;
+  z-index: 100;
 }
 .topMenu_content {
   width: 86vw;

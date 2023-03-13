@@ -32,8 +32,8 @@ export default {
       // 현재 선택한 역과, 도착역이 같을경우(ex: 사당 -> 사당)
       console.log('@click >> stationSelect.vue: clickedStart()');
       if (
-        this.$store.state.SelectedStation.name ==
-        this.$store.state.EndStation.name
+        this.$store.state.SelectedStation?.name ==
+        this.$store.state.EndStation?.name
       ) {
         this.$store.commit('setEndStation', {});
       }
@@ -45,7 +45,7 @@ export default {
       ) {
         return;
       }
-      this.$store.commit('toggleClicked');
+      this.$store.commit('setClicked', false);
     },
     clickedEnd() {
       // 현재 선택한 역과, 출발역이이 같을경우(ex: 사당 -> 사당)
@@ -64,7 +64,7 @@ export default {
       ) {
         return;
       }
-      this.$store.commit('toggleClicked');
+      this.$store.commit('setClicked', false);
     },
   },
 };
