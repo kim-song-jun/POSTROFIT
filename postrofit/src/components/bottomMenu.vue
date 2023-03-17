@@ -53,7 +53,8 @@ export default {
 
 <style>
 .bottomMenu_container {
-  position: fixed;
+  position: absolute;
+  z-index: 9999;
   bottom: 0px;
   left: 0px;
   width: 100vw;
