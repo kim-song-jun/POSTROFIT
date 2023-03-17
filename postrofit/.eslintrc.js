@@ -19,5 +19,6 @@ module.exports = {
   plugins: ['vue'],
   rules: {
     requireJsdoc: 'off',
+    'prettier/prettier': ['error', {endOfLine: 'auto'}],
   },
 };
