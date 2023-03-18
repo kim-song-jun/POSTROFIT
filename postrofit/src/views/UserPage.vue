@@ -1,5 +1,9 @@
 <template>
   <div class="userPage_container">
+    <lockerModal
+      v-if="lockerModalOpen"
+      @closeLockerModal="lockerModalOpen = false"
+    ></lockerModal>
     <div class="userPage_top">
       <div class="userPage_arrow" @click="$router.go(-1)">
         <div class="userPage_arrow_top"></div>
@@ -21,13 +25,15 @@
 </template>
 
 <script>
+import lockerModal from '../components/lockerModal.vue';
 
 export default {
   components: {
+    lockerModal,
   },
   data() {
     return {
-      nickname: '김성준',
+      lockerModalOpen: false,
     };
   },
 };
