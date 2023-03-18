@@ -16,6 +16,7 @@
         내 보관함
       </div> -->
     </div>
+    <router-view @openLockerModal="lockerModalOpen = true"></router-view>
   </div>
 </template>
 
