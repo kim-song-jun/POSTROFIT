@@ -1,7 +1,12 @@
 <template>
   <div class="topMenu_container">
     <div class="topMenu_content">
-      <img class="topMenu_user_circle" src="../assets/images/user.png" alt="" />
+      <img
+        class="topMenu_user_circle"
+        src="../assets/images/user.png"
+        alt=""
+        @click="$router.push('/UserPage')"
+      />
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
         <p class="topMenu_source">
