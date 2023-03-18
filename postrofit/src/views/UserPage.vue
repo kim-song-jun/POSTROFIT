@@ -1,7 +1,7 @@
 <template>
   <div class="userPage_container">
     <div class="userPage_top">
-      <div class="userPage_arrow">
+      <div class="userPage_arrow" @click="$router.go(-1)">
         <div class="userPage_arrow_top"></div>
         <div class="userPage_arrow_bottom"></div>
       </div>
