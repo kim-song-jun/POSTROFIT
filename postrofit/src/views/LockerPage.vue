@@ -59,9 +59,6 @@ export default {
   color: #cfcfcf;
   opacity: 1;
 }
-.lockerPage_noticeBox {
-  margin-left: 10.5vw;
-}
 .lockerPage_button {
   border: none;
   display: block;

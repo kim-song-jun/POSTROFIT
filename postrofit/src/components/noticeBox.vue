@@ -43,9 +43,8 @@ export default {};
 
 <style>
 .noticeBox_container {
-  margin-top: 8vw;
-  margin-bottom: 8vw;
-  margin-left: 4.5vw;
+  width: auto;
+  margin: 8vw auto;
 }
 .noticeBox_warning {
   /* UI Properties */
@@ -74,10 +73,9 @@ export default {};
 }
 .noticeBox_box {
   margin-top: 3.5vw;
-  padding: 3vw 3vw 1vw;
+  padding: 2.3vh 3vw 2vh;
   /* Layout Properties */
-  width: 73vw;
-  height: 31vw;
+  height: 16.2vh;
   /* UI Properties */
   /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;

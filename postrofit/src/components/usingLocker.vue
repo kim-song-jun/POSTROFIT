@@ -1,32 +1,32 @@
 <template>
-  <div class="usingLocker_container">
+  <div class="usingLocker_container" @click="$router.push('/UserPage/locker')">
     <div class="usingLocker_about">
-      <div class="usingLocker_line_container userPage_text3">2</div>
+      <div class="usingLocker_line_circle usingLocker_line_text">2</div>
       <div class="usingLocker_textbox2">
-        <div class="userPage_text2">서울특별시 동작구 남부순환로 지하2089</div>
-        <div class="userPage_text3">2호선 사당A</div>
+        <div class="userHome_text2">서울특별시 동작구 남부순환로 지하2089</div>
+        <div class="userHome_text3">2호선 사당A</div>
       </div>
       <div class="usingLocker_arrow">
-        <div class="userPage_arrow_top"></div>
-        <div class="userPage_arrow_bottom"></div>
+        <div class="usingLocker_arrow_top"></div>
+        <div class="usingLocker_arrow_bottom"></div>
       </div>
     </div>
-    <div class="userPage_text">
+    <div class="userHome_text">
       요금:
-      <span class="userPage_point_text">2000원</span> / 4시간
+      <span class="userHome_point_text">2000원</span> / 4시간
     </div>
     <div class="usingLocker_empty"></div>
-    <div class="userPage_text">
+    <div class="userHome_text">
       사이즈:
-      <span class="userPage_point_text">중형</span>
+      <span class="userHome_point_text">중형</span>
     </div>
     <div class="usingLocker_empty2"></div>
-    <div class="userPage_text4">보관 기간</div>
-    <div class="userPage_text3 usingLocker_time">
+    <div class="userHome_text4">보관 기간</div>
+    <div class="userHome_text3 usingLocker_time">
       2022/10/16
-      <span class="userPage_point_text">12:12:13</span> ~
+      <span class="userHome_point_text">12:12:13</span> ~
     </div>
-    <div class="userPage_text4 usingLocker_term">현재까지</div>
+    <div class="userHome_text4 usingLocker_term">현재까지</div>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {};
 .usingLocker_about {
   margin-bottom: 4.5vw;
 }
-.usingLocker_line_container {
+.usingLocker_line_circle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,19 +75,38 @@ export default {};
   background: #6fbb69 0% 0% no-repeat padding-box;
   border-radius: 5vw;
 }
+.usingLocker_line_text {
+  /* UI Properties */
+  font: normal normal normal 20px/26px Roboto;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #fff;
+  opacity: 1;
+}
 .usingLocker_textbox2 {
   margin-left: 10.5vw;
-}
-.usingLocker_arrow {
-  position: absolute;
-  left: 76vw;
-  top: 10vw;
-  height: 2.5vw;
-  width: 1.5vw;
-  transform: rotate(180deg);
 }
 .usingLocker_time {
   margin: 0vw auto;
   width: 54vw;
+}
+.usingLocker_arrow {
+  position: absolute;
+  right: 0vw;
+  top: 26vw;
+}
+.usingLocker_arrow .usingLocker_arrow_top,
+.usingLocker_arrow .usingLocker_arrow_bottom {
+  background-color: #666;
+  height: 1.5px;
+  width: 15px;
+}
+.usingLocker_arrow_top {
+  transform: rotate(-135deg);
+  transform-origin: bottom left;
+}
+.usingLocker_arrow_bottom {
+  transform: rotate(135deg);
+  transform-origin: top left;
 }
 </style>
