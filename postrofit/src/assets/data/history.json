@@ -1,0 +1,44 @@
+{
+  "history": [
+    {
+      "id": 0,
+      "hisType": "active",
+      "urn": "active",
+      "date": "10/15",
+      "price": 2500,
+      "size": "중형",
+      "type": "옮길게요",
+      "place": ["사당", "강남"]
+    },
+    {
+      "id": 0,
+      "hisType": "cancel",
+      "urn": "end",
+      "date": "10/15",
+      "price": 2500,
+      "size": "중형",
+      "type": "옮길게요",
+      "place": ["사당", "강남"]
+    },
+    {
+      "id": 1,
+      "hisType": "end",
+      "urn": "end",
+      "date": "10/14",
+      "price": 2500,
+      "size": "중형",
+      "type": "옮길게요",
+      "place": ["사당", "강남"]
+    },
+    {
+      "id": 2,
+      "hisType": "end",
+      "urn": "end",
+      "date": "10/13",
+      "price": 2500,
+      "size": "중형",
+      "type": "보관할게요",
+      "place": ["2호선 사당A"]
+    }
+  ]
+}
