@@ -36,6 +36,20 @@ export default {
 </script>
 
 <style>
+.bottomLocker_container {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 50vw;
+  /* UI Properties */
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  /* background: #fff 0% 0% no-repeat padding-box; */
+  opacity: 1;
+  background-color: wheat;
+}
+
 .bottomLocker_text {
   /* UI Properties */
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)

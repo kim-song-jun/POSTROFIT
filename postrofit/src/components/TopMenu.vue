@@ -5,11 +5,11 @@
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
         <p class="topMenu_source">
-          {{ getStationName($store.state.StartStation) }}
+          {{ this.$store.state.StartStation.name ?? '' }}
         </p>
         <img class="topMenu_arrow" src="../assets/images/arrow.png" alt="" />
         <p class="topMenu_destination">
-          {{ getStationName($store.state.EndStation) }}
+          {{ this.$store.state.EndStation.name ?? '' }}
         </p>
       </div>
     </div>
@@ -19,14 +19,7 @@
 <script>
 export default {
   props: {},
-  methods: {
-    getStationName(station) {
-      if (station.name != null && station.name != undefined) {
-        return station.name;
-      }
-      return '';
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -44,6 +37,7 @@ export default {
   box-shadow: 0px 3px 6px #0303034d;
   border-radius: 5vw;
   opacity: 1;
+  z-index: 10;
 }
 .topMenu_content {
   width: 86vw;
