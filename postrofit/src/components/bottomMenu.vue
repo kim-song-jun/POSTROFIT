@@ -3,7 +3,7 @@
     <MenuBar></MenuBar>
     <div class="bottomMenu_content">
       <div class="bottomMenu_column">
-        <div class="bottomMenu_source">사당</div>
+        <div class="bottomMenu_source">{{ this.startStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
             <img
@@ -21,7 +21,7 @@
       </div>
       <img class="bottomMenu_arrow" src="../assets/images/arrow.png" alt="" />
       <div class="bottomMenu_column">
-        <div class="bottomMenu_destination">강남</div>
+        <div class="bottomMenu_destination">{{ this.endStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
             <img
@@ -47,6 +47,17 @@ import MenuBar from './MenuBar.vue';
 export default {
   components: {
     MenuBar,
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
   },
 };
 </script>

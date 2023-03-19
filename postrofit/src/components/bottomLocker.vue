@@ -3,10 +3,16 @@
     <MenuBar></MenuBar>
     <div class="bottomLocker_stations">
       <div class="bottomLocker_stations_sub bottomLocker_text">
-        <div class="bottomLocker_stations_start">방배</div>
-        <div class="bottomLocker_stations_end">낙성대</div>
+        <div class="bottomLocker_stations_start">
+          {{ this.selectStation.pre }}
+        </div>
+        <div class="bottomLocker_stations_end">
+          {{ this.selectStation.next }}
+        </div>
       </div>
-      <div class="bottomLocker_stations_main">사당</div>
+      <div class="bottomLocker_stations_main">
+        {{ this.selectStation.name }}
+      </div>
     </div>
     <div class="bottomLocker_usable">
       <div class="bottomLocker_image_container bottomLocker_text">
@@ -32,22 +38,32 @@ export default {
   components: {
     MenuBar,
   },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
+  },
 };
 </script>
 
 <style>
 .bottomLocker_container {
   position: fixed;
-  z-index: 9999;
+  z-index: 10;
   bottom: 0px;
   left: 0px;
   width: 100vw;
   height: 50vw;
   /* UI Properties */
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
   /* background: #fff 0% 0% no-repeat padding-box; */
   opacity: 1;
-  background-color: wheat;
 }
 
 .bottomLocker_text {
