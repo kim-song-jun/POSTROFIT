@@ -5,11 +5,11 @@
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
         <p class="topMenu_source">
-          {{ this.$store.state.StartStation.name ?? '' }}
+          {{ this.$store.state.startStation?.name ?? '출발역' }}
         </p>
         <img class="topMenu_arrow" src="../assets/images/arrow.png" alt="" />
         <p class="topMenu_destination">
-          {{ this.$store.state.EndStation.name ?? '' }}
+          {{ this.$store.state.endStation?.name ?? '도착역' }}
         </p>
       </div>
     </div>

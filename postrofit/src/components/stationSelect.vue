@@ -25,8 +25,44 @@ export default {
     return {};
   },
   methods: {
-    clickedStart() {},
-    clickedEnd() {},
+    clickedStart() {
+      this.$store.commit('setStartStation', this.selectStation);
+      if (this.endStation?.name == this.selectStation.name) {
+        this.$store.commit('setEndStation', {});
+      }
+      this.$store.commit('setBottomLockerOpen', false);
+      const start = this.startStation?.name?.length ?? 0;
+      const end = this.endStation?.name?.length ?? 0;
+      if (start && end) {
+        this.$store.commit('setBottomMenuOpen', true);
+      }
+    },
+    clickedEnd() {
+      this.$store.commit('setEndStation', this.selectStation);
+      if (this.startStation?.name == this.selectStation.name) {
+        this.$store.commit('setStartStation', {});
+      }
+      this.$store.commit('setBottomLockerOpen', false);
+      const start = this.startStation?.name?.length ?? 0;
+      const end = this.endStation?.name?.length ?? 0;
+      if (start && end) {
+        this.$store.commit('setBottomMenuOpen', true);
+      }
+    },
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
+  },
+  mounted() {
+    console.log(this.clickedItem);
   },
 };
 </script>
