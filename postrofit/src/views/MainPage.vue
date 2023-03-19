@@ -1,14 +1,10 @@
 <template>
   <div class="MainPage-Container">
     <topMenu></topMenu>
-    <MainButton @scale="scale" :translate="this.trans"></MainButton>
-    <subwayLine2 @translate="translate" :scale="this.sca"></subwayLine2>
-    <bottomMenu
-      v-if="this.$store.state.clicked && !this.openLocker()"
-    ></bottomMenu>
-    <bottomLocker
-      v-if="this.$store.state.clicked && this.openLocker()"
-    ></bottomLocker>
+    <MainButton @scale="setScale" :translate="this.translate"></MainButton>
+    <subwayLine2 @translate="setTranslate" :scale="this.scale"></subwayLine2>
+    <bottomMenu v-if="this.$store.state.bottomMenuOpen"></bottomMenu>
+    <bottomLocker v-if="this.$store.state.bottomLockerOpen"></bottomLocker>
   </div>
 </template>
 
@@ -28,27 +24,16 @@ export default {
   },
   data() {
     return {
-      trans: 'translate(0px, 0px)',
-      sca: 1,
+      translate: 'translate(0px, 0px)',
+      scale: 1,
     };
   },
   methods: {
-    translate(value) {
-      this.trans = value;
+    setTranslate(value) {
+      this.translate = value;
     },
-    scale(value) {
-      this.sca = value;
-    },
-    openLocker() {
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return false;
-      } else {
-        this.$store.commit('setClicked', true);
-        return true;
-      }
+    setScale(value) {
+      this.scale = value;
     },
   },
 };

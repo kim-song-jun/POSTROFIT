@@ -81,6 +81,8 @@ export default {
       this.x = event.clientX;
       this.y = event.clientY;
       this.line2[key].open = true;
+      this.$store.commit('setSelectStation', this.line2[key]);
+      this.$store.commit('setBottomLockerOpen', true);
     },
     imgHandleTouchStart(event) {
       const touch = event.touches[0];
@@ -95,6 +97,7 @@ export default {
       this.startY = touch.clientY;
       this.translateX += moveX;
       this.translateY += moveY;
+      console.log(this.scale);
       event.target.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
       const imageRect = this.$refs.image.getBoundingClientRect();
       this.rect = {
@@ -141,6 +144,26 @@ export default {
       return transfer ? 8 : 6;
     },
   },
+  computed: {
+    bottomMenuOpen() {
+      return this.$store.state.bottomMenuOpen;
+    },
+    bottomLockerOpen() {
+      return this.$store.state.bottomLockerOpen;
+    },
+  },
+  watch: {
+    bottomMenuOpen(state) {
+      if (!state) {
+        this.line2 = this.line2.map((item) => ({...item, open: false}));
+      }
+    },
+    bottomLockerOpen(state) {
+      if (!state) {
+        this.line2 = this.line2.map((item) => ({...item, open: false}));
+      }
+    },
+  },
   mounted() {},
   created() {
     this.line2 = [...this.$store.state.LINE2_JSON.stations];
@@ -158,7 +181,7 @@ export default {
 }
 .Line2-Containter {
   position: relative;
-  background-color: aqua;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
