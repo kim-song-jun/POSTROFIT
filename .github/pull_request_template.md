@@ -20,21 +20,23 @@
 <!-- // Open한 MR에 Comment를 남긴 후 Close -->
 
 ## Docs
- - [jira 이슈 링크]()
- - [이슈 보드 링크]()
+
+- [jira 이슈 링크]()
+- [이슈 보드 링크]()
 
 ## Changes
- - before)
- - after)
- - images
+
+- before ::
+- after ::
+- images
 
 ## Review Points
+
 #### Problem
-
-
 
 #### Solution
 
 ## Test Checklist
- - [ ] check 1
- - [ ] check 2
+
+- [ ] check 1
+- [ ] check 2
