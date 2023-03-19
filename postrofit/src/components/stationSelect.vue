@@ -22,50 +22,11 @@ export default {
     clickedItem: Object,
   },
   data() {
-    return {
-      top: this.clickedItem.y - 43 + 'px',
-      left: this.clickedItem.x - 57 + 'px',
-    };
+    return {};
   },
   methods: {
-    clickedStart() {
-      // 현재 선택한 역과, 도착역이 같을경우(ex: 사당 -> 사당)
-      console.log('@click >> stationSelect.vue: clickedStart()');
-      if (
-        this.$store.state.SelectedStation?.name ==
-        this.$store.state.EndStation?.name
-      ) {
-        this.$store.commit('setEndStation', {});
-      }
-      this.$store.commit('setStartStation', this.clickedItem);
-
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return;
-      }
-      this.$store.commit('setClicked', false);
-    },
-    clickedEnd() {
-      // 현재 선택한 역과, 출발역이이 같을경우(ex: 사당 -> 사당)
-      console.log('@click >> stationSelect.vue: clickedEnd()');
-      if (
-        this.$store.state.SelectedStation.name ==
-        this.$store.state.StartStation.name
-      ) {
-        this.$store.commit('setStartStation', {});
-      }
-      this.$store.commit('setEndStation', this.clickedItem);
-
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return;
-      }
-      this.$store.commit('setClicked', false);
-    },
+    clickedStart() {},
+    clickedEnd() {},
   },
 };
 </script>
@@ -74,9 +35,7 @@ export default {
 .stationSelect_container {
   display: flex;
   position: absolute;
-  z-index: 10;
-  top: v-bind(top);
-  left: v-bind(left);
+  z-index: 5;
   width: 113px;
   height: 43px;
   opacity: 1;

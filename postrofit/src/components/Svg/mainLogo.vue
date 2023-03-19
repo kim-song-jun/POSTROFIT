@@ -13,7 +13,7 @@
         preserveAspectRatio="none"
         width="100%"
         height="100%"
-        viewBox="0 0 w298 310"
+        viewBox="0 0 298 310"
       >
         <image
           width="298"

@@ -1,7 +1,8 @@
 <template>
   <div class="MainPage-Container">
     <topMenu></topMenu>
-    <line-2></line-2>
+    <MainButton @scale="scale" :translate="this.trans"></MainButton>
+    <subwayLine2 @translate="translate" :scale="this.sca"></subwayLine2>
     <bottomMenu
       v-if="this.$store.state.clicked && !this.openLocker()"
     ></bottomMenu>
@@ -15,15 +16,29 @@
 import topMenu from '../components/topMenu.vue';
 import bottomMenu from '../components/bottomMenu.vue';
 import bottomLocker from '../components/bottomLocker.vue';
-import Line2 from '@/components/SubWay/Line2.vue';
+import subwayLine2 from '../components/SubWay/subwayLine2.vue';
+import MainButton from '../components/mainButton.vue';
 export default {
   components: {
     topMenu,
     bottomMenu,
     bottomLocker,
-    Line2,
+    subwayLine2,
+    MainButton,
+  },
+  data() {
+    return {
+      trans: 'translate(0px, 0px)',
+      sca: 1,
+    };
   },
   methods: {
+    translate(value) {
+      this.trans = value;
+    },
+    scale(value) {
+      this.sca = value;
+    },
     openLocker() {
       if (
         Object.keys(this.$store.state.EndStation).length > 0 &&
@@ -35,10 +50,6 @@ export default {
         return true;
       }
     },
-  },
-  mounted() {
-    this.$store.dispatch('initStation', {});
-    this.$store.commit('initLine2Json');
   },
 };
 </script>

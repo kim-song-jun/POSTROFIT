@@ -9,9 +9,20 @@ const store = createStore({
       clicked: false,
       openSelected: false,
       LINE2_JSON: {},
+      LINE2_IMAGE_TRANSFORM: {
+        transfromX: 0,
+        transfromY: 0,
+      },
+      LINE2_IMAGE_SCALE: 1,
     };
   },
   mutations: {
+    setLine2ImageScale(state, scale) {
+      state.LINE2_IMAGE_SCALE = scale;
+    },
+    setLine2ImageTransfrom(state, data) {
+      state.LINE2_IMAGE_TRANSFORM = {...data};
+    },
     initLine2Json(state) {
       state.LINE2_JSON = {
         ...Line2,
