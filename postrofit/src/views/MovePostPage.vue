@@ -70,9 +70,9 @@ export default {
   top: 20px;
 }
 .movePost_location_container {
-  margin: 8vw 0vw 8vw 8vw;
+  margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
-  height: 11vw;
+  height: 5.5vh;
 }
 .movePost_location {
   /* UI Properties */
@@ -103,9 +103,9 @@ export default {
 .movePost_sizebox_container {
   display: flex;
   align-items: center;
-  height: 55vw;
+  height: 25.5vh;
   width: 85vw;
-  margin: 0vw 8vw 8vw;
+  margin: 0vw 8vw 7vh;
   justify-content: space-between;
 }
 .movePost_sizebox {
@@ -114,11 +114,6 @@ export default {
   justify-content: center;
   align-items: center;
 
-  padding: 5.5vw 4vw;
-  margin: 14vw 0vw;
-  /* Layout Properties */
-  width: 33vw;
-  height: 24vw;
   /* UI Properties */
   /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -130,13 +125,15 @@ export default {
   font-size: 16px;
   /* Layout Properties */
   width: 47vw;
-  height: 43vw;
+  height: 25.5vh;
   margin: 0vw 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
 }
 .movePost_sizebox_unclicked {
   font-size: 10px;
+  width: 33vw;
+  height: 17.2vh;
 }
 .movePost_sizebox_type {
   /* UI Properties */
@@ -150,14 +147,25 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.movePost_sizebox_num {
-  margin: 0.9em;
+.movePost_smallbox_num {
+  margin: 0.8vh 0vw 2.2vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-28) / var(--unnamed-line-spacing-37) Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-707070); */
-  text-align: left;
+  font: normal normal bold 1.5em Roboto;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+.movePost_middlebox_num {
+  margin: 1.2vh 0vw 1.7vh;
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-28) / var(--unnamed-line-spacing-37) Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-707070); */
   font: normal normal bold 1.5em Roboto;
   letter-spacing: 0px;
   color: #707070;
@@ -177,10 +185,10 @@ export default {
 .movePost_button {
   border: none;
   display: block;
-  margin: 30vw auto 5vw;
+  margin: 15vh auto 3vh;
   /* Layout Properties */
   width: 88vw;
-  height: 12vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;

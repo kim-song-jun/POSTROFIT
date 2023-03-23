@@ -59,10 +59,9 @@ export default {
   display: none;
 }
 .movePost_location_container {
-  margin: 8vw 0vw;
-  margin-right: 8vw;
+  margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
-  height: 11vw;
+  height: 5.5vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) */
   /* var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32) */
@@ -75,8 +74,8 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.checkBill_content {
-  margin: 15vw 0vw 0vw 10.5vw;
+.checkBill_info {
+  margin: 7.2vh 0vw 0vh 10.5vw;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
@@ -93,10 +92,10 @@ export default {
   color: #6fbb69;
 }
 .checkBill_price {
-  margin-bottom: 2.5vw;
+  margin-bottom: 1.2vh;
 }
 .checkBill_size {
-  margin-bottom: 5vw;
+  margin-bottom: 2.3vh;
 }
 .movePost_location_sub {
   /* UI Properties */
@@ -117,10 +116,10 @@ export default {
 .movePost_button {
   border: none;
   display: block;
-  margin: 15vw auto 5vw;
+  margin: 0vh auto 3vh;
   /* Layout Properties */
-  width: 88vw;
-  height: 12vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;

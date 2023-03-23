@@ -43,7 +43,7 @@ export default {
 }
 .menuBar_bottom_menu_bar {
   display: flex;
-  height: 10.5vw;
+  height: 5vh;
   align-items: center;
   /* border-top: 2px solid #888888; */
   border-bottom: 1.5px solid #ccc;

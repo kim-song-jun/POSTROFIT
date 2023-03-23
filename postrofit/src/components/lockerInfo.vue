@@ -97,12 +97,14 @@ tr td {
   padding: 4.5vw 0vw 6vw 11vw;
 }
 .lockerInfo_locker {
-  margin-bottom: 10.5vw;
+  margin-bottom: 3vh;
   /* height: 85.5vw; */
-  width: 100vw;
+  width: 89vw;
   overflow-x: auto;
-  margin-left: -3vw;
-  margin-right: 3vw;
+  scrollbar-width: none;
+}
+.lockerInfo_locker::-webkit-scrollbar {
+  display: none;
 }
 .lockerInfo_state {
   margin-left: 1.5vw;

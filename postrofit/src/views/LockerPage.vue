@@ -44,7 +44,7 @@ export default {
   display: none;
 }
 .lockerPage_station {
-  margin: 7vw 0vw 0vw 10vw;
+  margin: 4vh 0vw 0vh 10vw;
 }
 .lockerPage_station_name {
   /* UI Properties */
@@ -75,10 +75,10 @@ export default {
 .lockerPage_button {
   border: none;
   display: block;
-  margin: 9.5vw auto 5vw;
+  margin: 5.6vh auto 3vh;
   /* Layout Properties */
-  width: 84vw;
-  height: 11.5vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
