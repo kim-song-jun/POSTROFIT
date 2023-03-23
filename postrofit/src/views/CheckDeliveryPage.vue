@@ -1,33 +1,35 @@
 <template>
-  <div class="deliveryStartPage_container">
-    <MenuBar></MenuBar>
-    <div class="deliveryStartPage_content">
-      <locationBox></locationBox>
-      <div class="deliveryStartPage_text">
-        요금: <span class="deliveryStartPage_point">2000원</span>
+  <div class="checkDeliveryPage_container">
+    <MenuBar />
+    <div class="checkDeliveryPage_content">
+      <div class="checkDeliveryPage_info">
+        <locationBox />
+        <div class="checkDeliveryPage_text">
+          요금: <span class="checkDeliveryPage_point">2000원</span>
+        </div>
+        <div class="checkDeliveryPage_text">
+          사이즈: <span class="checkDeliveryPage_point">소형</span>
+        </div>
       </div>
-      <div class="deliveryStartPage_text">
-        사이즈: <span class="deliveryStartPage_point">소형</span>
+      <progressMenu />
+      <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
+      <div class="checkDeliveryPage_button_container">
+        <button class="checkDeliveryPage_button">옮길게요</button>
       </div>
-    </div>
-    <ProgressMenu></ProgressMenu>
-    <noticeBox class="deliveryStartPage_noticeBox"></noticeBox>
-    <div class="deliveryStartPage_button_container">
-      <button class="deliveryStartPage_button">옮길게요</button>
     </div>
   </div>
 </template>
 
 <script>
 import MenuBar from '../components/MenuBar.vue';
-import ProgressMenu from '../components/progressMenu3.vue';
+import progressMenu from '../components/progressMenu3.vue';
 import locationBox from '../components/locationBox.vue';
 import noticeBox from '@/components/noticeBox.vue';
 
 export default {
   components: {
     MenuBar,
-    ProgressMenu,
+    progressMenu,
     locationBox,
     noticeBox,
   },
@@ -35,14 +37,14 @@ export default {
 </script>
 
 <style>
-.deliveryStartPage_container {
+.checkDeliveryPage_container {
   width: 100vw;
   position: absolute;
   top: 20px;
 }
-.deliveryStartPage_content {
+.checkDeliveryPage_info {
   width: 82.5vw;
-  margin: 15vw auto 5.5vw;
+  margin: 5.3vh auto 7vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32) Roboto;
@@ -53,22 +55,23 @@ export default {
   letter-spacing: 0px;
   color: #707070;
 }
-.deliveryStartPage_text {
+.checkDeliveryPage_text {
   margin-left: 7vw;
-  margin-bottom: 2.5vw;
+  margin-bottom: 1.2vh;
 }
-.deliveryStartPage_point {
+.checkDeliveryPage_point {
   color: #6fbb69;
 }
-.deliveryStartPage_noticeBox {
+.checkDeliveryPage_noticeBox {
   margin-left: 10.5vw;
 }
-.deliveryStartPage_button {
+.checkDeliveryPage_button {
   border: none;
-  margin: 0vw 8vw 5vw;
+  display: block;
+  margin: 0vh auto 3vh;
   /* Layout Properties */
-  width: 83.5vw;
-  height: 11.5vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
