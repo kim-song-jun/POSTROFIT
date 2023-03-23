@@ -39,8 +39,16 @@ export default {
 <style>
 .checkDeliveryPage_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
+}
+.checkDeliveryPage_content {
+  height: 92.7vh;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+.checkDeliveryPage_content::-webkit-scrollbar {
+  display: none;
 }
 .checkDeliveryPage_info {
   width: 82.5vw;
