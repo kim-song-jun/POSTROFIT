@@ -1,6 +1,6 @@
 <template>
   <div class="movePost_container">
-    <MenuBar></MenuBar>
+    <MenuBar />
     <div class="movePost_location_container">
       <div class="movePost_location">2호선 사당A</div>
       <div class="movePost_location_sub">
@@ -8,18 +8,26 @@
       </div>
     </div>
     <div class="movePost_sizebox_container">
-      <div class="movePost_sizebox movePost_sizebox_clicked">
+      <div
+        class="movePost_sizebox"
+        :class="isSmallBoxClick"
+        @click="smallBoxClicked = !smallBoxClicked"
+      >
         <div class="movePost_sizebox_type">소형</div>
-        <div class="movePost_sizebox_num">4개</div>
+        <div class="movePost_smallbox_num">4개</div>
         <div class="movePost_sizebox_price">2000원 / 개</div>
       </div>
-      <div class="movePost_sizebox movePost_sizebox_unclicked">
+      <div
+        class="movePost_sizebox"
+        :class="isMiddleBoxClick"
+        @click="smallBoxClicked = !smallBoxClicked"
+      >
         <div class="movePost_sizebox_type">중형</div>
-        <div class="movePost_sizebox_num">4개</div>
+        <div class="movePost_middlebox_num">4개</div>
         <div class="movePost_sizebox_price">2000원 / 개</div>
       </div>
     </div>
-    <ProgressMenu></ProgressMenu>
+    <ProgressMenu />
     <div class="movePost_button_container">
       <button class="movePost_button">옮길게요</button>
     </div>
@@ -31,6 +39,23 @@ import MenuBar from '../components/MenuBar.vue';
 import ProgressMenu from '../components/progressMenu.vue';
 
 export default {
+  data() {
+    return {
+      smallBoxClicked: true,
+    };
+  },
+  computed: {
+    isSmallBoxClick() {
+      return this.smallBoxClicked
+        ? 'movePost_sizebox_clicked'
+        : 'movePost_sizebox_unclicked';
+    },
+    isMiddleBoxClick() {
+      return !this.smallBoxClicked
+        ? 'movePost_sizebox_clicked'
+        : 'movePost_sizebox_unclicked';
+    },
+  },
   components: {
     MenuBar,
     ProgressMenu,
