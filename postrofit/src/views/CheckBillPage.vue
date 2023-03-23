@@ -1,37 +1,39 @@
 <template>
   <div class="checkBill_container">
-    <MenuBar></MenuBar>
-    <div class="movePost_location_container">
-      <div class="movePost_location">2호선 사당A</div>
-      <div class="movePost_location_sub">
-        서울특별시 동작구 남부순환로 지하2089
-      </div>
-    </div>
+    <MenuBar />
     <div class="checkBill_content">
-      <div class="checkBill_price">
-        요금: <span class="checkBill_green">2000원</span> / 4시간
+      <div class="movePost_location_container">
+        <div class="movePost_location">2호선 사당A</div>
+        <div class="movePost_location_sub">
+          서울특별시 동작구 남부순환로 지하2089
+        </div>
       </div>
-      <div class="checkBill_size">
-        사이즈: <span class="checkBill_green">대형</span>
+      <div class="checkBill_info">
+        <div class="checkBill_price">
+          요금: <span class="checkBill_green">2000원</span> / 4시간
+        </div>
+        <div class="checkBill_size">
+          사이즈: <span class="checkBill_green">대형</span>
+        </div>
+        <div class="checkBill_term">보관 기간</div>
+        <div class="checkBill_date">
+          2022/10/16
+          <span class="checkBill_green">12:12:13</span> ~
+        </div>
       </div>
-      <div class="checkBill_term">보관 기간</div>
-      <div class="checkBill_date">
-        2022/10/16
-        <span class="checkBill_green">12:12:13</span> ~
+      <progressMenu />
+      <noticeBox class="checkBill_noticeBox"></noticeBox>
+      <div class="movePost_button_container">
+        <button class="movePost_button" disabled>옮길게요</button>
       </div>
-    </div>
-    <progressMenu></progressMenu>
-    <noticeBox class="checkBill_noticeBox"></noticeBox>
-    <div class="movePost_button_container">
-      <button class="movePost_button" disabled>옮길게요</button>
     </div>
   </div>
 </template>
 
 <script>
-import MenuBar from '@/components/MenuBar.vue';
-import progressMenu from '@/components/progressMenu.vue';
-import noticeBox from '@/components/noticeBox.vue';
+import MenuBar from '../components/MenuBar.vue';
+import progressMenu from '../components/progressMenu.vue';
+import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {
@@ -45,8 +47,16 @@ export default {
 <style>
 .checkBill_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
+}
+.checkBill_content {
+  overflow: scroll;
+  height: 92.7vh;
+  scrollbar-width: none;
+}
+.checkBill_content::-webkit-scrollbar {
+  display: none;
 }
 .movePost_location_container {
   margin: 8vw 0vw;
