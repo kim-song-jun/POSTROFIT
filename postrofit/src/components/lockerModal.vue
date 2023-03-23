@@ -7,7 +7,9 @@
       </div>
       <div class="lockerModal_location">강남A 3번 보관함</div>
       <div class="lockerModal_passwd">3145</div>
-      <button class="lockerModal_button">닫기</button>
+      <button class="lockerModal_button" @click="$emit('closeLockerModal')">
+        닫기
+      </button>
     </div>
   </div>
 </template>

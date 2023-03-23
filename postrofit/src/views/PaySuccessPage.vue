@@ -1,5 +1,9 @@
 <template>
   <div class="paySuccessPage_container">
+    <lockerModal
+      v-if="lockerModalOpen"
+      @closeLockerModal="lockerModalOpen = false"
+    />
     <MenuBar></MenuBar>
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
@@ -30,7 +34,9 @@
         </div>
       </div>
       <noticeBox class="paySuccessPage_noticeBox"></noticeBox>
-      <button class="paySuccessPage_button">보관함 열기</button>
+      <button class="paySuccessPage_button" @click="lockerModalOpen = true">
+        보관함 열기
+      </button>
     </div>
   </div>
 </template>
@@ -38,16 +44,19 @@
 <script>
 import MenuBar from '../components/MenuBar.vue';
 import noticeBox from '../components/noticeBox.vue';
+import lockerModal from '../components/lockerModal.vue';
 
 export default {
   data() {
     return {
+      lockerModalOpen: false,
       progress: ['출발역 선택', '물품 선택', '보관함 열기', '배송 중'],
     };
   },
   components: {
     MenuBar,
     noticeBox,
+    lockerModal,
   },
 };
 </script>
