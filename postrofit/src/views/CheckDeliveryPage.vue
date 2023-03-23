@@ -1,5 +1,9 @@
 <template>
   <div class="checkDeliveryPage_container">
+    <checkModal
+      v-if="checkModalOpen"
+      @closeCheckModal="checkModalOpen = false"
+    />
     <MenuBar />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">
@@ -14,7 +18,9 @@
       <progressMenu />
       <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
       <div class="checkDeliveryPage_button_container">
-        <button class="checkDeliveryPage_button">옮길게요</button>
+        <button class="checkDeliveryPage_button" @click="checkModalOpen = true">
+          옮길게요
+        </button>
       </div>
     </div>
   </div>
@@ -25,13 +31,20 @@ import MenuBar from '../components/MenuBar.vue';
 import progressMenu from '../components/progressMenu3.vue';
 import locationBox from '../components/locationBox.vue';
 import noticeBox from '@/components/noticeBox.vue';
+import checkModal from '../components/checkModal.vue';
 
 export default {
+  data() {
+    return {
+      checkModalOpen: false,
+    };
+  },
   components: {
     MenuBar,
     progressMenu,
     locationBox,
     noticeBox,
+    checkModal,
   },
 };
 </script>
