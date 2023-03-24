@@ -9,7 +9,12 @@
       </div>
       <lockerInfo />
       <noticeBox class="lockerPage_noticeBox"></noticeBox>
-      <button class="lockerPage_button">옮길게요</button>
+      <button
+        class="lockerPage_button"
+        @click="$router.push('/SelectPage/checkDeliveryPage')"
+      >
+        옮길게요
+      </button>
     </div>
   </div>
 </template>

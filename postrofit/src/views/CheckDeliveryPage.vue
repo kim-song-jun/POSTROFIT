@@ -4,7 +4,6 @@
       v-if="checkModalOpen"
       @closeCheckModal="checkModalOpen = false"
     />
-    <MenuBar />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">
         <locationBox />
@@ -27,7 +26,6 @@
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
 import progressMenu from '../components/progressMenu3.vue';
 import locationBox from '../components/locationBox.vue';
 import noticeBox from '@/components/noticeBox.vue';
@@ -40,7 +38,6 @@ export default {
     };
   },
   components: {
-    MenuBar,
     progressMenu,
     locationBox,
     noticeBox,
@@ -50,11 +47,6 @@ export default {
 </script>
 
 <style>
-.checkDeliveryPage_container {
-  width: 100vw;
-  height: 97.7vh;
-  padding-top: 2.3vh;
-}
 .checkDeliveryPage_content {
   height: 92.7vh;
   overflow: scroll;
