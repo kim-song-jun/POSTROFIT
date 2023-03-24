@@ -1,27 +1,62 @@
 <template>
   <div class="paySuccessPage_container">
+    <lockerModal
+      v-if="lockerModalOpen"
+      @closeLockerModal="lockerModalOpen = false"
+    />
     <MenuBar></MenuBar>
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">결제 완료</div>
       <div class="paySuccessPage_info">대형 4시간</div>
-      <progressMenu></progressMenu>
+      <div class="progressMenu_container">
+        <div class="progressMenu_graybar"></div>
+        <div class="progressMenu_menu">
+          <div class="progressMenu_desc">{{ progress[0] }}</div>
+          <div class="progressMenu_circle">01</div>
+        </div>
+        <div class="progressMenu_menu">
+          <div class="progressMenu_desc">{{ progress[1] }}</div>
+          <div class="progressMenu_circle">02</div>
+        </div>
+        <div class="progressMenu_menu">
+          <div class="progressMenu_desc">{{ progress[2] }}</div>
+          <div class="progressMenu_circle">03</div>
+        </div>
+        <div class="progressMenu_menu">
+          <div class="progressMenu_check">04</div>
+        </div>
+      </div>
+      <div class="progressMenu_desc_container">
+        <div class="progressMenu_now">{{ progress[3] }}</div>
+        <div class="progressMenu_desc_sub">
+          장소, 사이즈, 이용금액, 주의사항 확인
+        </div>
+      </div>
       <noticeBox class="paySuccessPage_noticeBox"></noticeBox>
-      <button class="paySuccessPage_button">보관함 열기</button>
+      <button class="paySuccessPage_button" @click="lockerModalOpen = true">
+        보관함 열기
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import MenuBar from '../components/MenuBar.vue';
-import progressMenu from '../components/progressMenu4.vue';
 import noticeBox from '../components/noticeBox.vue';
+import lockerModal from '../components/lockerModal.vue';
 
 export default {
+  data() {
+    return {
+      lockerModalOpen: false,
+      progress: ['출발역 선택', '물품 선택', '보관함 열기', '배송 중'],
+    };
+  },
   components: {
     MenuBar,
-    progressMenu,
     noticeBox,
+    lockerModal,
   },
 };
 </script>
@@ -29,11 +64,16 @@ export default {
 <style>
 .paySuccessPage_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
+  /* position: absolute; */
+  /* z-index: 1; */
+  /* background-color: #fff; */
 }
 .paySuccessPage_content {
-  margin-top: 20vw;
+  padding-top: 9.8vh;
+  height: 82.7vh;
+  overflow: scroll;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     30px/39px Roboto;
@@ -44,12 +84,18 @@ export default {
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
+  /* 파이어폭스 */
+  scrollbar-width: none;
+}
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.paySuccessPage_content::-webkit-scrollbar {
+  display: none;
 }
 .paySuccessPage_message {
-  margin: 7vw 0vw 1vw;
+  margin: 3.5vh 0vw 0.2vh;
 }
 .paySuccessPage_info {
-  padding-bottom: 4.5vw;
+  padding-bottom: 3.4vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal normal 16px/21px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
@@ -60,14 +106,14 @@ export default {
   opacity: 1;
 }
 .paySuccessPage_noticeBox {
-  margin-left: 11.5vw;
+  width: 83vw;
 }
 .paySuccessPage_button {
   border: none;
-  margin-bottom: 5vw;
+  margin-bottom: 1.9vh;
   /* Layout Properties */
-  width: 84vw;
-  height: 11.5vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
@@ -81,6 +127,125 @@ export default {
   font: normal normal bold 20px/26px Roboto;
   letter-spacing: 0px;
   color: #ffffff;
+  opacity: 1;
+}
+.progressMenu_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.7vh 12.5vw 0.9vh;
+}
+.progressMenu_graybar {
+  position: absolute;
+  top: 26.5vw;
+  left: 8.5vw;
+  z-index: -1;
+  /* Layout Properties */
+  width: 83vw;
+  height: 2vw;
+  /* UI Properties */
+  /* background: var(--unnamed-color-d8d6d6) 0% 0% no-repeat padding-box; */
+  background: #d8d6d6 0% 0% no-repeat padding-box;
+  border-radius: 30vw;
+  opacity: 1;
+}
+.progressMenu_menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* UI Properties */
+  opacity: 1;
+}
+.progressMenu_circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5vw;
+  margin: 0vw 5.5vw;
+  /* Layout Properties */
+  width: 9.5vw;
+  height: 9.5vw;
+  /* UI Properties */
+  /* background: var(--unnamed-color-707070) 0% 0% no-repeat padding-box; */
+  background: #707070 0% 0% no-repeat padding-box;
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-20) / 26px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-ffffff); */
+  text-align: left;
+  font: normal normal bold 20px/26px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+}
+.progressMenu_desc {
+  padding: 0vw 0vw 2vw;
+  min-width: 60px;
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32) Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-707070); */
+  text-align: center;
+  font: normal normal bold 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #9b9b9b;
+  opacity: 1;
+}
+.progressMenu_check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6fbb69;
+  /* margin-top: 34px; */
+  margin: 9vw 3.5vw 0px;
+  /* Layout Properties */
+  width: 13vw;
+  height: 13vw;
+  border-radius: 7vw;
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
+    var(--unnamed-font-family-roboto);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-ffffff); */
+  text-align: left;
+  font: normal normal bold 24px/32px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+}
+.progressMenu_desc_container {
+  width: 51vw;
+  height: 12vw;
+  margin-left: 38vw;
+}
+.progressMenu_now {
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
+    var(--unnamed-font-family-roboto);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-707070); */
+  text-align: right;
+  font: normal normal bold 24px/32px Roboto;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+.progressMenu_desc_sub {
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-10) /
+    var(--unnamed-line-spacing-13) var(--unnamed-font-family-roboto);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-cfcfcf); */
+  text-align: right;
+  font: normal normal normal 10px/13px Roboto;
+  letter-spacing: 0px;
+  color: #cfcfcf;
   opacity: 1;
 }
 </style>
