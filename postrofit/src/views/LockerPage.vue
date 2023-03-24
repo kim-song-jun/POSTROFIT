@@ -70,7 +70,7 @@ export default {
   opacity: 1;
 }
 .lockerPage_noticeBox {
-  margin-left: 10.5vw;
+  width: 83vw;
 }
 .lockerPage_button {
   border: none;

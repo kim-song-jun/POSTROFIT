@@ -111,7 +111,7 @@ export default {
   opacity: 1;
 }
 .checkBill_noticeBox {
-  margin-left: 10.5vw;
+  width: 83vw;
 }
 .movePost_button {
   border: none;
