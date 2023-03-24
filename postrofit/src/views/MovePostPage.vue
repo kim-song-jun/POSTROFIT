@@ -66,8 +66,8 @@ export default {
 <style>
 .movePost_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
 }
 .movePost_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
@@ -105,7 +105,7 @@ export default {
   align-items: center;
   height: 25.5vh;
   width: 85vw;
-  margin: 0vw 8vw 7vh;
+  margin: 0vh 8vw 7vh;
   justify-content: space-between;
 }
 .movePost_sizebox {
@@ -126,7 +126,7 @@ export default {
   /* Layout Properties */
   width: 47vw;
   height: 25.5vh;
-  margin: 0vw 2vw;
+  margin: 0vh 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
 }
