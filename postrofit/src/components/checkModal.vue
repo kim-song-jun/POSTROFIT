@@ -36,7 +36,13 @@
           *동의함
         </span>
       </div>
-      <button class="checkModal_button" @click="$emit('closeCheckModal')">
+      <button
+        class="checkModal_button"
+        @click="
+          $emit('closeCheckModal');
+          $router.push('/SelectPage/paySuccessPage');
+        "
+      >
         닫기
       </button>
     </div>

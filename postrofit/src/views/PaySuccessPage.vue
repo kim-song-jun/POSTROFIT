@@ -4,7 +4,6 @@
       v-if="lockerModalOpen"
       @closeLockerModal="lockerModalOpen = false"
     />
-    <MenuBar></MenuBar>
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">결제 완료</div>
@@ -42,7 +41,6 @@
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
 import noticeBox from '../components/noticeBox.vue';
 import lockerModal from '../components/lockerModal.vue';
 
@@ -54,7 +52,6 @@ export default {
     };
   },
   components: {
-    MenuBar,
     noticeBox,
     lockerModal,
   },
@@ -62,16 +59,8 @@ export default {
 </script>
 
 <style>
-.paySuccessPage_container {
-  width: 100vw;
-  height: 97.7vh;
-  padding-top: 2.3vh;
-  /* position: absolute; */
-  /* z-index: 1; */
-  /* background-color: #fff; */
-}
 .paySuccessPage_content {
-  padding-top: 9.8vh;
+  padding-top: 10vh;
   height: 82.7vh;
   overflow: scroll;
   /* UI Properties */
