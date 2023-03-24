@@ -84,7 +84,7 @@ export default {
   color: #6fbb69;
 }
 .checkDeliveryPage_noticeBox {
-  margin-left: 10.5vw;
+  width: 83vw;
 }
 .checkDeliveryPage_button {
   border: none;
