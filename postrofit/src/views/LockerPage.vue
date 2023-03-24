@@ -1,6 +1,5 @@
 <template>
   <div class="lockerPage_container">
-    <MenuBar />
     <div class="lockerPage_content">
       <div class="lockerPage_station">
         <div class="lockerPage_station_name">2호선 사당A</div>
@@ -16,13 +15,11 @@
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
 import lockerInfo from '../components/lockerInfo.vue';
 import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {
-    MenuBar,
     lockerInfo,
     noticeBox,
   },
@@ -30,11 +27,6 @@ export default {
 </script>
 
 <style>
-.lockerPage_container {
-  width: 100vw;
-  height: 97.7vh;
-  padding-top: 2.3vh;
-}
 .lockerPage_content {
   overflow: scroll;
   height: 92.7vh;

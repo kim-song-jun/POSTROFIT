@@ -1,6 +1,5 @@
 <template>
   <div class="checkBill_container">
-    <MenuBar />
     <div class="checkBill_content">
       <div class="movePost_location_container">
         <div class="movePost_location">2호선 사당A</div>
@@ -24,20 +23,23 @@
       <progressMenu />
       <noticeBox class="checkBill_noticeBox"></noticeBox>
       <div class="movePost_button_container">
-        <button class="movePost_button" disabled>옮길게요</button>
+        <button
+          class="movePost_button"
+          @click="$router.push('/SelectPage/lockerPage')"
+        >
+          옮길게요
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
 import progressMenu from '../components/progressMenu.vue';
 import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {
-    MenuBar,
     progressMenu,
     noticeBox,
   },
@@ -45,11 +47,6 @@ export default {
 </script>
 
 <style>
-.checkBill_container {
-  width: 100vw;
-  height: 97.7vh;
-  padding-top: 2.3vh;
-}
 .checkBill_content {
   overflow: scroll;
   height: 92.7vh;

@@ -1,6 +1,5 @@
 <template>
   <div class="movePost_container">
-    <MenuBar />
     <div class="movePost_location_container">
       <div class="movePost_location">2호선 사당A</div>
       <div class="movePost_location_sub">
@@ -35,13 +34,17 @@
     </div>
     <progressMenu />
     <div class="movePost_button_container">
-      <button class="movePost_button">옮길게요</button>
+      <button
+        class="movePost_button"
+        @click="$router.push('/SelectPage/checkBillPage')"
+      >
+        옮길게요
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
 import ProgressMenu from '../components/progressMenu.vue';
 
 export default {
@@ -64,18 +67,12 @@ export default {
     },
   },
   components: {
-    MenuBar,
     ProgressMenu,
   },
 };
 </script>
 
 <style>
-.movePost_container {
-  width: 100vw;
-  height: 97.7vh;
-  padding-top: 2.3vh;
-}
 .movePost_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
