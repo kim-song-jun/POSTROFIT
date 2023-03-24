@@ -2,7 +2,12 @@
   <div class="bottomMenu_container">
     <MenuBar></MenuBar>
     <div class="bottomMenu_content">
-      <div class="bottomMenu_column">
+      <div
+        class="bottomMenu_column"
+        @click="
+          $router.push({path: '/SelectPage', query: {serviceType: '맡길게요'}})
+        "
+      >
         <div class="bottomMenu_source">{{ this.startStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
