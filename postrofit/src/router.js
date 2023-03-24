@@ -1,4 +1,4 @@
-import {createWebHashHistory, createRouter} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import MainPage from './views/MainPage.vue';
 import UserPage from './views/UserPage.vue';
 import UserHome from './components/User/UserHome';
@@ -50,7 +50,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

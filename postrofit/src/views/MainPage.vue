@@ -1,57 +1,47 @@
 <template>
   <div class="MainPage-Container">
-    <TopMenu></TopMenu>
-    <div class="MainPage-Line2">
-      <line-2></line-2>
-    </div>
-    <bottomMenu
-      v-if="this.$store.state.clicked && !this.openLocker()"
-    ></bottomMenu>
-    <bottomLocker
-      v-if="this.$store.state.clicked && this.openLocker()"
-    ></bottomLocker>
+    <topMenu></topMenu>
+    <MainButton @scale="setScale" :translate="this.translate"></MainButton>
+    <subwayLine2 @translate="setTranslate" :scale="this.scale"></subwayLine2>
+    <bottomMenu v-if="this.$store.state.bottomMenuOpen"></bottomMenu>
+    <bottomLocker v-if="this.$store.state.bottomLockerOpen"></bottomLocker>
   </div>
 </template>
 
 <script>
-import TopMenu from '../components/TopMenu.vue';
+import topMenu from '../components/topMenu.vue';
 import bottomMenu from '../components/bottomMenu.vue';
 import bottomLocker from '../components/bottomLocker.vue';
-import Line2 from '@/components/SubWay/Line2.vue';
+import subwayLine2 from '../components/SubWay/subwayLine2.vue';
+import MainButton from '../components/mainButton.vue';
 export default {
   components: {
-    TopMenu,
+    topMenu,
     bottomMenu,
     bottomLocker,
-    Line2,
+    subwayLine2,
+    MainButton,
+  },
+  data() {
+    return {
+      translate: 'translate(0px, 0px)',
+      scale: 1,
+    };
   },
   methods: {
-    openLocker() {
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return false;
-      } else {
-        this.$store.commit('setClicked', true);
-        return true;
-      }
+    setTranslate(value) {
+      this.translate = value;
     },
-  },
-  mounted() {
-    this.$store.dispatch('initStation', {});
+    setScale(value) {
+      this.scale = value;
+    },
   },
 };
 </script>
 
 <style scoped>
 .MainPage-Container {
-  width: 100vh;
-  height: 100vh;
-}
-.MainPage-Line2 {
-  width: 100vh;
-  height: 100vh;
-  overflow: auto;
+  width: auto;
+  height: auto;
 }
 </style>

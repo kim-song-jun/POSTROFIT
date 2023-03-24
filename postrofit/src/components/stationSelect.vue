@@ -22,50 +22,47 @@ export default {
     clickedItem: Object,
   },
   data() {
-    return {
-      top: this.clickedItem.y - 43 + 'px',
-      left: this.clickedItem.x - 57 + 'px',
-    };
+    return {};
   },
   methods: {
     clickedStart() {
-      // 현재 선택한 역과, 도착역이 같을경우(ex: 사당 -> 사당)
-      console.log('@click >> stationSelect.vue: clickedStart()');
-      if (
-        this.$store.state.SelectedStation.name ==
-        this.$store.state.EndStation.name
-      ) {
+      this.$store.commit('setStartStation', this.selectStation);
+      if (this.endStation?.name == this.selectStation.name) {
         this.$store.commit('setEndStation', {});
       }
-      this.$store.commit('setStartStation', this.clickedItem);
-
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return;
+      this.$store.commit('setBottomLockerOpen', false);
+      const start = this.startStation?.name?.length ?? 0;
+      const end = this.endStation?.name?.length ?? 0;
+      if (start && end) {
+        this.$store.commit('setBottomMenuOpen', true);
       }
-      this.$store.commit('toggleClicked');
     },
     clickedEnd() {
-      // 현재 선택한 역과, 출발역이이 같을경우(ex: 사당 -> 사당)
-      console.log('@click >> stationSelect.vue: clickedEnd()');
-      if (
-        this.$store.state.SelectedStation.name ==
-        this.$store.state.StartStation.name
-      ) {
+      this.$store.commit('setEndStation', this.selectStation);
+      if (this.startStation?.name == this.selectStation.name) {
         this.$store.commit('setStartStation', {});
       }
-      this.$store.commit('setEndStation', this.clickedItem);
-
-      if (
-        Object.keys(this.$store.state.EndStation).length > 0 &&
-        Object.keys(this.$store.state.StartStation).length > 0
-      ) {
-        return;
+      this.$store.commit('setBottomLockerOpen', false);
+      const start = this.startStation?.name?.length ?? 0;
+      const end = this.endStation?.name?.length ?? 0;
+      if (start && end) {
+        this.$store.commit('setBottomMenuOpen', true);
       }
-      this.$store.commit('toggleClicked');
     },
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
+  },
+  mounted() {
+    console.log(this.clickedItem);
   },
 };
 </script>
@@ -73,10 +70,8 @@ export default {
 <style>
 .stationSelect_container {
   display: flex;
-  position: fixed;
-  z-index: 10;
-  top: v-bind(top);
-  left: v-bind(left);
+  position: absolute;
+  z-index: 5;
   width: 113px;
   height: 43px;
   opacity: 1;
