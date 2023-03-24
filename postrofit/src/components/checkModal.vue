@@ -36,7 +36,9 @@
           *동의함
         </span>
       </div>
-      <button class="checkModal_button" disabled>닫기</button>
+      <button class="checkModal_button" @click="$emit('closeCheckModal')">
+        닫기
+      </button>
     </div>
   </div>
 </template>
