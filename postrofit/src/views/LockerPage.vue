@@ -11,9 +11,14 @@
       <noticeBox class="lockerPage_noticeBox"></noticeBox>
       <button
         class="lockerPage_button"
-        @click="$router.push('/SelectPage/checkDeliveryPage')"
+        @click="
+          $router.push({
+            path: '/SelectPage/checkDeliveryPage',
+            query: {serviceType: $route.query.serviceType},
+          })
+        "
       >
-        옮길게요
+        {{ $route.query.serviceType }}
       </button>
     </div>
   </div>

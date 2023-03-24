@@ -18,7 +18,7 @@
       <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
       <div class="checkDeliveryPage_button_container">
         <button class="checkDeliveryPage_button" @click="checkModalOpen = true">
-          옮길게요
+          {{ $route.query.serviceType }}
         </button>
       </div>
     </div>
