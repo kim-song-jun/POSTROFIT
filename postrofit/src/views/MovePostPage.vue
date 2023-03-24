@@ -38,7 +38,7 @@
         class="movePost_button"
         @click="$router.push('/SelectPage/checkBillPage')"
       >
-        옮길게요
+        맡길게요
       </button>
     </div>
   </div>
