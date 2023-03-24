@@ -5,7 +5,9 @@
         <div class="menuBar_subway_line">2</div>
         <div v-if="0" class="menuBar_subway_line">4</div>
         <div class="menuBar_round_bar"></div>
-        <div class="menuBar_close_btn">X</div>
+        <div class="menuBar_close_btn" @click="$router.push('/MainPage')">
+          X
+        </div>
       </div>
     </div>
     <router-view />
