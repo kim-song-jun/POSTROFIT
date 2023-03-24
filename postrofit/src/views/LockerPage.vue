@@ -1,27 +1,29 @@
 <template>
   <div class="lockerPage_container">
-    <MenuBar></MenuBar>
-    <div class="lockerPage_station">
-      <div class="lockerPage_station_name">2호선 사당A</div>
-      <div class="lockerPage_station_location">
-        서울특별시 동작구 남부순환로 지하2089
+    <MenuBar />
+    <div class="lockerPage_content">
+      <div class="lockerPage_station">
+        <div class="lockerPage_station_name">2호선 사당A</div>
+        <div class="lockerPage_station_location">
+          서울특별시 동작구 남부순환로 지하2089
+        </div>
       </div>
+      <lockerInfo />
+      <noticeBox class="lockerPage_noticeBox"></noticeBox>
+      <button class="lockerPage_button">옮길게요</button>
     </div>
-    <LockerInfo></LockerInfo>
-    <noticeBox class="lockerPage_noticeBox"></noticeBox>
-    <button class="lockerPage_button">옮길게요</button>
   </div>
 </template>
 
 <script>
 import MenuBar from '../components/MenuBar.vue';
-import LockerInfo from '../components/lockerInfo.vue';
+import lockerInfo from '../components/lockerInfo.vue';
 import noticeBox from '../components/noticeBox.vue';
 
 export default {
   components: {
     MenuBar,
-    LockerInfo,
+    lockerInfo,
     noticeBox,
   },
 };
@@ -30,11 +32,19 @@ export default {
 <style>
 .lockerPage_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
+}
+.lockerPage_content {
+  overflow: scroll;
+  height: 92.7vh;
+  scrollbar-width: none;
+}
+.lockerPage_content::-webkit-scrollbar {
+  display: none;
 }
 .lockerPage_station {
-  margin: 7vw 0vw 0vw 10vw;
+  margin: 4vh 0vw 0vh 10vw;
 }
 .lockerPage_station_name {
   /* UI Properties */
@@ -59,13 +69,16 @@ export default {
   color: #cfcfcf;
   opacity: 1;
 }
+.lockerPage_noticeBox {
+  width: 83vw;
+}
 .lockerPage_button {
   border: none;
   display: block;
-  margin: 9.5vw auto 5vw;
+  margin: 5.6vh auto 3vh;
   /* Layout Properties */
-  width: 84vw;
-  height: 11.5vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;

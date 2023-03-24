@@ -1,6 +1,6 @@
 <template>
   <div class="movePost_container">
-    <MenuBar></MenuBar>
+    <MenuBar />
     <div class="movePost_location_container">
       <div class="movePost_location">2호선 사당A</div>
       <div class="movePost_location_sub">
@@ -8,18 +8,32 @@
       </div>
     </div>
     <div class="movePost_sizebox_container">
-      <div class="movePost_sizebox movePost_sizebox_clicked">
+      <div
+        class="movePost_sizebox"
+        :class="isSmallBoxClick"
+        @click="
+          smallBoxClicked = true;
+          middleBoxClicked = false;
+        "
+      >
         <div class="movePost_sizebox_type">소형</div>
-        <div class="movePost_sizebox_num">4개</div>
+        <div class="movePost_smallbox_num">4개</div>
         <div class="movePost_sizebox_price">2000원 / 개</div>
       </div>
-      <div class="movePost_sizebox movePost_sizebox_unclicked">
+      <div
+        class="movePost_sizebox"
+        :class="isMiddleBoxClick"
+        @click="
+          smallBoxClicked = false;
+          middleBoxClicked = true;
+        "
+      >
         <div class="movePost_sizebox_type">중형</div>
-        <div class="movePost_sizebox_num">4개</div>
+        <div class="movePost_middlebox_num">4개</div>
         <div class="movePost_sizebox_price">2000원 / 개</div>
       </div>
     </div>
-    <ProgressMenu></ProgressMenu>
+    <progressMenu />
     <div class="movePost_button_container">
       <button class="movePost_button">옮길게요</button>
     </div>
@@ -31,6 +45,24 @@ import MenuBar from '../components/MenuBar.vue';
 import ProgressMenu from '../components/progressMenu.vue';
 
 export default {
+  data() {
+    return {
+      smallBoxClicked: true,
+      middleBoxClicked: false,
+    };
+  },
+  computed: {
+    isSmallBoxClick() {
+      return this.smallBoxClicked
+        ? 'movePost_sizebox_clicked'
+        : 'movePost_sizebox_unclicked';
+    },
+    isMiddleBoxClick() {
+      return this.middleBoxClicked
+        ? 'movePost_sizebox_clicked'
+        : 'movePost_sizebox_unclicked';
+    },
+  },
   components: {
     MenuBar,
     ProgressMenu,
@@ -41,13 +73,13 @@ export default {
 <style>
 .movePost_container {
   width: 100vw;
-  position: absolute;
-  top: 20px;
+  height: 97.7vh;
+  padding-top: 2.3vh;
 }
 .movePost_location_container {
-  margin: 8vw 0vw 8vw 8vw;
+  margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
-  height: 11vw;
+  height: 5.5vh;
 }
 .movePost_location {
   /* UI Properties */
@@ -78,9 +110,9 @@ export default {
 .movePost_sizebox_container {
   display: flex;
   align-items: center;
-  height: 55vw;
+  height: 25.5vh;
   width: 85vw;
-  margin: 0vw 8vw 8vw;
+  margin: 0vh 8vw 7vh;
   justify-content: space-between;
 }
 .movePost_sizebox {
@@ -89,11 +121,6 @@ export default {
   justify-content: center;
   align-items: center;
 
-  padding: 5.5vw 4vw;
-  margin: 14vw 0vw;
-  /* Layout Properties */
-  width: 33vw;
-  height: 24vw;
   /* UI Properties */
   /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -105,13 +132,15 @@ export default {
   font-size: 16px;
   /* Layout Properties */
   width: 47vw;
-  height: 43vw;
-  margin: 0vw 2vw;
+  height: 25.5vh;
+  margin: 0vh 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
 }
 .movePost_sizebox_unclicked {
   font-size: 10px;
+  width: 33vw;
+  height: 17.2vh;
 }
 .movePost_sizebox_type {
   /* UI Properties */
@@ -125,14 +154,25 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.movePost_sizebox_num {
-  margin: 0.9em;
+.movePost_smallbox_num {
+  margin: 0.8vh 0vw 2.2vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-28) / var(--unnamed-line-spacing-37) Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-707070); */
-  text-align: left;
+  font: normal normal bold 1.5em Roboto;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+.movePost_middlebox_num {
+  margin: 1.2vh 0vw 1.7vh;
+  /* UI Properties */
+  /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-28) / var(--unnamed-line-spacing-37) Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-707070); */
   font: normal normal bold 1.5em Roboto;
   letter-spacing: 0px;
   color: #707070;
@@ -152,10 +192,10 @@ export default {
 .movePost_button {
   border: none;
   display: block;
-  margin: 30vw auto 5vw;
+  margin: 15vh auto 3vh;
   /* Layout Properties */
   width: 88vw;
-  height: 12vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;
