@@ -11,7 +11,10 @@
       <div
         class="movePost_sizebox"
         :class="isSmallBoxClick"
-        @click="smallBoxClicked = !smallBoxClicked"
+        @click="
+          smallBoxClicked = true;
+          middleBoxClicked = false;
+        "
       >
         <div class="movePost_sizebox_type">소형</div>
         <div class="movePost_smallbox_num">4개</div>
@@ -20,14 +23,17 @@
       <div
         class="movePost_sizebox"
         :class="isMiddleBoxClick"
-        @click="smallBoxClicked = !smallBoxClicked"
+        @click="
+          smallBoxClicked = false;
+          middleBoxClicked = true;
+        "
       >
         <div class="movePost_sizebox_type">중형</div>
         <div class="movePost_middlebox_num">4개</div>
         <div class="movePost_sizebox_price">2000원 / 개</div>
       </div>
     </div>
-    <ProgressMenu />
+    <progressMenu />
     <div class="movePost_button_container">
       <button class="movePost_button">옮길게요</button>
     </div>
@@ -42,6 +48,7 @@ export default {
   data() {
     return {
       smallBoxClicked: true,
+      middleBoxClicked: false,
     };
   },
   computed: {
@@ -51,7 +58,7 @@ export default {
         : 'movePost_sizebox_unclicked';
     },
     isMiddleBoxClick() {
-      return !this.smallBoxClicked
+      return this.middleBoxClicked
         ? 'movePost_sizebox_clicked'
         : 'movePost_sizebox_unclicked';
     },
