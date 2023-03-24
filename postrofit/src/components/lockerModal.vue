@@ -7,7 +7,9 @@
       </div>
       <div class="lockerModal_location">강남A 3번 보관함</div>
       <div class="lockerModal_passwd">3145</div>
-      <button class="lockerModal_button">닫기</button>
+      <button class="lockerModal_button" @click="$emit('closeLockerModal')">
+        닫기
+      </button>
     </div>
   </div>
 </template>
@@ -29,10 +31,10 @@ export default {};
   background-color: rgba(0, 0, 0, 0.6);
 }
 .lockerModal_container {
-  margin: 48.8vw auto 0vw;
+  margin: 23.1vh auto;
   /* Layout Properties */
-  width: 89vw;
-  height: 92.8vw;
+  width: 83vw;
+  height: 43.9vh;
   /* UI Properties */
   /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -58,7 +60,7 @@ export default {};
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-6fbb69); */
   text-align: center;
-  font: normal normal normal 16px/21px Roboto;
+  font: normal normal normal 14px/19px Roboto;
   letter-spacing: 0px;
   color: #6fbb69;
   opacity: 1;
@@ -82,7 +84,7 @@ export default {};
 .lockerModal_button {
   border: none;
   /* Layout Properties */
-  width: 69.2vw;
+  width: 66.5vw;
   height: 11.5vw;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */

@@ -14,7 +14,9 @@
         </div>
       </div>
       <noticeBox></noticeBox>
-      <button class="cancelModal_button" disabled>닫기</button>
+      <button class="cancelModal_button" @click="$emit('closeCancelModal')">
+        닫기
+      </button>
     </div>
   </div>
 </template>
@@ -44,10 +46,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .cancelModal_container {
-  margin: 23vw 6vw;
+  margin: 7.8vh auto;
   /* Layout Properties */
-  width: 88vw;
-  height: 182vw;
+  width: 75vw;
+  height: 88.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -61,6 +63,7 @@ export default {
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
+  padding: 0 4.4vw;
 }
 .cancelModal_title {
   padding: 10.5vw 0vw 2.5vw;

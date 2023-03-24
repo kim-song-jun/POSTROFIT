@@ -1,75 +1,62 @@
 <template>
   <div class="historyActive_container">
-    <div class="userPage_top">
-      <div class="userPage_arrow">
-        <div class="userPage_arrow_top"></div>
-        <div class="userPage_arrow_bottom"></div>
-      </div>
-      <div class="userPage_text1 userPage_top_text">내 정보</div>
-    </div>
+    <cancelModal
+      v-if="cancelModalOpen"
+      @closeCancelModal="cancelModalOpen = false"
+    />
     <div class="historyActive_info_container">
-      <div class="historyActive_info userPage_text1">
+      <div class="historyActive_info userHome_text1">
         이용내역
-        <div class="userPage_text2">현재 이용하고 있는 정보</div>
+        <div class="userHome_text2">현재 이용하고 있는 정보</div>
       </div>
       <div class="historyActive_cancel_container">
-        <a class="historyActive_cancel" href="">취소하기</a>
+        <span class="historyActive_cancel" @click="cancelModalOpen = true"
+          >취소하기</span
+        >
       </div>
     </div>
     <locationBoxActive></locationBoxActive>
     <progressMenu></progressMenu>
-    <noticeBox class="historyActive_noticeBox"></noticeBox>
+    <noticeBox class="historyLocker_noticeBox"></noticeBox>
     <div class="movePost_button_container">
-      <button class="movePost_button">보관함 열기</button>
+      <button class="movePost_button" @click="$emit('openLockerModal')">
+        보관함 열기
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import locationBoxActive from '@/components/locationBoxActive.vue';
-import progressMenu from '@/components/progressMenu.vue';
-import noticeBox from '@/components/noticeBox.vue';
+import locationBoxActive from '../locationBoxActive.vue';
+import progressMenu from '../progressMenu.vue';
+import noticeBox from '../noticeBox.vue';
+import cancelModal from '../cancelModal.vue';
 
 export default {
   components: {
     locationBoxActive,
     progressMenu,
     noticeBox,
+    cancelModal,
+  },
+  data() {
+    return {
+      cancelModalOpen: false,
+    };
   },
 };
 </script>
 
 <style>
-.userPage_top {
-  height: 15vw;
-  display: flex;
-  align-items: center;
+.historyActive_container {
+  overflow: scroll;
+  height: 92.2vh;
+  /* 파이어폭스 */
+  scrollbar-width: none;
 }
-.userPage_arrow {
-  margin-left: 7.5vw;
-  position: relative;
-  height: 5vw;
-  width: 3vw;
-}
-.userPage_arrow_top,
-.userPage_arrow_bottom {
-  background-color: #666;
-  height: 2px;
-  left: 0.8vw;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-}
-.userPage_arrow_top {
-  transform: rotate(-45deg);
-  transform-origin: bottom left;
-}
-.userPage_arrow_bottom {
-  transform: rotate(45deg);
-  transform-origin: top left;
-}
-.userPage_top_text {
-  margin-left: 32vw;
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.historyActive_container::-webkit-scrollbar {
+  display: none;
 }
 .historyActive_info_container {
   display: flex;
@@ -100,9 +87,7 @@ export default {
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
-}
-.historyActive_noticeBox {
-  margin-left: 10.5vw;
+  text-decoration-line: underline;
 }
 .movePost_button {
   border: none;
@@ -127,15 +112,15 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
-.userPage_text1 {
+.userHome_text1 {
   /* UI Properties */
   font: normal normal bold 20px/26px Roboto;
-  text-align: left;
+  /* text-align: left; */
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
 }
-.userPage_text2 {
+.userHome_text2 {
   /* UI Properties */
   font: normal normal normal 10px/13px Roboto;
   text-align: left;

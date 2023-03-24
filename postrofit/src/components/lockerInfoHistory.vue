@@ -1,6 +1,8 @@
 <template>
   <div class="lockerInfo_container">
-    <div class="lockerInfo_locker"></div>
+    <div class="lockerInfo_locker_container">
+      <div class="lockerInfoHistory_locker"></div>
+    </div>
     <div class="lockerInfo_state">
       <div class="lockerInfo_state_row">
         <div class="lockerInfo_state_color lockerInfo_state_using"></div>
@@ -30,13 +32,22 @@ export default {};
 .lockerInfo_container {
   padding: 4.5vw 0vw 6vw 11vw;
 }
-.lockerInfo_locker {
-  margin-bottom: 10.5vw;
+.lockerInfo_locker_container {
+  overflow: scroll;
+  /* 파이어폭스 */
+  /* scrollbar-width: none; */
+}
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+/* .lockerInfo_locker_container::-webkit-scrollbar {
+  display: none;
+} */
+.lockerInfoHistory_locker {
   height: 85.5vw;
   width: 125vw;
   background: gray;
 }
 .lockerInfo_state {
+  margin-top: 10.5vw;
   margin-left: 1.5vw;
   display: flex;
 }

@@ -1,16 +1,9 @@
 <template>
   <div class="historyLocker_container">
-    <div class="userPage_top">
-      <div class="userPage_arrow">
-        <div class="userPage_arrow_top"></div>
-        <div class="userPage_arrow_bottom"></div>
-      </div>
-      <div class="userPage_text1 userPage_top_text">내 정보</div>
-    </div>
     <div class="historyActive_info_container">
-      <div class="historyActive_info userPage_text1">
+      <div class="historyActive_info userHome_text1">
         내 보관함
-        <div class="userPage_text2">현재 이용하는 보관함 정보</div>
+        <div class="userHome_text2">현재 이용하는 보관함 정보</div>
       </div>
     </div>
     <div class="lockerPage_station">
@@ -24,32 +17,34 @@
     </div>
     <lockerInfoHistory></lockerInfoHistory>
     <div class="historyLocker_detail_container">
-      <div class="userPage_text">
+      <div class="userHome_text">
         요금:
-        <span class="userPage_point_text">2000원</span> / 4시간
+        <span class="userHome_point_text">2000원</span> / 4시간
       </div>
       <div class="usingLocker_empty"></div>
-      <div class="userPage_text">
+      <div class="userHome_text">
         사이즈:
-        <span class="userPage_point_text">중형</span>
+        <span class="userHome_point_text">중형</span>
       </div>
       <div class="usingLocker_empty2"></div>
-      <div class="userPage_text4">보관 기간</div>
-      <div class="userPage_text3 usingLocker_time">
-        2022/10/16 <span class="userPage_point_text">12:12:13</span> ~
+      <div class="userHome_text4">보관 기간</div>
+      <div class="userHome_text3 usingLocker_time">
+        2022/10/16 <span class="userHome_point_text">12:12:13</span> ~
       </div>
-      <div class="userPage_text4 usingLocker_term">현재까지</div>
+      <div class="userHome_text4 usingLocker_term">현재까지</div>
     </div>
-    <noticeBox class="lockerPage_noticeBox"></noticeBox>
+    <noticeBox class="historyLocker_noticeBox"></noticeBox>
     <div class="movePost_button_container">
-      <button class="movePost_button">보관함 열기</button>
+      <button class="movePost_button" @click="$emit('openLockerModal')">
+        보관함 열기
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import lockerInfoHistory from '../components/lockerInfoHistory.vue';
-import noticeBox from '../components/noticeBox.vue';
+import lockerInfoHistory from '../lockerInfoHistory.vue';
+import noticeBox from '../noticeBox.vue';
 
 export default {
   components: {
@@ -60,7 +55,17 @@ export default {
 </script>
 
 <style>
-.userPage_text {
+.historyLocker_container {
+  overflow: scroll;
+  height: 92.2vh;
+  /* 파이어폭스 */
+  scrollbar-width: none;
+}
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.historyLocker_container::-webkit-scrollbar {
+  display: none;
+}
+.userHome_text {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-18) /
@@ -73,7 +78,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.userPage_text1 {
+.userHome_text1 {
   /* UI Properties */
   font: normal normal bold 20px/26px Roboto;
   text-align: left;
@@ -81,7 +86,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.userPage_text2 {
+.userHome_text2 {
   /* UI Properties */
   font: normal normal normal 10px/13px Roboto;
   text-align: left;
@@ -89,7 +94,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.userPage_text3 {
+.userHome_text3 {
   /* UI Properties */
   font: normal normal normal 20px/26px Roboto;
   text-align: left;
@@ -97,7 +102,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.userPage_text4 {
+.userHome_text4 {
   /* UI Properties */
   font: normal normal normal 16px/21px Roboto;
   text-align: left;
@@ -105,7 +110,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.userPage_point_text {
+.userHome_point_text {
   color: #6fbb69;
 }
 .usingLocker_empty {
@@ -115,37 +120,6 @@ export default {
 .usingLocker_empty2 {
   height: 5vw;
   width: 100%;
-}
-.userPage_top {
-  height: 15vw;
-  display: flex;
-  align-items: center;
-}
-.userPage_arrow {
-  margin-left: 7.5vw;
-  position: relative;
-  height: 5vw;
-  width: 3vw;
-}
-.userPage_arrow_top,
-.userPage_arrow_bottom {
-  background-color: #666;
-  height: 2px;
-  left: 0.8vw;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-}
-.userPage_arrow_top {
-  transform: rotate(-45deg);
-  transform-origin: bottom left;
-}
-.userPage_arrow_bottom {
-  transform: rotate(45deg);
-  transform-origin: top left;
-}
-.userPage_top_text {
-  margin-left: 32vw;
 }
 .historyActive_info_container {
   display: flex;
@@ -225,9 +199,6 @@ export default {
   margin: 0vw auto;
   width: 54vw;
 }
-.lockerPage_noticeBox {
-  margin-left: 10.5vw;
-}
 .movePost_button {
   border: none;
   display: block;
@@ -250,5 +221,8 @@ export default {
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+}
+.historyLocker_noticeBox {
+  width: 83vw;
 }
 </style>
