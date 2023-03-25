@@ -2,7 +2,7 @@
   <div class="lockerPage_container">
     <div class="lockerPage_content">
       <div class="lockerPage_station">
-        <div class="lockerPage_station_name">2호선 사당A</div>
+        <div class="lockerPage_station_name">{{ getStationName() }}</div>
         <div class="lockerPage_station_location">
           서울특별시 동작구 남부순환로 지하2089
         </div>
@@ -32,6 +32,26 @@ export default {
   components: {
     lockerInfo,
     noticeBox,
+  },
+  methods: {
+    getStationName() {
+      return (
+        this.startStation.name ??
+        this.endStation.name ??
+        this.selectStation.name
+      );
+    },
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
   },
 };
 </script>

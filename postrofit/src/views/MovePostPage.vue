@@ -1,7 +1,7 @@
 <template>
   <div class="movePost_container">
     <div class="movePost_location_container">
-      <div class="movePost_location">2호선 사당A</div>
+      <div class="movePost_location">{{ startStation.name }}</div>
       <div class="movePost_location_sub">
         서울특별시 동작구 남부순환로 지하2089
       </div>
@@ -64,6 +64,9 @@ export default {
       return this.middleBoxClicked
         ? 'movePost_sizebox_clicked'
         : 'movePost_sizebox_unclicked';
+    },
+    startStation() {
+      return this.$store.state.startStation;
     },
   },
   components: {

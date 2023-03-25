@@ -2,6 +2,7 @@
   <div class="paySuccessPage_container">
     <lockerModal
       v-if="lockerModalOpen"
+      :stationName="getStationName()"
       @closeLockerModal="lockerModalOpen = false"
     />
     <div class="paySuccessPage_content">
@@ -26,9 +27,9 @@
           <div class="progressMenu_check">04</div>
         </div>
       </div>
-      <div class="progressMenu_desc_container">
-        <div class="progressMenu_now">{{ progress[3] }}</div>
-        <div class="progressMenu_desc_sub">
+      <div class="progressMenu4_desc_container">
+        <div class="progressMenu4_now">{{ progress[3] }}</div>
+        <div class="progressMenu4_desc_sub">
           장소, 사이즈, 이용금액, 주의사항 확인
         </div>
       </div>
@@ -54,6 +55,26 @@ export default {
   components: {
     noticeBox,
     lockerModal,
+  },
+  methods: {
+    getStationName() {
+      return (
+        this.startStation.name ??
+        this.endStation.name ??
+        this.selectStation.name
+      );
+    },
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
   },
 };
 </script>
@@ -206,12 +227,12 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
-.progressMenu_desc_container {
+.progressMenu4_desc_container {
   width: 51vw;
   height: 12vw;
   margin-left: 38vw;
 }
-.progressMenu_now {
+.progressMenu4_now {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
@@ -224,7 +245,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.progressMenu_desc_sub {
+.progressMenu4_desc_sub {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-10) /

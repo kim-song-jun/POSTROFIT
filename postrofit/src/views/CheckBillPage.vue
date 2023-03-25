@@ -2,7 +2,7 @@
   <div class="checkBill_container">
     <div class="checkBill_content">
       <div class="movePost_location_container">
-        <div class="movePost_location">2호선 사당A</div>
+        <div class="movePost_location">{{ startStation.name }}</div>
         <div class="movePost_location_sub">
           서울특별시 동작구 남부순환로 지하2089
         </div>
@@ -47,6 +47,11 @@ export default {
   components: {
     progressMenu,
     noticeBox,
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
   },
 };
 </script>
