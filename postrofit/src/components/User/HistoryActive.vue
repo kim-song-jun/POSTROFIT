@@ -94,7 +94,7 @@ export default {
   display: block;
   margin: 15vw auto 5vw;
   /* Layout Properties */
-  width: 88vw;
+  width: 83vw;
   height: 12vw;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */

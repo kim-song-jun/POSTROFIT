@@ -123,7 +123,7 @@ export default {
 .movePost_button {
   border: none;
   display: block;
-  margin: 0vh auto 3vh;
+  margin: 15vh auto 3vh;
   /* Layout Properties */
   width: 83vw;
   height: 5.5vh;

@@ -131,7 +131,7 @@ export default {
 .progressMenu_desc_container {
   width: 51vw;
   height: 5.4vh;
-  margin-left: 13vw;
+  margin-left: 13.5vw;
 }
 .progressMenu_now {
   /* UI Properties */
