@@ -82,6 +82,7 @@ export default {
       this.y = event.clientY;
       this.line2[key].open = true;
       this.$store.commit('setSelectStation', this.line2[key]);
+      this.$store.commit('setBottomLockerCreated', true);
       this.$store.commit('setBottomLockerOpen', true);
     },
     imgHandleTouchStart(event) {

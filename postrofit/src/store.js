@@ -8,10 +8,18 @@ const store = createStore({
       selectStation: {},
       bottomMenuOpen: false,
       bottomLockerOpen: false,
+      bottomMenuCreated: false,
+      bottomLockerCreated: false,
       LINE2_JSON: {},
     };
   },
   mutations: {
+    setBottomMenuCreated(state, bool) {
+      state.bottomMenuCreated = bool;
+    },
+    setBottomLockerCreated(state, bool) {
+      state.bottomLockerCreated = bool;
+    },
     setBottomLockerOpen(state, bool) {
       state.bottomLockerOpen = bool;
     },
