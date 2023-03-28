@@ -2,7 +2,10 @@
   <div class="checkDeliveryPage_container">
     <checkModal
       v-if="checkModalOpen"
-      @closeCheckModal="checkModalOpen = false"
+      @closeCheckModal="
+        checkModalOpen = false;
+        $router.push('/SelectPage/paySuccessPage');
+      "
     />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">

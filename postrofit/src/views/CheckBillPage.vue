@@ -1,8 +1,15 @@
 <template>
   <div class="checkBill_container">
+    <checkModal
+      v-if="checkModalOpen"
+      @closeCheckModal="
+        checkModalOpen = false;
+        $router.push('/SelectPage/paySuccessPage');
+      "
+    />
     <div class="checkBill_content">
       <div class="movePost_location_container">
-        <div class="movePost_location">{{ startStation.name }}</div>
+        <div class="movePost_location">{{ selectStation.name }}</div>
         <div class="movePost_location_sub">
           서울특별시 동작구 남부순환로 지하2089
         </div>
@@ -23,16 +30,8 @@
       <progressMenu />
       <noticeBox class="checkBill_noticeBox"></noticeBox>
       <div class="movePost_button_container">
-        <button
-          class="movePost_button"
-          @click="
-            $router.push({
-              path: '/SelectPage/lockerPage',
-              query: {serviceType: '맡길게요'},
-            })
-          "
-        >
-          맡길게요
+        <button class="movePost_button" @click="checkModalOpen = true">
+          {{ $route.query.serviceType }}
         </button>
       </div>
     </div>
@@ -42,15 +41,22 @@
 <script>
 import progressMenu from '../components/progressMenu.vue';
 import noticeBox from '../components/noticeBox.vue';
+import checkModal from '../components/checkModal.vue';
 
 export default {
   components: {
     progressMenu,
     noticeBox,
+    checkModal,
+  },
+  data() {
+    return {
+      checkModalOpen: false,
+    };
   },
   computed: {
-    startStation() {
-      return this.$store.state.startStation;
+    selectStation() {
+      return this.$store.state.selectStation;
     },
   },
 };

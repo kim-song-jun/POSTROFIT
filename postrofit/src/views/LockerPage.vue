@@ -13,7 +13,7 @@
         class="lockerPage_button"
         @click="
           $router.push({
-            path: '/SelectPage/checkDeliveryPage',
+            path: getPath(),
             query: {serviceType: $route.query.serviceType},
           })
         "
@@ -40,6 +40,11 @@ export default {
         this.endStation.name ??
         this.selectStation.name
       );
+    },
+    getPath() {
+      return this.$route.query.serviceType == '보관할게요'
+        ? '/SelectPage/checkBillPage'
+        : '/SelectPage/checkDeliveryPage';
     },
   },
   computed: {

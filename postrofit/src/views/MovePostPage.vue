@@ -36,7 +36,12 @@
     <div class="movePost_button_container">
       <button
         class="movePost_button"
-        @click="$router.push('/SelectPage/checkBillPage')"
+        @click="
+          $router.push({
+            path: '/SelectPage/lockerPage',
+            query: {serviceType: '맡길게요'},
+          })
+        "
       >
         맡길게요
       </button>
