@@ -3,7 +3,10 @@
     <lockerModal
       v-if="lockerModalOpen"
       :stationName="getStationName()"
-      @closeLockerModal="lockerModalOpen = false"
+      @closeLockerModal="
+        lockerModalOpen = false;
+        $router.push('/MainPage');
+      "
     />
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
