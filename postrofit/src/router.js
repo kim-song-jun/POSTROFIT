@@ -6,7 +6,11 @@ import HistoryLocker from './components/User/HistoryLocker.vue';
 import HistoryEnd from './components/User/HistoryEnd.vue';
 import HistoryActive from './components/User/HistoryActive.vue';
 import MovePostPage from './views/MovePostPage.vue';
+import CheckBillPage from './views/CheckBillPage.vue';
 import LockerPage from './views/LockerPage.vue';
+import CheckDeliveryPage from './views/CheckDeliveryPage.vue';
+import PaySuccessPage from './views/PaySuccessPage.vue';
+import SelectPage from './views/SelectPage.vue';
 
 const routes = [
   {
@@ -44,12 +48,30 @@ const routes = [
     ],
   },
   {
-    path: '/MovePostPage',
-    component: MovePostPage,
-  },
-  {
-    path: '/LockerPage',
-    component: LockerPage,
+    path: '/SelectPage',
+    component: SelectPage,
+    children: [
+      {
+        path: '',
+        component: MovePostPage,
+      },
+      {
+        path: 'checkBillPage',
+        component: CheckBillPage,
+      },
+      {
+        path: 'lockerPage',
+        component: LockerPage,
+      },
+      {
+        path: 'checkDeliveryPage',
+        component: CheckDeliveryPage,
+      },
+      {
+        path: 'paySuccessPage',
+        component: PaySuccessPage,
+      },
+    ],
   },
 ];
 

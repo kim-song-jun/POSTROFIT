@@ -1,43 +1,29 @@
 <template>
-  <div class="menuBar_container">
-    <div class="menuBar_bottom_menu_bar">
-      <div class="menuBar_subway_line">2</div>
-      <div v-if="0" class="menuBar_subway_line">4</div>
-      <div class="menuBar_round_bar"></div>
-      <div class="menuBar_close_btn" @click="closeMenu">X</div>
+  <div class="select_container">
+    <div class="menuBar_container">
+      <div class="menuBar_bottom_menu_bar">
+        <div class="menuBar_subway_line">2</div>
+        <div v-if="0" class="menuBar_subway_line">4</div>
+        <div class="menuBar_round_bar"></div>
+        <div class="menuBar_close_btn" @click="$router.push('/MainPage')">
+          X
+        </div>
+      </div>
     </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    closeMenu() {
-      const start = this.startStation?.name?.length ?? 0;
-      const end = this.endStation?.name?.length ?? 0;
-      if (start && end) {
-        this.$store.dispatch('initStation');
-        return;
-      }
-      this.$store.commit('setBottomMenuOpen', false);
-      this.$store.commit('setBottomLockerOpen', false);
-    },
-  },
-  computed: {
-    startStation() {
-      return this.$store.state.startStation;
-    },
-    endStation() {
-      return this.$store.state.endStation;
-    },
-    selectStation() {
-      return this.$store.state.selectStation;
-    },
-  },
-};
+export default {};
 </script>
 
 <style>
+.select_container {
+  width: 100vw;
+  height: 97.7vh;
+  padding-top: 2.3vh;
+}
 .menuBar_container {
   position: relative;
 }

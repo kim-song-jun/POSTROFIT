@@ -6,10 +6,10 @@
         <div class="userHome_text2">현재 이용하는 보관함 정보</div>
       </div>
     </div>
-    <div class="lockerPage_station">
+    <div class="historyLocker_station">
       <div class="historyLocker_line">2</div>
-      <div class="lockerPage_station_name">
-        <div class="lockerPage_station_location">
+      <div class="historyLocker_station_name">
+        <div class="historyLocker_station_location">
           서울특별시 동작구 남부순환로 지하2089
         </div>
         2호선 사당A
@@ -137,8 +137,8 @@ export default {
 .historyActive_info {
   margin-left: 10.5vw;
 }
-.lockerPage_station {
-  margin: 7vw 0vw 0vw 10vw;
+.historyLocker_station {
+  margin: 3vh 0vw 0vh 10vw;
   display: flex;
 }
 .historyLocker_line {
@@ -164,7 +164,7 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
-.lockerPage_station_name {
+.historyLocker_station_name {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
@@ -177,7 +177,7 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.lockerPage_station_location {
+.historyLocker_station_location {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal normal 10px/13px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
@@ -204,7 +204,7 @@ export default {
   display: block;
   margin: 15vw auto 5vw;
   /* Layout Properties */
-  width: 88vw;
+  width: 83vw;
   height: 12vw;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */

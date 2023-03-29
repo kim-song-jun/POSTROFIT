@@ -1,58 +1,80 @@
 <template>
   <div class="checkBill_container">
-    <MenuBar></MenuBar>
-    <div class="movePost_location_container">
-      <div class="movePost_location">2호선 사당A</div>
-      <div class="movePost_location_sub">
-        서울특별시 동작구 남부순환로 지하2089
-      </div>
-    </div>
+    <checkModal
+      v-if="checkModalOpen"
+      @closeCheckModal="
+        checkModalOpen = false;
+        $router.push('/SelectPage/paySuccessPage');
+      "
+    />
     <div class="checkBill_content">
-      <div class="checkBill_price">
-        요금: <span class="checkBill_green">2000원</span> / 4시간
+      <div class="movePost_location_container">
+        <div class="movePost_location">{{ selectStation.name }}</div>
+        <div class="movePost_location_sub">
+          서울특별시 동작구 남부순환로 지하2089
+        </div>
       </div>
-      <div class="checkBill_size">
-        사이즈: <span class="checkBill_green">대형</span>
+      <div class="checkBill_info">
+        <div class="checkBill_price">
+          요금: <span class="checkBill_green">2000원</span> / 4시간
+        </div>
+        <div class="checkBill_size">
+          사이즈: <span class="checkBill_green">대형</span>
+        </div>
+        <div class="checkBill_term">보관 기간</div>
+        <div class="checkBill_date">
+          2022/10/16
+          <span class="checkBill_green">12:12:13</span> ~
+        </div>
       </div>
-      <div class="checkBill_term">보관 기간</div>
-      <div class="checkBill_date">
-        2022/10/16
-        <span class="checkBill_green">12:12:13</span> ~
+      <progressMenu />
+      <noticeBox class="checkBill_noticeBox"></noticeBox>
+      <div class="movePost_button_container">
+        <button class="movePost_button" @click="checkModalOpen = true">
+          {{ $route.query.serviceType }}
+        </button>
       </div>
-    </div>
-    <progressMenu></progressMenu>
-    <noticeBox class="checkBill_noticeBox"></noticeBox>
-    <div class="movePost_button_container">
-      <button class="movePost_button" disabled>옮길게요</button>
     </div>
   </div>
 </template>
 
 <script>
-import MenuBar from '@/components/MenuBar.vue';
-import progressMenu from '@/components/progressMenu.vue';
-import noticeBox from '@/components/noticeBox.vue';
+import progressMenu from '../components/progressMenu.vue';
+import noticeBox from '../components/noticeBox.vue';
+import checkModal from '../components/checkModal.vue';
 
 export default {
   components: {
-    MenuBar,
     progressMenu,
     noticeBox,
+    checkModal,
+  },
+  data() {
+    return {
+      checkModalOpen: false,
+    };
+  },
+  computed: {
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
   },
 };
 </script>
 
 <style>
-.checkBill_container {
-  width: 100vw;
-  position: absolute;
-  top: 20px;
+.checkBill_content {
+  overflow: scroll;
+  height: 92.7vh;
+  scrollbar-width: none;
+}
+.checkBill_content::-webkit-scrollbar {
+  display: none;
 }
 .movePost_location_container {
-  margin: 8vw 0vw;
-  margin-right: 8vw;
+  margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
-  height: 11vw;
+  height: 5.5vh;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) */
   /* var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32) */
@@ -65,8 +87,8 @@ export default {
   color: #707070;
   opacity: 1;
 }
-.checkBill_content {
-  margin: 15vw 0vw 0vw 10.5vw;
+.checkBill_info {
+  margin: 7.2vh 0vw 0vh 10.5vw;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-24) / var(--unnamed-line-spacing-32)
@@ -83,10 +105,10 @@ export default {
   color: #6fbb69;
 }
 .checkBill_price {
-  margin-bottom: 2.5vw;
+  margin-bottom: 1.2vh;
 }
 .checkBill_size {
-  margin-bottom: 5vw;
+  margin-bottom: 2.3vh;
 }
 .movePost_location_sub {
   /* UI Properties */
@@ -102,15 +124,15 @@ export default {
   opacity: 1;
 }
 .checkBill_noticeBox {
-  margin-left: 10.5vw;
+  width: 83vw;
 }
 .movePost_button {
   border: none;
   display: block;
-  margin: 15vw auto 5vw;
+  margin: 15vh auto 3vh;
   /* Layout Properties */
-  width: 88vw;
-  height: 12vw;
+  width: 83vw;
+  height: 5.5vh;
   /* UI Properties */
   /* background: var(--unnamed-color-6fbb69) 0% 0% no-repeat padding-box; */
   background: #6fbb69 0% 0% no-repeat padding-box;

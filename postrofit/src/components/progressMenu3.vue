@@ -19,7 +19,7 @@
       <div class="progressMenu_circle">04</div>
     </div>
   </div>
-  <div class="progressMenu_desc_container">
+  <div class="progressMenu3_desc_container">
     <div class="progressMenu_now">{{ progress[2] }}</div>
     <div class="progressMenu_desc_sub">
       장소, 사이즈, 이용금액, 주의사항 확인
@@ -128,7 +128,7 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
-.progressMenu_desc_container {
+.progressMenu3_desc_container {
   width: 51vw;
   height: 12vw;
   margin-left: 35vw;

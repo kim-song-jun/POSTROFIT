@@ -14,7 +14,15 @@
         {{ this.selectStation.name }}
       </div>
     </div>
-    <div class="bottomLocker_usable">
+    <div
+      class="bottomLocker_usable"
+      @click="
+        $router.push({
+          path: '/SelectPage/lockerPage',
+          query: {serviceType: '보관할게요'},
+        })
+      "
+    >
       <div class="bottomLocker_image_container bottomLocker_text">
         <img
           class="bottomLocker_image"

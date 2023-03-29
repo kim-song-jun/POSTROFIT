@@ -5,7 +5,7 @@
       <div class="lockerModal_warning">
         *타인에게 노출되지 않도록 주의하세요
       </div>
-      <div class="lockerModal_location">강남A 3번 보관함</div>
+      <div class="lockerModal_location">{{ stationName }} 3번 보관함</div>
       <div class="lockerModal_passwd">3145</div>
       <button class="lockerModal_button" @click="$emit('closeLockerModal')">
         닫기
@@ -15,7 +15,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    stationName: String,
+  },
+};
 </script>
 
 <style>

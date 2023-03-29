@@ -2,7 +2,9 @@
   <div class="locationBox_container">
     <div class="locationBox_src">
       <div class="locationBox_text1">출발</div>
-      <div class="locationBox_text2">2호선 <span>사당</span></div>
+      <div class="locationBox_text2">
+        2호선 <span>{{ startStation.name }}</span>
+      </div>
       <div class="locationBox_text3">서울특별시 동작구 남부순환로 지하2089</div>
     </div>
     <div class="locationBox_arrow_container">
@@ -10,14 +12,25 @@
     </div>
     <div class="locationBox_dst">
       <div class="locationBox_text1">도착</div>
-      <div class="locationBox_text2">2호선 <span>강남</span></div>
+      <div class="locationBox_text2">
+        2호선 <span>{{ endStation.name }}</span>
+      </div>
       <div class="locationBox_text3">서울특별시 동작구 남부순환로 지하2089</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+  },
+};
 </script>
 
 <style>

@@ -43,16 +43,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12.5vw 12.5vw 2vw;
+  padding: 6vh 12.5vw 1vh;
 }
 .progressMenu_graybar {
   position: absolute;
-  top: 26.5vw;
+  top: 12vh;
   left: 8.5vw;
   z-index: -1;
   /* Layout Properties */
   width: 83vw;
-  height: 2vw;
+  height: 1vh;
   /* UI Properties */
   /* background: var(--unnamed-color-d8d6d6) 0% 0% no-repeat padding-box; */
   background: #d8d6d6 0% 0% no-repeat padding-box;
@@ -74,7 +74,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 5vw;
-  margin: 0vw 6.5vw;
+  margin: 0vh 6.5vw;
   /* Layout Properties */
   width: 9.5vw;
   height: 9.5vw;
@@ -92,7 +92,7 @@ export default {
   opacity: 1;
 }
 .progressMenu_desc {
-  padding: 0vw 0vw 2vw;
+  padding: 0vh 0vw 1vh;
   min-width: 60px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
@@ -111,7 +111,7 @@ export default {
   justify-content: center;
   background-color: #6fbb69;
   /* margin-top: 34px; */
-  margin: 9vw 3.5vw 0px;
+  margin: 4.2vh 3.5vw 0vh;
   /* Layout Properties */
   width: 13vw;
   height: 13vw;
@@ -130,8 +130,8 @@ export default {
 }
 .progressMenu_desc_container {
   width: 51vw;
-  height: 12vw;
-  margin-left: 13vw;
+  height: 5.4vh;
+  margin-left: 13.5vw;
 }
 .progressMenu_now {
   /* UI Properties */

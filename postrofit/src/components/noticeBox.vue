@@ -44,7 +44,7 @@ export default {};
 <style>
 .noticeBox_container {
   width: auto;
-  margin: 8vw auto;
+  margin: 5vh auto;
 }
 .noticeBox_warning {
   /* UI Properties */
