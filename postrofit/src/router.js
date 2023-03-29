@@ -22,6 +22,10 @@ const routes = [
     component: MainPage,
   },
   {
+    path: '/Test',
+    component: () => import('../src/components/Locker/lockerImage.vue'),
+  },
+  {
     path: '/UserPage',
     component: UserPage,
     children: [

@@ -1,16 +1,7 @@
 <template>
   <div class="lockerInfo_container">
     <div class="lockerInfo_locker">
-      <table>
-        <tr v-for="(item, key) in this.lockerData" :key="key">
-          <td
-            class="lockerTable_cell"
-            v-for="(value, index) in item"
-            :key="index"
-            :rowspan="this.setPostSize(value)"
-          ></td>
-        </tr>
-      </table>
+      <LockerImage></LockerImage>
     </div>
     <div class="lockerInfo_state">
       <div class="lockerInfo_state_column">
@@ -49,6 +40,7 @@
 
 <script>
 import locker from '../assets/data/locker.json';
+import LockerImage from './Locker/lockerImage.vue';
 
 export default {
   data() {
@@ -70,29 +62,11 @@ export default {
       console.log(id);
     },
   },
+  components: {LockerImage},
 };
 </script>
 
 <style>
-table {
-  border-collapse: separate;
-  border-spacing: 10px;
-  min-width: 100vw;
-  width: 125vw;
-}
-
-tr td {
-  width: 25vw;
-  height: 16vw;
-  box-shadow: 0 0 0 10px #fff;
-  border-radius: 10px;
-  background-color: #707070;
-}
-.lockerTable_cell {
-  vertical-align: text-top;
-  padding-left: 10px;
-  padding-top: 10px;
-}
 .lockerInfo_container {
   padding: 4.5vw 0vw 6vw 11vw;
 }

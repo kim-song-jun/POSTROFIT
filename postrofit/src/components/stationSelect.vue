@@ -34,6 +34,7 @@ export default {
       const start = this.startStation?.name?.length ?? 0;
       const end = this.endStation?.name?.length ?? 0;
       if (start && end) {
+        this.$store.commit('setBottomMenuCreated', true);
         this.$store.commit('setBottomMenuOpen', true);
       }
     },
@@ -46,6 +47,7 @@ export default {
       const start = this.startStation?.name?.length ?? 0;
       const end = this.endStation?.name?.length ?? 0;
       if (start && end) {
+        this.$store.commit('setBottomMenuCreated', true);
         this.$store.commit('setBottomMenuOpen', true);
       }
     },
