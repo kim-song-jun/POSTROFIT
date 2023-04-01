@@ -1,10 +1,14 @@
 <template>
   <div class="usingLocker_container" @click="$router.push('/UserPage/locker')">
     <div class="usingLocker_about">
-      <div class="usingLocker_line_circle usingLocker_line_text">2</div>
+      <div class="usingLocker_line_circle usingLocker_line_text">
+        {{ store.station.line }}
+      </div>
       <div class="usingLocker_textbox2">
-        <div class="userHome_text2">서울특별시 동작구 남부순환로 지하2089</div>
-        <div class="userHome_text3">2호선 사당A</div>
+        <div class="userHome_text2">{{ store.location }}</div>
+        <div class="userHome_text3">
+          {{ store.station.line }}호선 {{ store.station.name }}
+        </div>
       </div>
       <div class="usingLocker_arrow">
         <div class="usingLocker_arrow_top"></div>
@@ -13,25 +17,29 @@
     </div>
     <div class="userHome_text">
       요금:
-      <span class="userHome_point_text">2000원</span> / 4시간
+      <span class="userHome_point_text">{{ store.fee }}원</span> / 4시간
     </div>
     <div class="usingLocker_empty"></div>
     <div class="userHome_text">
       사이즈:
-      <span class="userHome_point_text">중형</span>
+      <span class="userHome_point_text">{{ store.size }}</span>
     </div>
     <div class="usingLocker_empty2"></div>
     <div class="userHome_text4">보관 기간</div>
     <div class="userHome_text3 usingLocker_time">
-      2022/10/16
-      <span class="userHome_point_text">12:12:13</span> ~
+      {{ store.date }}
+      <span class="userHome_point_text">{{ store.time }}</span> ~
     </div>
     <div class="userHome_text4 usingLocker_term">현재까지</div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    store: Object,
+  },
+};
 </script>
 
 <style>
