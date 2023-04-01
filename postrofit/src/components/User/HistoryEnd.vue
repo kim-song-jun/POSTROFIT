@@ -6,7 +6,11 @@
         <div class="userHome_text2">현재 이용하고 있는 정보</div>
       </div>
     </div>
-    <locationBox class="historyActive_locationBox"></locationBox>
+    <locationBox
+      class="historyEnd_locationBox"
+      :startStation="historyDetail.startStation"
+      :endStation="historyDetail.endStation"
+    />
     <noticeBox class="historyLocker_noticeBox"></noticeBox>
   </div>
 </template>

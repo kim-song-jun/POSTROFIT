@@ -2,6 +2,8 @@
   <div class="historyActive_container">
     <cancelModal
       v-if="cancelModalOpen"
+      :startStation="historyDetail.startStation"
+      :endStation="historyDetail.endStation"
       @closeCancelModal="cancelModalOpen = false"
     />
     <div class="historyActive_info_container">
