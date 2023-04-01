@@ -11,6 +11,7 @@ const store = createStore({
       bottomMenuCreated: false,
       bottomLockerCreated: false,
       LINE2_JSON: {},
+      userStore: {},
     };
   },
   mutations: {
@@ -41,6 +42,9 @@ const store = createStore({
         stations: Line2.stations.map((item) => ({...item, open: false})),
       };
       console.log(state.LINE2_JSON);
+    },
+    setUserStore(state, userStore) {
+      state.userStore = {...userStore};
     },
   },
   actions: {

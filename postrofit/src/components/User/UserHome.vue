@@ -46,7 +46,7 @@ export default {
     getStore() {
       // 내 보관함 정보 요청
       // return null;
-      return {
+      const data = {
         location: '서울특별시 동작구 남부순환로 지하2089',
         station: {line: 2, name: '사당'},
         fee: 2000,
@@ -54,6 +54,8 @@ export default {
         date: '2022/10/16',
         time: '12:12:13',
       };
+      this.$store.commit('setUserStore', data);
+      return data;
     },
     getHistory() {
       // 이용 내역 정보 요청
