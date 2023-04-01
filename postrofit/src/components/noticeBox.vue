@@ -28,17 +28,24 @@
         </span>
       </div>
     </div>
-    <div v-if="1" class="noticeBox_check_btn">
+    <div v-if="checkBoxOpen" class="noticeBox_check_btn">
       <span class="noticeBox_warning">
-        <input type="checkbox" name="agree" />
-        *동의함
+        <input type="checkbox" id="notice" name="agree" v-model="isCheck" />
+        <label for="notice">*동의함</label>
       </span>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      checkBoxOpen: false,
+      isCheck: false,
+    };
+  },
+};
 </script>
 
 <style>
