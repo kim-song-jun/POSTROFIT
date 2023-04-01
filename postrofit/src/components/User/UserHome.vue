@@ -115,7 +115,7 @@ export default {
 }
 .userHome_locker_container {
   width: 83vw;
-  height: 75vw;
+  /* height: 75vw; */
   margin: 7vw auto 0vw;
 }
 .userHome_text {
