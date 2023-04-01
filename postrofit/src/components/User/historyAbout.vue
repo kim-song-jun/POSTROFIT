@@ -1,7 +1,7 @@
 <template>
   <div class="historyList_container">
     <div
-      v-for="(history, i) in historyList"
+      v-for="(history, i) in userHistory"
       :key="i"
       class="historyAbout"
       :class="historyClass(history.hisType)"
@@ -46,8 +46,10 @@
 
 <script>
 export default {
-  props: {
-    historyList: Array,
+  computed: {
+    userHistory() {
+      return this.$store.state.userHistory;
+    },
   },
   methods: {
     historyClass(type) {

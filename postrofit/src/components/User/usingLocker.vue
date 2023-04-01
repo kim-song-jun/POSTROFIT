@@ -2,12 +2,12 @@
   <div class="usingLocker_container" @click="$router.push('/UserPage/locker')">
     <div class="usingLocker_about">
       <div class="usingLocker_line_circle usingLocker_line_text">
-        {{ store.station.line }}
+        {{ userStore.station.line }}
       </div>
       <div class="usingLocker_textbox2">
-        <div class="userHome_text2">{{ store.location }}</div>
+        <div class="userHome_text2">{{ userStore.location }}</div>
         <div class="userHome_text3">
-          {{ store.station.line }}호선 {{ store.station.name }}
+          {{ userStore.station.line }}호선 {{ userStore.station.name }}
         </div>
       </div>
       <div class="usingLocker_arrow">
@@ -17,18 +17,18 @@
     </div>
     <div class="userHome_text">
       요금:
-      <span class="userHome_point_text">{{ store.fee }}원</span> / 4시간
+      <span class="userHome_point_text">{{ userStore.fee }}원</span> / 4시간
     </div>
     <div class="usingLocker_empty"></div>
     <div class="userHome_text">
       사이즈:
-      <span class="userHome_point_text">{{ store.size }}</span>
+      <span class="userHome_point_text">{{ userStore.size }}</span>
     </div>
     <div class="usingLocker_empty2"></div>
     <div class="userHome_text4">보관 기간</div>
     <div class="userHome_text3 usingLocker_time">
-      {{ store.date }}
-      <span class="userHome_point_text">{{ store.time }}</span> ~
+      {{ userStore.date }}
+      <span class="userHome_point_text">{{ userStore.time }}</span> ~
     </div>
     <div class="userHome_text4 usingLocker_term">현재까지</div>
   </div>
@@ -36,8 +36,10 @@
 
 <script>
 export default {
-  props: {
-    store: Object,
+  computed: {
+    userStore() {
+      return this.$store.state.userStore;
+    },
   },
 };
 </script>
