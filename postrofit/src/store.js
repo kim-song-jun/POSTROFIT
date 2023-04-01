@@ -12,6 +12,7 @@ const store = createStore({
       bottomLockerCreated: false,
       LINE2_JSON: {},
       userStore: {},
+      userHistory: [],
     };
   },
   mutations: {
@@ -45,6 +46,9 @@ const store = createStore({
     },
     setUserStore(state, userStore) {
       state.userStore = {...userStore};
+    },
+    setUserHistory(state, userHistory) {
+      state.userHistory = [...userHistory];
     },
   },
   actions: {

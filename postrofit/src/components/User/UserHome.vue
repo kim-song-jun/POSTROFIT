@@ -15,13 +15,13 @@
         <div class="userHome_text1">내 보관함</div>
         <div class="userHome_text2">현재 보관함 이용내역</div>
       </div>
-      <usingLocker v-if="getStore()" :store="getStore()" />
+      <usingLocker v-if="this.$store.state.userStore" />
     </div>
     <div class="userHome_history_container">
       <div class="userHome_text1">이용내역</div>
       <div class="userHome_text2">최근 10일간 이용내역</div>
       <div class="userHome_history_content">
-        <historyAbout :historyList="getHistory()" />
+        <historyAbout />
       </div>
     </div>
   </div>
@@ -45,7 +45,6 @@ export default {
   methods: {
     getStore() {
       // 내 보관함 정보 요청
-      // return null;
       const data = {
         location: '서울특별시 동작구 남부순환로 지하2089',
         station: {line: 2, name: '사당'},
@@ -55,13 +54,15 @@ export default {
         time: '12:12:13',
       };
       this.$store.commit('setUserStore', data);
-      return data;
     },
     getHistory() {
       // 이용 내역 정보 요청
-      // return null;
-      return [...history];
+      this.$store.commit('setUserHistory', history);
     },
+  },
+  created() {
+    this.getStore();
+    this.getHistory();
   },
 };
 </script>
