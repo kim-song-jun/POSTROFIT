@@ -1,7 +1,7 @@
 <template>
-  <div class="historyActive_container">
-    <div class="historyActive_info_container">
-      <div class="historyActive_info userHome_text1">
+  <div class="historyEnd_container">
+    <div class="historyEnd_info_container">
+      <div class="historyEnd_info userHome_text1">
         이용내역
         <div class="userHome_text2">현재 이용하고 있는 정보</div>
       </div>
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     getHistoryDetail() {
-      // 異諛?, ?李⑹ ?? 蹂닿?? ?蹂??踰? ?泥
+      // 출발역, 도착역 또는 보관역 정보 서버에 요청
       const data = {
-        startStation: '?щ?,
-        endStation: '媛??,
-        selectStation: '?щ?,
+        startStation: '사당',
+        endStation: '강남',
+        selectStation: '사당',
       };
       return data;
     },
@@ -47,11 +47,11 @@ export default {
 </script>
 
 <style>
-.historyActive_container {
+.historyEnd_container {
   overflow: scroll;
   height: 92.2vh;
 }
-.historyActive_info_container {
+.historyEnd_info_container {
   display: flex;
   align-items: center;
   position: relative;
@@ -64,13 +64,18 @@ export default {
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
 }
-.historyActive_info {
+.historyEnd_info {
   margin-left: 10.5vw;
 }
-.historyActive_locationBox {
+.historyEnd_locationBox {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9vw;
+  margin-bottom: 5vw;
 }
-.historyActive_locationBox .locationBox_text3 {
+.historyEnd_locationBox .locationBox_text3 {
   margin: 0vw auto;
 }
 .userHome_text1 {
