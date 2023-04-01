@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import lockerInfoHistory from '../lockerInfoHistory.vue';
+import lockerInfo from '../lockerInfo.vue';
 import noticeBox from '../noticeBox.vue';
 
 export default {
@@ -60,7 +60,7 @@ export default {
     },
   },
   components: {
-    lockerInfoHistory,
+    lockerInfo,
     noticeBox,
   },
 };
