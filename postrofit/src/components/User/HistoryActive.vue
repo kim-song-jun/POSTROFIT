@@ -35,16 +35,31 @@ import noticeBox from '../noticeBox.vue';
 import cancelModal from '../cancelModal.vue';
 
 export default {
-  components: {
     locationBoxActive,
-    progressMenu,
-    noticeBox,
-    cancelModal,
-  },
   data() {
     return {
       cancelModalOpen: false,
+      historyDetail: {},
     };
+  },
+  methods: {
+    getHistoryDetail() {
+      // 異諛?, ?李⑹ ?? 蹂닿?? ?蹂??踰? ?泥
+      const data = {
+        startStation: '?щ?,
+        endStation: '媛??,
+        selectStation: '?щ?,
+      };
+      return data;
+    },
+  },
+  created() {
+    this.historyDetail = this.getHistoryDetail();
+  },
+  components: {
+    progressMenu,
+    noticeBox,
+    cancelModal,
   },
 };
 </script>

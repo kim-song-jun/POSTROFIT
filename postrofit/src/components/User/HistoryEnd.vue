@@ -20,6 +20,25 @@ import locationBox from '../locationBox.vue';
 import noticeBox from '../noticeBox.vue';
 
 export default {
+  data() {
+    return {
+      historyDetail: {},
+    };
+  },
+  methods: {
+    getHistoryDetail() {
+      // 異諛?, ?李⑹ ?? 蹂닿?? ?蹂??踰? ?泥
+      const data = {
+        startStation: '?щ?,
+        endStation: '媛??,
+        selectStation: '?щ?,
+      };
+      return data;
+    },
+  },
+  created() {
+    this.historyDetail = this.getHistoryDetail();
+  },
   components: {
     locationBox,
     noticeBox,
