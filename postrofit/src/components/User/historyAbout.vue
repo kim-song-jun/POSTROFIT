@@ -1,7 +1,7 @@
 <template>
   <div class="historyList_container">
     <div
-      v-for="(history, i) in list"
+      v-for="(history, i) in historyList"
       :key="i"
       class="historyAbout"
       :class="historyClass(history.hisType)"
@@ -45,13 +45,9 @@
 </template>
 
 <script>
-import {history} from '../../assets/data/history.json';
-
 export default {
-  data() {
-    return {
-      list: history,
-    };
+  props: {
+    historyList: Array,
   },
   methods: {
     historyClass(type) {
