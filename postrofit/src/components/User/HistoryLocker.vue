@@ -7,33 +7,34 @@
       </div>
     </div>
     <div class="historyLocker_station">
-      <div class="historyLocker_line">2</div>
+      <div class="historyLocker_line">{{ userStore.station.line }}</div>
       <div class="historyLocker_station_name">
         <div class="historyLocker_station_location">
-          서울특별시 동작구 남부순환로 지하2089
+          {{ userStore.location }}
         </div>
-        2호선 사당A
+        {{ userStore.station.line }}호선 {{ userStore.station.name }}
       </div>
     </div>
-    <lockerInfoHistory></lockerInfoHistory>
+    <lockerInfo />
     <div class="historyLocker_detail_container">
       <div class="userHome_text">
         요금:
-        <span class="userHome_point_text">2000원</span> / 4시간
+        <span class="userHome_point_text">{{ userStore.fee }}원</span> / 4시간
       </div>
       <div class="usingLocker_empty"></div>
       <div class="userHome_text">
         사이즈:
-        <span class="userHome_point_text">중형</span>
+        <span class="userHome_point_text">{{ userStore.size }}</span>
       </div>
       <div class="usingLocker_empty2"></div>
       <div class="userHome_text4">보관 기간</div>
       <div class="userHome_text3 usingLocker_time">
-        2022/10/16 <span class="userHome_point_text">12:12:13</span> ~
+        {{ userStore.date }}
+        <span class="userHome_point_text">{{ userStore.time }}</span> ~
       </div>
       <div class="userHome_text4 usingLocker_term">현재까지</div>
     </div>
-    <noticeBox class="historyLocker_noticeBox"></noticeBox>
+    <noticeBox class="historyLocker_noticeBox" />
     <div class="movePost_button_container">
       <button class="movePost_button" @click="$emit('openLockerModal')">
         보관함 열기
@@ -47,6 +48,17 @@ import lockerInfoHistory from '../lockerInfoHistory.vue';
 import noticeBox from '../noticeBox.vue';
 
 export default {
+  computed: {
+    userStore() {
+      return this.$store.state.userStore;
+    },
+  },
+  methods: {
+    getStorage() {
+      // 보관함 데이터 서버 요청
+      return {};
+    },
+  },
   components: {
     lockerInfoHistory,
     noticeBox,
