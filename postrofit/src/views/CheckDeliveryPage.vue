@@ -44,34 +44,53 @@ export default {
       this.checkModalOpen = false;
       // 결제 페이지로 이동
       // 결제 후 등록 요청
-      // let reqData = {user_id: ''};
+      // issue user_id는 어디서 받아오나?
+      // const reqData = {user_id: ''};
       // if (this.serviceType == '맡길게요') {
-      //   reqData = {...reqData, storage_id: 8};
-      //   this.$axios
-      //     .post('/make', {data: JSON.stringify(reqData)})
-      //     .then((response) => {
-      //       console.log(response);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
+      //   this.makeOrder(reqData);
       // }
       // if (this.serviceType == '옮길게요') {
-      //   reqData = {...reqData, order_id: 8};
-      //   this.$axios
-      //     .post('/take', {data: JSON.stringify(reqData)})
-      //     .then((response) => {
-      //       console.log(response);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
+      //   this.takeDelivery(reqData);
       // }
       // 결제 완료 페이지로 이동
       this.$router.push('/SelectPage/paySuccessPage');
     },
     move2PayPage() {
       // 결제 페이지로 이동
+    },
+    findStorageId() {
+      const storage = this.$store.state.storage;
+
+      storage.locker.forEach((line) => {
+        line.forEach((container) => {
+          if (container.status == '선택') return container.id;
+        });
+      });
+    },
+    makeOrder(reqData) {
+      reqData = {...reqData, storage_id: this.findStorageId()};
+
+      this.$axios
+        .post('/make', {data: JSON.stringify(reqData)})
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    takeDelivery(reqData) {
+      // issue order_id는 어디서 받아오나?
+      reqData = {...reqData, order_id: 8};
+
+      this.$axios
+        .post('/take', {data: JSON.stringify(reqData)})
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   components: {
