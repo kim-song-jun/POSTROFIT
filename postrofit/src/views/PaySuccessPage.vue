@@ -84,25 +84,45 @@ export default {
         storageNum: 4,
         password: 4456,
       };
-      // this.$axios
-      //   .get('/store/fee/user_id')
-      //   .then((response) => {
-      //     this.lockerInfo = response.data;
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      // if (this.$route.query.serviceType == '맡길게요')
+      //   this.$axios
+      //     .get('/order/storage/info/user_id')
+      //     .then((response) => {
+      //       this.lockerInfo = response.data;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // if (this.$route.query.serviceType == '보관할게요')
+      //   this.$axios
+      //     .get('/store/fee/user_id')
+      //     .then((response) => {
+      //       this.lockerInfo = response.data;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
       this.lockerModalOpen = true;
     },
     openLockerModal() {
-      this.$axios
-        .get('/store/fee/user_id')
-        .then((response) => {
-          this.lockerInfo = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.$route.query.serviceType == '맡길게요')
+        this.$axios
+          .get('/order/storage/info/user_id')
+          .then((response) => {
+            this.lockerInfo = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.$route.query.serviceType == '보관할게요')
+        this.$axios
+          .get('/store/fee/user_id')
+          .then((response) => {
+            this.lockerInfo = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       this.lockerModalOpen = true;
     },
   },
