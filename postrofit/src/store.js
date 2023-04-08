@@ -11,6 +11,10 @@ const store = createStore({
       bottomMenuCreated: false,
       bottomLockerCreated: false,
       LINE2_JSON: {},
+      // 옮길게요 기능에 필요한 데이터
+      deliveryData: null,
+      // 맡길게요 기능에 필요한 데이터
+      orderData: null,
       // 보관할게요 기능에 필요한 데이터
       storeData: null,
     };
@@ -43,6 +47,12 @@ const store = createStore({
         stations: Line2.stations.map((item) => ({...item, open: false})),
       };
       console.log(state.LINE2_JSON);
+    },
+    setDeliveryData(state, deliveryData) {
+      state.deliveryData = {...deliveryData};
+    },
+    setOrderData(state, orderData) {
+      state.orderData = {...orderData};
     },
     setStoreData(state, storeData) {
       state.storeData = {...storeData};
