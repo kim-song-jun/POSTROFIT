@@ -21,7 +21,7 @@
       <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
       <div class="checkDeliveryPage_button_container">
         <button class="checkDeliveryPage_button" @click="checkModalOpen = true">
-          {{ $route.query.serviceType }}
+          {{ serviceType }}
         </button>
       </div>
     </div>
@@ -39,6 +39,11 @@ export default {
     return {
       checkModalOpen: false,
     };
+  },
+  computed: {
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   components: {
     progressMenu,

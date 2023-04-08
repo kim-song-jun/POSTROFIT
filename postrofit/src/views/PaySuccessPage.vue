@@ -64,14 +64,17 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   methods: {
     getStationName() {
-      return (
-        this.startStation.name ??
-        this.endStation.name ??
-        this.selectStation.name
-      );
+      return this.serviceType == '맡길게요'
+        ? this.startStation.name
+        : this.serviceType == '옮길게요'
+        ? this.endStation.name
+        : this.selectStation.name;
     },
     move2Main() {
       this.lockerModalOpen = false;
@@ -80,11 +83,11 @@ export default {
     testOpenLockerModal() {
       // 보관함 비밀번호 받아오기
       this.lockerInfo = {
-        stationName: this.getStationName(), // 여기서도 이름은 필요한지 잘 모르겠음
+        stationName: this.getStationName(), // issue 여기서도 이름은 필요한지 잘 모르겠음
         storageNum: 4,
         password: 4456,
       };
-      // if (this.$route.query.serviceType == '맡길게요')
+      // if (this.serviceType == '맡길게요')
       //   this.$axios
       //     .get('/order/storage/info/user_id')
       //     .then((response) => {
@@ -93,7 +96,7 @@ export default {
       //     .catch((error) => {
       //       console.log(error);
       //     });
-      // if (this.$route.query.serviceType == '보관할게요')
+      // if (this.serviceType == '보관할게요')
       //   this.$axios
       //     .get('/store/fee/user_id')
       //     .then((response) => {
@@ -105,7 +108,7 @@ export default {
       this.lockerModalOpen = true;
     },
     openLockerModal() {
-      if (this.$route.query.serviceType == '맡길게요')
+      if (this.serviceType == '맡길게요')
         this.$axios
           .get('/order/storage/info/user_id')
           .then((response) => {
@@ -114,7 +117,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.$route.query.serviceType == '보관할게요')
+      if (this.serviceType == '보관할게요')
         this.$axios
           .get('/store/fee/user_id')
           .then((response) => {

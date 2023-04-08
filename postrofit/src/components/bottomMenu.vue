@@ -58,16 +58,12 @@ export default {
   },
   methods: {
     move2SelectPage() {
-      this.$router.push({
-        path: '/SelectPage',
-        query: {serviceType: '맡길게요'},
-      });
+      this.$store.commit('setServiceType', '맡길게요');
+      this.$router.push('/SelectPage');
     },
     move2LockerPage() {
-      this.$router.push({
-        path: '/SelectPage/lockerPage',
-        query: {serviceType: '옮길게요'},
-      });
+      this.$store.commit('setServiceType', '옮길게요');
+      this.$router.push('/SelectPage/lockerPage');
     },
   },
   components: {

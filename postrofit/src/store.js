@@ -19,6 +19,8 @@ const store = createStore({
       storeData: null,
       // 보관함을 그리는데 필요한 데인터
       storage: null,
+      // 이용하는 서비스 구분
+      serviceType: '',
     };
   },
   mutations: {
@@ -61,6 +63,9 @@ const store = createStore({
     },
     setStorage(state, storage) {
       state.storage = {...storage};
+    },
+    setServiceType(state, serviceeType) {
+      state.serviceType = serviceeType;
     },
   },
   actions: {

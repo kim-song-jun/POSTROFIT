@@ -28,7 +28,7 @@
       <noticeBox class="checkBill_noticeBox"></noticeBox>
       <div class="checkBill_button_container">
         <button class="checkBill_button" @click="openCheckModal">
-          {{ $route.query.serviceType }}
+          {{ serviceType }}
         </button>
       </div>
     </div>
@@ -57,6 +57,9 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   methods: {
     openCheckModal() {
@@ -75,7 +78,7 @@ export default {
     },
     testSetFee() {
       this.feeData = {size: 'SMALL', profit: 2000, time: 4};
-      // if (this.$route.query.serviceType == '맡길게요')
+      // if (this.serviceType == '맡길게요')
       //   this.$axios
       //     .get(`/order/cost/테스트역1/테스트역2/MID`)
       //     .then((response) => {
@@ -84,7 +87,7 @@ export default {
       //     .catch((error) => {
       //       console.log(error);
       //     });
-      // if (this.$route.query.serviceType == '보관할게요')
+      // if (this.serviceType == '보관할게요')
       //   this.$axios
       //     .get(`/store/fee/테스트역1/MID`)
       //     .then((response) => {
@@ -95,7 +98,7 @@ export default {
       //     });
     },
     setFee() {
-      if (this.$route.query.serviceType == '맡길게요')
+      if (this.serviceType == '맡길게요')
         this.$axios
           .get(`/order/cost/${this.startStation}/${this.endStation}/MID`)
           .then((response) => {
@@ -104,7 +107,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.$route.query.serviceType == '보관할게요')
+      if (this.serviceType == '보관할게요')
         this.$axios
           .get(`/store/fee/${this.selectStation}/MID`)
           .then((response) => {

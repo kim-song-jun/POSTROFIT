@@ -64,10 +64,7 @@ export default {
   },
   methods: {
     move2LockerPage() {
-      this.$router.push({
-        path: '/SelectPage/lockerPage',
-        query: {serviceType: '맡길게요'},
-      });
+      this.$router.push('/SelectPage/lockerPage');
     },
     selectBoxSize(isSmall) {
       this.smallBoxClicked = isSmall;

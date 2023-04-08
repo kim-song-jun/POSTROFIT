@@ -10,7 +10,7 @@
       <lockerInfo v-if="storage" />
       <noticeBox class="lockerPage_noticeBox" />
       <button class="lockerPage_button" @click="move2CheckPage">
-        {{ $route.query.serviceType }}
+        {{ serviceType }}
       </button>
     </div>
   </div>
@@ -38,31 +38,31 @@ export default {
     storage() {
       return this.$store.state.storage;
     },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   methods: {
     getStationName() {
-      return this.$route.query.serviceType == '맡길게요'
+      return this.serviceType == '맡길게요'
         ? this.startStation.name
-        : this.$route.query.serviceType == '옮길게요'
+        : this.serviceType == '옮길게요'
         ? this.endStation.name
         : this.selectStation.name;
     },
     getPathByServiceType() {
-      return this.$route.query.serviceType == '보관할게요'
+      return this.serviceType == '보관할게요'
         ? '/SelectPage/checkBillPage'
         : '/SelectPage/checkDeliveryPage';
     },
     move2CheckPage() {
       const nextPath = this.getPathByServiceType();
       // 앞으로 결제할 보관함 정보 넘겨 보관함 선점하기
-      this.$router.push({
-        path: nextPath,
-        query: {serviceType: this.$route.query.serviceType},
-      });
+      this.$router.push(nextPath);
     },
     testInitStorage() {
       this.$store.commit('setStorage', lockerData);
-      // if (this.$route.query.serviceType == '맡길게요')
+      // if (this.serviceType == '맡길게요')
       //   this.$axios
       //     .get(`/order/storage/테스트역1`)
       //     .then((response) => {
@@ -71,7 +71,7 @@ export default {
       //     .catch((error) => {
       //       console.log(error);
       //     });
-      // if (this.$route.query.serviceType == '보관할게요')
+      // if (this.serviceType == '보관할게요')
       //   this.$axios
       //     .get(`/store/storage/테스트역1`)
       //     .then((response) => {
@@ -82,7 +82,7 @@ export default {
       //     });
     },
     initStorage() {
-      if (this.$route.query.serviceType == '맡길게요')
+      if (this.serviceType == '맡길게요')
         this.$axios
           .get(`/order/storage/${this.getStationName()}`)
           .then((response) => {
@@ -91,7 +91,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.$route.query.serviceType == '보관할게요')
+      if (this.serviceType == '보관할게요')
         this.$axios
           .get(`/store/storage/${this.getStationName()}`)
           .then((response) => {

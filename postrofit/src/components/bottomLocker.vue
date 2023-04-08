@@ -50,11 +50,9 @@ export default {
     move2Lockerpage() {
       // issue!! 모달 닫기
       // this.$store.commit('setBottomLockerOpen', false);
+      this.$store.commit('setServiceType', '보관할게요');
       // 화면 이동
-      this.$router.push({
-        path: '/SelectPage/lockerPage',
-        query: {serviceType: '보관할게요'},
-      });
+      this.$router.push('/SelectPage/lockerPage');
     },
   },
   components: {
