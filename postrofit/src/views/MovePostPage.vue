@@ -81,9 +81,14 @@ export default {
 </script>
 
 <style>
+.movePost_content {
+  overflow: scroll;
+  height: 92.7vh;
+}
 .movePost_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
-  width: 47vw;
+  min-width: 47vw;
+  max-width: 90vw;
   height: 5.5vh;
 }
 .movePost_location {
@@ -116,7 +121,7 @@ export default {
   display: flex;
   align-items: center;
   height: 25.5vh;
-  width: 85vw;
+  width: 84vw;
   margin: 0vh 8vw 7vh;
   justify-content: space-between;
 }
