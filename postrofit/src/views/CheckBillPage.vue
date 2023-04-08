@@ -28,7 +28,7 @@
       <noticeBox class="checkBill_noticeBox"></noticeBox>
       <div class="checkBill_button_container">
         <button class="checkBill_button" @click="openCheckModal">
-          {{ serviceType }}
+          보관할게요
         </button>
       </div>
     </div>
@@ -57,9 +57,6 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
-    serviceType() {
-      return this.$store.state.serviceType;
-    },
   },
   methods: {
     openCheckModal() {
@@ -76,18 +73,8 @@ export default {
     move2PayPage() {
       // 결제 페이지로 이동
     },
-    testSetFee() {
+    testGetFee() {
       this.feeData = {size: 'SMALL', profit: 2000, time: 4};
-      // if (this.serviceType == '맡길게요')
-      //   this.$axios
-      //     .get(`/order/cost/테스트역1/테스트역2/MID`)
-      //     .then((response) => {
-      //       this.feeData = response.data;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // if (this.serviceType == '보관할게요')
       //   this.$axios
       //     .get(`/store/fee/테스트역1/MID`)
       //     .then((response) => {
@@ -97,25 +84,15 @@ export default {
       //       console.log(error);
       //     });
     },
-    setFee() {
-      if (this.serviceType == '맡길게요')
-        this.$axios
-          .get(`/order/cost/${this.startStation}/${this.endStation}/MID`)
-          .then((response) => {
-            this.feeData = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      if (this.serviceType == '보관할게요')
-        this.$axios
-          .get(`/store/fee/${this.selectStation}/MID`)
-          .then((response) => {
-            this.feeData = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    getFee() {
+      this.$axios
+        .get(`/store/fee/${this.selectStation}/MID`)
+        .then((response) => {
+          this.feeData = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getSize(size) {
       if (size == 'SMALL') return '소형';
@@ -124,8 +101,8 @@ export default {
     },
   },
   mounted() {
-    this.testSetFee();
-    // this.setFee();
+    this.testGetFee();
+    // this.getFee();
   },
   components: {
     progressMenu,
