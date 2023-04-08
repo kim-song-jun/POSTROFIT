@@ -26,7 +26,7 @@
 export default {
   computed: {
     lockerInfo() {
-      return {...this.$store.state.storeData};
+      return {...this.$store.state.storage};
     },
     locker() {
       return this.lockerInfo.locker;

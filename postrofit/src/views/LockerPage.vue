@@ -7,7 +7,7 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <lockerInfo v-if="storeData" />
+      <lockerInfo v-if="storage" />
       <noticeBox class="lockerPage_noticeBox" />
       <button class="lockerPage_button" @click="move2CheckPage">
         {{ $route.query.serviceType }}
@@ -35,17 +35,17 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
-    storeData() {
-      return this.$store.state.storeData;
+    storage() {
+      return this.$store.state.storage;
     },
   },
   methods: {
     getStationName() {
-      return (
-        this.startStation.name ??
-        this.endStation.name ??
-        this.selectStation.name
-      );
+      return this.$route.query.serviceType == '맡길게요'
+        ? this.startStation.name
+        : this.$route.query.serviceType == '옮길게요'
+        ? this.endStation.name
+        : this.selectStation.name;
     },
     getPathByServiceType() {
       return this.$route.query.serviceType == '보관할게요'
@@ -61,27 +61,45 @@ export default {
       });
     },
     testInitStorage() {
-      // test 1
-      this.$store.commit('setStoreData', lockerData);
-      // test 2
-      // this.$axios
-      //   .get(`/store/storage/테스트역1`)
-      //   .then((response) => {
-      //     this.$store.commit('setStoreData', response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      this.$store.commit('setStorage', lockerData);
+      // if (this.$route.query.serviceType == '맡길게요')
+      //   this.$axios
+      //     .get(`/order/storage/테스트역1`)
+      //     .then((response) => {
+      //       this.$store.commit('setStorage', response.data);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // if (this.$route.query.serviceType == '보관할게요')
+      //   this.$axios
+      //     .get(`/store/storage/테스트역1`)
+      //     .then((response) => {
+      //       this.$store.commit('setStorage', response.data);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
     },
     initStorage() {
-      this.$axios
-        .get(`/store/storage/${this.getStationName()}`)
-        .then((response) => {
-          this.$store.commit('setStoreData', response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.$route.query.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/${this.getStationName()}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.$route.query.serviceType == '보관할게요')
+        this.$axios
+          .get(`/store/storage/${this.getStationName()}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     },
   },
   mounted() {

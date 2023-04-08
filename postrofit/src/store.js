@@ -17,6 +17,8 @@ const store = createStore({
       orderData: null,
       // 보관할게요 기능에 필요한 데이터
       storeData: null,
+      // 보관함을 그리는데 필요한 데인터
+      storage: null,
     };
   },
   mutations: {
@@ -56,6 +58,9 @@ const store = createStore({
     },
     setStoreData(state, storeData) {
       state.storeData = {...storeData};
+    },
+    setStorage(state, storage) {
+      state.storage = {...storage};
     },
   },
   actions: {
