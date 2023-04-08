@@ -1,12 +1,6 @@
 <template>
   <div class="checkBill_container">
-    <checkModal
-      v-if="checkModalOpen"
-      @closeCheckModal="
-        checkModalOpen = false;
-        $router.push('/SelectPage/paySuccessPage');
-      "
-    />
+    <checkModal v-if="checkModalOpen" @closeCheckModal="testMove2PayPage" />
     <div class="checkBill_content">
       <div class="movePost_location_container">
         <div class="movePost_location">{{ selectStation.name }}</div>
@@ -14,23 +8,26 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <div class="checkBill_info">
+      <div v-if="feeData" class="checkBill_info">
         <div class="checkBill_price">
-          요금: <span class="checkBill_green">2000원</span> / 4시간
+          기본 요금:
+          <span class="checkBill_green">{{ feeData.profit }}원</span> /
+          {{ feeData.time }}시간
         </div>
         <div class="checkBill_size">
-          사이즈: <span class="checkBill_green">대형</span>
+          사이즈:
+          <span class="checkBill_green">{{ getSize(feeData.size) }}</span>
         </div>
         <div class="checkBill_term">보관 기간</div>
         <div class="checkBill_date">
           2022/10/16
-          <span class="checkBill_green">12:12:13</span> ~
+          <span class="checkBill_green">12:12</span> ~
         </div>
       </div>
       <progressMenu />
       <noticeBox class="checkBill_noticeBox"></noticeBox>
       <div class="movePost_button_container">
-        <button class="movePost_button" @click="checkModalOpen = true">
+        <button class="movePost_button" @click="openCheckModal">
           {{ $route.query.serviceType }}
         </button>
       </div>
@@ -44,20 +41,72 @@ import noticeBox from '../components/noticeBox.vue';
 import checkModal from '../components/checkModal.vue';
 
 export default {
-  components: {
-    progressMenu,
-    noticeBox,
-    checkModal,
-  },
   data() {
     return {
       checkModalOpen: false,
+      feeData: null,
     };
   },
   computed: {
     selectStation() {
       return this.$store.state.selectStation;
     },
+  },
+  methods: {
+    openCheckModal() {
+      this.checkModalOpen = true;
+    },
+    testMove2PayPage() {
+      // 결제 페이지로 이동
+      // 결제 완료 페이지로 이동
+      this.checkModalOpen = false;
+      // issue 보관 등록 api 없음
+      // this.$axios
+      //   .post('/store/머시기')
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      this.$router.push('/SelectPage/paySuccessPage');
+    },
+    move2PayPage() {
+      // 결제 페이지로 이동
+    },
+    testSetFee() {
+      this.feeData = {size: 'SMALL', profit: 2000, time: 4};
+      // this.$axios
+      //   .get(`/store/fee/테스트역1`)
+      //   .then((response) => {
+      //     this.feeData = response.data;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    },
+    setFee() {
+      this.$axios
+        .get(`/store/fee/${this.selectStation}/MID`)
+        .then((response) => {
+          this.feeData = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getSize(size) {
+      return size == 'MID' ? '중형' : size == 'SMALL' ? '소형' : '대형';
+    },
+  },
+  mounted() {
+    this.testSetFee();
+    // this.setFee();
+  },
+  components: {
+    progressMenu,
+    noticeBox,
+    checkModal,
   },
 };
 </script>
