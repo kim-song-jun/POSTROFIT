@@ -1,12 +1,6 @@
 <template>
   <div class="checkDeliveryPage_container">
-    <checkModal
-      v-if="checkModalOpen"
-      @closeCheckModal="
-        checkModalOpen = false;
-        $router.push('/SelectPage/paySuccessPage');
-      "
-    />
+    <checkModal v-if="checkModalOpen" @closeCheckModal="testMove2PayPage" />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">
         <locationBox />
@@ -43,6 +37,41 @@ export default {
   computed: {
     serviceType() {
       return this.$store.state.serviceType;
+    },
+  },
+  methods: {
+    testMove2PayPage() {
+      this.checkModalOpen = false;
+      // 결제 페이지로 이동
+      // 결제 후 등록 요청
+      // let reqData = {user_id: ''};
+      // if (this.serviceType == '맡길게요') {
+      //   reqData = {...reqData, storage_id: 8};
+      //   this.$axios
+      //     .post('/make', {data: JSON.stringify(reqData)})
+      //     .then((response) => {
+      //       console.log(response);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // }
+      // if (this.serviceType == '옮길게요') {
+      //   reqData = {...reqData, order_id: 8};
+      //   this.$axios
+      //     .post('/take', {data: JSON.stringify(reqData)})
+      //     .then((response) => {
+      //       console.log(response);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // }
+      // 결제 완료 페이지로 이동
+      this.$router.push('/SelectPage/paySuccessPage');
+    },
+    move2PayPage() {
+      // 결제 페이지로 이동
     },
   },
   components: {

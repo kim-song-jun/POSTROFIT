@@ -120,6 +120,16 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+      // issue 옮기는 부분에 대한 비밀번호 분리가 가능한가?
+      // if (this.serviceType == '옮길게요')
+      //   this.$axios
+      //     .get('/delivery/storage/info/user_id')
+      //     .then((response) => {
+      //       this.lockerInfo = response.data;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
       if (this.serviceType == '보관할게요')
         this.$axios
           .get('/store/fee/user_id')
