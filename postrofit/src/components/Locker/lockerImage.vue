@@ -23,18 +23,27 @@
 </template>
 
 <script>
-import lockerData from '../../assets/data/lockerInfo.json';
 export default {
-  data() {
-    return {
-      locker: lockerData.locker,
-      columns: Math.max(...lockerData.locker.map((el) => el.length)),
-      rows: lockerData.locker.length,
-      lockerflat: lockerData.locker.flat(),
-    };
+  computed: {
+    lockerInfo() {
+      return {...this.$store.state.storeData};
+    },
+    locker() {
+      return this.lockerInfo.locker;
+    },
+    columns() {
+      return Math.max(...this.lockerInfo.locker.map((el) => el.length));
+    },
+    rows() {
+      return this.lockerInfo.locker.length;
+    },
+    lockerflat() {
+      return this.lockerInfo.locker.flat();
+    },
   },
   methods: {
     setSelectBox(index) {
+      // check box status '사용가능' & change status '사용가능' > '선택'
       if (this.lockerflat[index].status != '사용가능') {
         return;
       }
@@ -44,6 +53,9 @@ export default {
         }
       });
       this.lockerflat[index].status = '선택';
+
+      // store changed lockerInfo data
+      this.$store.commit('setStoreData', this.lockerInfo);
     },
     setRowSpan(item) {
       if (item == 'Controller') {

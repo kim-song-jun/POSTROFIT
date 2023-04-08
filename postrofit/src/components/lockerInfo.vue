@@ -1,7 +1,7 @@
 <template>
   <div class="lockerInfo_container">
     <div class="lockerInfo_locker">
-      <LockerImage></LockerImage>
+      <LockerImage />
     </div>
     <div class="lockerInfo_state">
       <div class="lockerInfo_state_column">
@@ -39,13 +39,11 @@
 </template>
 
 <script>
-import locker from '../assets/data/locker.json';
 import LockerImage from './Locker/lockerImage.vue';
 
 export default {
   data() {
     return {
-      lockerData: locker.Locker,
       count: 1,
     };
   },

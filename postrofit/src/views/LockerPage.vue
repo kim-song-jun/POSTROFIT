@@ -7,17 +7,9 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <lockerInfo />
-      <noticeBox class="lockerPage_noticeBox"></noticeBox>
-      <button
-        class="lockerPage_button"
-        @click="
-          $router.push({
-            path: getPath(),
-            query: {serviceType: $route.query.serviceType},
-          })
-        "
-      >
+      <lockerInfo v-if="storeData" />
+      <noticeBox class="lockerPage_noticeBox" />
+      <button class="lockerPage_button" @click="move2CheckPage">
         {{ $route.query.serviceType }}
       </button>
     </div>
@@ -27,25 +19,11 @@
 <script>
 import lockerInfo from '../components/lockerInfo.vue';
 import noticeBox from '../components/noticeBox.vue';
+import lockerData from '../assets/data/lockerInfo.json';
 
 export default {
-  components: {
-    lockerInfo,
-    noticeBox,
-  },
-  methods: {
-    getStationName() {
-      return (
-        this.startStation.name ??
-        this.endStation.name ??
-        this.selectStation.name
-      );
-    },
-    getPath() {
-      return this.$route.query.serviceType == '보관할게요'
-        ? '/SelectPage/checkBillPage'
-        : '/SelectPage/checkDeliveryPage';
-    },
+  data() {
+    return {};
   },
   computed: {
     startStation() {
@@ -57,6 +35,62 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    storeData() {
+      return this.$store.state.storeData;
+    },
+  },
+  methods: {
+    getStationName() {
+      return (
+        this.startStation.name ??
+        this.endStation.name ??
+        this.selectStation.name
+      );
+    },
+    getPathByServiceType() {
+      return this.$route.query.serviceType == '보관할게요'
+        ? '/SelectPage/checkBillPage'
+        : '/SelectPage/checkDeliveryPage';
+    },
+    move2CheckPage() {
+      const nextPath = this.getPathByServiceType();
+      // 앞으로 결제할 보관함 정보 넘겨 보관함 선점하기
+      this.$router.push({
+        path: nextPath,
+        query: {serviceType: this.$route.query.serviceType},
+      });
+    },
+    testInitStorage() {
+      // test 1
+      this.$store.commit('setStoreData', lockerData);
+      // test 2
+      // this.$axios
+      //   .get(`/store/storage/테스트역1`)
+      //   .then((response) => {
+      //     this.$store.commit('setStoreData', response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    },
+    initStorage() {
+      this.$axios
+        .get(`/store/storage/${this.getStationName()}`)
+        .then((response) => {
+          this.$store.commit('setStoreData', response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.testInitStorage();
+    // this.initStorage();
+  },
+  components: {
+    lockerInfo,
+    noticeBox,
   },
 };
 </script>
