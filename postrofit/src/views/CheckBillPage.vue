@@ -48,6 +48,12 @@ export default {
     };
   },
   computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
     selectStation() {
       return this.$store.state.selectStation;
     },
@@ -60,15 +66,8 @@ export default {
       // 결제 페이지로 이동
       // 결제 완료 페이지로 이동
       this.checkModalOpen = false;
+      // 결제 후 등록 요청
       // issue 보관 등록 api 없음
-      // this.$axios
-      //   .post('/store/머시기')
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
       this.$router.push('/SelectPage/paySuccessPage');
     },
     move2PayPage() {
@@ -76,27 +75,49 @@ export default {
     },
     testSetFee() {
       this.feeData = {size: 'SMALL', profit: 2000, time: 4};
-      // this.$axios
-      //   .get(`/store/fee/테스트역1`)
-      //   .then((response) => {
-      //     this.feeData = response.data;
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      // if (this.$route.query.serviceType == '맡길게요')
+      //   this.$axios
+      //     .get(`/order/cost/테스트역1/테스트역2/MID`)
+      //     .then((response) => {
+      //       this.feeData = response.data;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // if (this.$route.query.serviceType == '보관할게요')
+      //   this.$axios
+      //     .get(`/store/fee/테스트역1/MID`)
+      //     .then((response) => {
+      //       this.feeData = response.data;
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
     },
     setFee() {
-      this.$axios
-        .get(`/store/fee/${this.selectStation}/MID`)
-        .then((response) => {
-          this.feeData = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.$route.query.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/cost/${this.startStation}/${this.endStation}/MID`)
+          .then((response) => {
+            this.feeData = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.$route.query.serviceType == '보관할게요')
+        this.$axios
+          .get(`/store/fee/${this.selectStation}/MID`)
+          .then((response) => {
+            this.feeData = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     },
     getSize(size) {
-      return size == 'MID' ? '중형' : size == 'SMALL' ? '소형' : '대형';
+      if (size == 'SMALL') return '소형';
+      if (size == 'MID') return '중형';
+      if (size == 'BIG') return '대형';
     },
   },
   mounted() {
