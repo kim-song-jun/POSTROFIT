@@ -16,6 +16,7 @@
 export default {
   methods: {
     move2Main() {
+      this.$store.dispatch('initStation');
       this.$router.push('/MainPage');
     },
   },

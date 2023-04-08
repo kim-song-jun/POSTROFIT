@@ -8,7 +8,7 @@
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">결제 완료</div>
-      <!-- 여기에 사이즈를 알려줄 필요가 있나?-->
+      <!-- issue 여기에 사이즈를 알려줄 필요가 있나?-->
       <div class="paySuccessPage_info">대형 4시간</div>
       <div class="progressMenu_container">
         <div class="progressMenu_graybar" />
@@ -78,6 +78,9 @@ export default {
     },
     move2Main() {
       this.lockerModalOpen = false;
+      // 하단 메뉴 창 닫기
+      // issue 자연스럽지 못한 애니메이션
+      this.$store.dispatch('initStation');
       this.$router.push('/MainPage');
     },
     testOpenLockerModal() {
