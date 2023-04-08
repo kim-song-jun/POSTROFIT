@@ -1,6 +1,6 @@
 <template>
   <div class="bottomLocker_container">
-    <MenuBar></MenuBar>
+    <MenuBar />
     <div class="bottomLocker_stations">
       <div class="bottomLocker_stations_sub bottomLocker_text">
         <div class="bottomLocker_stations_start">
@@ -14,15 +14,7 @@
         {{ this.selectStation.name }}
       </div>
     </div>
-    <div
-      class="bottomLocker_usable"
-      @click="
-        $router.push({
-          path: '/SelectPage/lockerPage',
-          query: {serviceType: '보관할게요'},
-        })
-      "
-    >
+    <div class="bottomLocker_usable" @click="move2Lockerpage">
       <div class="bottomLocker_image_container bottomLocker_text">
         <img
           class="bottomLocker_image"
@@ -43,9 +35,6 @@
 import MenuBar from '../components/MenuBar.vue';
 
 export default {
-  components: {
-    MenuBar,
-  },
   computed: {
     startStation() {
       return this.$store.state.startStation;
@@ -56,6 +45,20 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+  },
+  methods: {
+    move2Lockerpage() {
+      // issue!! 모달 닫기
+      // this.$store.commit('setBottomLockerOpen', false);
+      // 화면 이동
+      this.$router.push({
+        path: '/SelectPage/lockerPage',
+        query: {serviceType: '보관할게요'},
+      });
+    },
+  },
+  components: {
+    MenuBar,
   },
 };
 </script>
