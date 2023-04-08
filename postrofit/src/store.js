@@ -11,6 +11,8 @@ const store = createStore({
       bottomMenuCreated: false,
       bottomLockerCreated: false,
       LINE2_JSON: {},
+      // 보관할게요 기능에 필요한 데이터
+      storeData: null,
     };
   },
   mutations: {
@@ -41,6 +43,9 @@ const store = createStore({
         stations: Line2.stations.map((item) => ({...item, open: false})),
       };
       console.log(state.LINE2_JSON);
+    },
+    setStoreData(state, storeData) {
+      state.storeData = {...storeData};
     },
   },
   actions: {
