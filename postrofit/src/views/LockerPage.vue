@@ -62,33 +62,36 @@ export default {
     },
     testInitStorage() {
       this.$store.commit('setStorage', lockerData);
-      // if (this.serviceType == '맡길게요')
-      //   this.$axios
-      //     .get(`/order/storage/테스트역1`)
-      //     .then((response) => {
-      //       this.$store.commit('setStorage', response.data);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // if (this.serviceType == '옮길게요')
-      //   this.$axios
-      //     .get(`/delivery/storage/테스트역1`)
-      //     .then((response) => {
-      //       this.$store.commit('setStorage', response.data);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // if (this.serviceType == '보관할게요')
-      //   this.$axios
-      //     .get(`/store/storage/테스트역1`)
-      //     .then((response) => {
-      //       this.$store.commit('setStorage', response.data);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/테스트역1`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(`/delivery/storage/테스트역1`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get('/store/storage/테스트역1')
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     },
     initStorage() {
       if (this.serviceType == '맡길게요')

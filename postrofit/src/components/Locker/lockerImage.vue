@@ -6,17 +6,17 @@
     >
       <div
         v-for="(item, index) in lockerflat"
-        :key="item.id"
+        :key="item.storageNumber"
         class="item"
         :style="`grid-row-end: span ${setRowSpan(
           item.type,
         )}; height: ${setRowHeight(
           item.type,
           46,
-        )}; background-color: ${setColor(item.status)}`"
+        )}; background-color: ${setColor(item.storageStat)}`"
         @click="setSelectBox(index)"
       >
-        <div style="margin: 5px">{{ item.id }}</div>
+        <div style="margin: 5px">{{ item.storageNumber }}</div>
       </div>
     </div>
   </div>
@@ -43,54 +43,54 @@ export default {
   },
   methods: {
     setSelectBox(index) {
-      // check box status '사용가능' & change status '사용가능' > '선택'
-      if (this.lockerflat[index].status != '사용가능') {
+      // check box storageStat '사용가능' & change storageStat '사용가능' > '선택'
+      if (this.lockerflat[index].storageStat != 'EMPTY') {
         return;
       }
       this.lockerflat.forEach((item) => {
-        if (item.status == '선택') {
-          item.status = '사용가능';
+        if (item.storageStat == '선택') {
+          item.storageStat = 'EMPTY';
         }
       });
-      this.lockerflat[index].status = '선택';
+      this.lockerflat[index].storageStat = '선택';
 
       // store changed lockerInfo data
       this.$store.commit('setStoreData', this.lockerInfo);
     },
-    setRowSpan(item) {
-      if (item == 'Controller') {
+    setRowSpan(itemType) {
+      if (itemType == 'Controller') {
         return 1;
       }
-      if (item == 'N') {
+      if (itemType == 'N') {
         return 1;
       }
-      if (item == 'M') {
+      if (itemType == 'M') {
         return 2;
       }
-      if (item == 'L') {
+      if (itemType == 'L') {
         return 4;
       }
     },
-    setRowHeight(item, height) {
-      if (item == 'Controller') {
+    setRowHeight(itemType, height) {
+      if (itemType == 'Controller') {
         return `${height * 1}px`;
       }
-      if (item == 'N') {
+      if (itemType == 'N') {
         return `${height * 1}px`;
       }
-      if (item == 'M') {
+      if (itemType == 'M') {
         return `${height * 2 + 10}px`;
       }
-      if (item == 'L') {
+      if (itemType == 'L') {
         return `${height * 4 + 30}px`;
       }
     },
-    setColor(item) {
-      if (item == '사용가능') return '#CFCFCF';
-      if (item == '사용중') return '#707070';
-      if (item == '선택') return '#D04040';
-      if (item == '제어부') return '#6FBB69';
-      if (item == '내 보관함') return '#FFC702';
+    setColor(storageStat) {
+      if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
+      if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
+      if (storageStat == '선택') return '#D04040';
+      if (storageStat == '제어부') return '#6FBB69';
+      if (storageStat == '내 보관함') return '#FFC702';
     },
   },
 };

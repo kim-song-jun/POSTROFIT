@@ -3,128 +3,151 @@
   "locker": [
     [
       {
-        "id": "01",
+        "storageId": 0,
+        "storageNumber": 1,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "02",
+        "storageId": 1,
+        "storageNumber": 2,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "03",
+        "storageId": 2,
+        "storageNumber": 3,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "04",
+        "storageId": 3,
+        "storageNumber": 4,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "05",
+        "storageId": 4,
+        "storageNumber": 5,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       }
     ],
     [
       {
-        "id": "06",
+        "storageId": 5,
+        "storageNumber": 6,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "07",
+        "storageId": 6,
+        "storageNumber": 7,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "08",
+        "storageId": 7,
+        "storageNumber": 8,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "09",
+        "storageId": 8,
+        "storageNumber": 9,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "10",
+        "storageId": 9,
+        "storageNumber": 10,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       }
     ],
     [
       {
-        "id": "11",
+        "storageId": 10,
+        "storageNumber": 11,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "12",
+        "storageId": 11,
+        "storageNumber": 12,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "13",
+        "storageId": 12,
+        "storageNumber": 13,
         "type": "N",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "Controller",
+        "storageId": "Controller",
+        "storageNumber": "Controller",
         "type": "N",
-        "status": "제어부"
+        "storageStat": "제어부"
       },
       {
-        "id": "14",
+        "storageId": 13,
+        "storageNumber": 14,
         "type": "N",
-        "status": "내 보관함"
+        "storageStat": "내 보관함"
       }
     ],
     [
       {
-        "id": "15",
+        "storageId": 14,
+        "storageNumber": 15,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "16",
+        "storageId": 15,
+        "storageNumber": 16,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "17",
+        "storageId": 16,
+        "storageNumber": 17,
         "type": "L",
-        "status": "사용중"
+        "storageStat": "STORE"
       },
       {
-        "id": "18",
+        "storageId": 17,
+        "storageNumber": 18,
         "type": "L",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "19",
+        "storageId": 18,
+        "storageNumber": 19,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       }
     ],
     [],
     [
       {
-        "id": "20",
+        "storageId": 19,
+        "storageNumber": 20,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "21",
+        "storageId": 20,
+        "storageNumber": 21,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       },
       {
-        "id": "22",
+        "storageId": 21,
+        "storageNumber": 22,
         "type": "M",
-        "status": "사용가능"
+        "storageStat": "EMPTY"
       }
     ],
     []
