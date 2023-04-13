@@ -61,13 +61,13 @@ export default {
       if (itemType == 'Controller') {
         return 1;
       }
-      if (itemType == 'N') {
+      if (itemType == 'SMALL') {
         return 1;
       }
-      if (itemType == 'M') {
+      if (itemType == 'MID') {
         return 2;
       }
-      if (itemType == 'L') {
+      if (itemType == 'BIG') {
         return 4;
       }
     },
@@ -75,13 +75,13 @@ export default {
       if (itemType == 'Controller') {
         return `${height * 1}px`;
       }
-      if (itemType == 'N') {
+      if (itemType == 'SMALL') {
         return `${height * 1}px`;
       }
-      if (itemType == 'M') {
+      if (itemType == 'MID') {
         return `${height * 2 + 10}px`;
       }
-      if (itemType == 'L') {
+      if (itemType == 'BIG') {
         return `${height * 4 + 30}px`;
       }
     },
