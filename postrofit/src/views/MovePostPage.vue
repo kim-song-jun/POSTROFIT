@@ -15,7 +15,7 @@
         >
           <div class="movePost_sizebox_type">소형</div>
           <div class="movePost_smallbox_num">4개</div>
-          <div class="movePost_sizebox_price">2000원 / 개</div>
+          <div class="movePost_sizebox_price">{{ cost.smallCost }}원 / 개</div>
         </div>
         <div
           class="movePost_sizebox"
@@ -24,7 +24,7 @@
         >
           <div class="movePost_sizebox_type">중형</div>
           <div class="movePost_middlebox_num">4개</div>
-          <div class="movePost_sizebox_price">2000원 / 개</div>
+          <div class="movePost_sizebox_price">{{ cost.midCost }}원 / 개</div>
         </div>
       </div>
       <progressMenu />
@@ -45,6 +45,7 @@ export default {
     return {
       smallBoxClicked: true,
       middleBoxClicked: false,
+      cost: {},
     };
   },
   computed: {
@@ -70,6 +71,21 @@ export default {
       this.smallBoxClicked = isSmall;
       this.middleBoxClicked = !isSmall;
     },
+    testGetCost() {
+      // issue. 개수 정보도 필요
+      this.$axios
+        .get('/order/cost/테스트역1/테스트역2')
+        .then((response) => {
+          console.log(response);
+          this.cost = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.testGetCost();
   },
   components: {
     ProgressMenu,

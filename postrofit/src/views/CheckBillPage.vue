@@ -16,7 +16,9 @@
         </div>
         <div class="checkBill_size">
           사이즈:
-          <span class="checkBill_green">{{ getSize(feeData.size) }}</span>
+          <span class="checkBill_green">{{
+            getSize(feeData.storageSize)
+          }}</span>
         </div>
         <div class="checkBill_term">보관 기간</div>
         <div class="checkBill_date">
@@ -74,15 +76,15 @@ export default {
       // 결제 페이지로 이동
     },
     testGetFee() {
-      this.feeData = {size: 'SMALL', profit: 2000, time: 4};
-      //   this.$axios
-      //     .get(`/store/fee/테스트역1/MID`)
-      //     .then((response) => {
-      //       this.feeData = response.data;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
+      // this.feeData = {storageSize: 'SMALL', profit: 2000, time: 4};
+      this.$axios
+        .get(`/store/fee/테스트역1/MID`)
+        .then((response) => {
+          this.feeData = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getFee() {
       this.$axios

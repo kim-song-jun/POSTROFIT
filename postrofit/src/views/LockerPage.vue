@@ -61,23 +61,39 @@ export default {
       this.$router.push(nextPath);
     },
     testInitStorage() {
-      this.$store.commit('setStorage', lockerData);
+      // this.$store.commit('setStorage', lockerData);
+      console.log(lockerData);
+      const newLocker = [];
       if (this.serviceType == '맡길게요')
         this.$axios
           .get(`/order/storage/테스트역1`)
           .then((response) => {
-            this.$store.commit('setStorage', response.data);
-            console.log(response);
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: {
+                startStation: this.startStation,
+                endStation: this.endStation,
+              },
+              locker: newLocker,
+            });
           })
           .catch((error) => {
             console.log(error);
           });
       if (this.serviceType == '옮길게요')
         this.$axios
-          .get(`/delivery/storage/테스트역1`)
+          .get(`/delivery/storage/테스트역1/테스트역2`)
           .then((response) => {
-            this.$store.commit('setStorage', response.data);
-            console.log(response);
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: {
+                startStation: this.startStation,
+                endStation: this.endStation,
+              },
+              locker: newLocker,
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -86,8 +102,14 @@ export default {
         this.$axios
           .get('/store/storage/테스트역1')
           .then((response) => {
-            this.$store.commit('setStorage', response.data);
-            console.log(response);
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: this.selectStation,
+              locker: newLocker,
+            });
+            console.log(newLocker);
+            console.log(response.data);
           })
           .catch((error) => {
             console.log(error);
@@ -96,7 +118,7 @@ export default {
     initStorage() {
       if (this.serviceType == '맡길게요')
         this.$axios
-          .get(`/order/storage/${this.getStationName()}`)
+          .get(`/order/storage/${this.startStation}/${this.endStation}`)
           .then((response) => {
             this.$store.commit('setStorage', response.data);
           })
@@ -105,7 +127,7 @@ export default {
           });
       if (this.serviceType == '옮길게요')
         this.$axios
-          .get(`/delivery/storage/${this.getStationName()}`)
+          .get(`/delivery/storage/${this.startStation}`)
           .then((response) => {
             this.$store.commit('setStorage', response.data);
           })
@@ -114,7 +136,7 @@ export default {
           });
       if (this.serviceType == '보관할게요')
         this.$axios
-          .get(`/store/storage/${this.getStationName()}`)
+          .get(`/store/storage/${this.selectStation}`)
           .then((response) => {
             this.$store.commit('setStorage', response.data);
           })

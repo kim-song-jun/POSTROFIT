@@ -44,16 +44,15 @@ export default {
       this.checkModalOpen = false;
       // 결제 페이지로 이동
       // 결제 후 등록 요청
-      // issue user_id는 어디서 받아오나?
-      // const reqData = {user_id: ''};
-      // if (this.serviceType == '맡길게요') {
-      //   this.makeOrder(reqData);
-      // }
-      // if (this.serviceType == '옮길게요') {
-      //   this.takeDelivery(reqData);
-      // }
-      // 결제 완료 페이지로 이동
-      this.$router.push('/SelectPage/paySuccessPage');
+      // user_id는 어디서 받아오나? 0~3, 2는 배달부
+      const userId = 0;
+      // try. reqData ={}로 변경해보기
+      if (this.serviceType == '맡길게요') {
+        this.makeOrder(userId);
+      }
+      if (this.serviceType == '옮길게요') {
+        this.takeDelivery(userId);
+      }
     },
     move2PayPage() {
       // 결제 페이지로 이동
@@ -67,26 +66,40 @@ export default {
         });
       });
     },
-    makeOrder(reqData) {
-      reqData = {...reqData, storage_id: this.findStorageId()};
+    async makeOrder(userId) {
+      // storage_id: this.findStorageId(),
+      // endStationName: this.$store.state.endStation,
+      const storageId = 2;
+      const endStationName = '테스트역1';
 
       this.$axios
-        .post('/make', {data: JSON.stringify(reqData)})
+        .post('/order/make', {
+          userId: userId,
+          storageId: storageId,
+          endStationName: endStationName,
+        })
         .then((response) => {
           console.log(response);
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    takeDelivery(reqData) {
-      // issue order_id는 어디서 받아오나?
-      reqData = {...reqData, order_id: 8};
+    takeDelivery(userId) {
+      // issue order_id는 어디서 받아오나? maybe 0~3?
+      const orderId = 1;
 
       this.$axios
-        .post('/take', {data: JSON.stringify(reqData)})
+        .post('/delivery/take', {
+          userId: userId,
+          orderId: orderId,
+        })
         .then((response) => {
           console.log(response);
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
         })
         .catch((error) => {
           console.log(error);
