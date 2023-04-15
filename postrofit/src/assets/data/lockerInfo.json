@@ -5,31 +5,31 @@
       {
         "storageId": 0,
         "storageNumber": 1,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 1,
         "storageNumber": 2,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 2,
         "storageNumber": 3,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 3,
         "storageNumber": 4,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 4,
         "storageNumber": 5,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       }
     ],
@@ -37,31 +37,31 @@
       {
         "storageId": 5,
         "storageNumber": 6,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 6,
         "storageNumber": 7,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 7,
         "storageNumber": 8,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 8,
         "storageNumber": 9,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 9,
         "storageNumber": 10,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       }
     ],
@@ -69,31 +69,31 @@
       {
         "storageId": 10,
         "storageNumber": 11,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 11,
         "storageNumber": 12,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 12,
         "storageNumber": 13,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "EMPTY"
       },
       {
         "storageId": "Controller",
         "storageNumber": "Controller",
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "제어부"
       },
       {
         "storageId": 13,
         "storageNumber": 14,
-        "type": "SMALL",
+        "storageSize": "SMALL",
         "storageStat": "내 보관함"
       }
     ],
@@ -101,31 +101,31 @@
       {
         "storageId": 14,
         "storageNumber": 15,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 15,
         "storageNumber": 16,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 16,
         "storageNumber": 17,
-        "type": "BIG",
+        "storageSize": "BIG",
         "storageStat": "STORE"
       },
       {
         "storageId": 17,
         "storageNumber": 18,
-        "type": "BIG",
+        "storageSize": "BIG",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 18,
         "storageNumber": 19,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       }
     ],
@@ -134,19 +134,19 @@
       {
         "storageId": 19,
         "storageNumber": 20,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 20,
         "storageNumber": 21,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       },
       {
         "storageId": 21,
         "storageNumber": 22,
-        "type": "MID",
+        "storageSize": "MID",
         "storageStat": "EMPTY"
       }
     ],

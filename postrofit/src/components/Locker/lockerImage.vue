@@ -9,9 +9,9 @@
         :key="item.storageNumber"
         class="item"
         :style="`grid-row-end: span ${setRowSpan(
-          item.type,
+          item.storageSize,
         )}; height: ${setRowHeight(
-          item.type,
+          item.storageSize,
           46,
         )}; background-color: ${setColor(item.storageStat)}`"
         @click="setSelectBox(index)"
@@ -55,33 +55,42 @@ export default {
       this.lockerflat[index].storageStat = '선택';
 
       // store changed lockerInfo data
-      this.$store.commit('setStoreData', this.lockerInfo);
+      // this.$store.commit('setStorage', this.lockerInfo);
+
+      // store selected locker data
+      let selectedLocker = null;
+      this.locker.forEach((items) => {
+        items.forEach((item) => {
+          if (item.storageStat == '??') selectedLocker = item;
+        });
+      });
+      this.$store.commit('setStoreData', {selectedLocker: selectedLocker});
     },
-    setRowSpan(itemType) {
-      if (itemType == 'Controller') {
+    setRowSpan(storageSize) {
+      if (storageSize == 'Controller') {
         return 1;
       }
-      if (itemType == 'SMALL') {
+      if (storageSize == 'SMALL') {
         return 1;
       }
-      if (itemType == 'MID') {
+      if (storageSize == 'MID') {
         return 2;
       }
-      if (itemType == 'BIG') {
+      if (storageSize == 'BIG') {
         return 4;
       }
     },
-    setRowHeight(itemType, height) {
-      if (itemType == 'Controller') {
+    setRowHeight(storageSize, height) {
+      if (storageSize == 'Controller') {
         return `${height * 1}px`;
       }
-      if (itemType == 'SMALL') {
+      if (storageSize == 'SMALL') {
         return `${height * 1}px`;
       }
-      if (itemType == 'MID') {
+      if (storageSize == 'MID') {
         return `${height * 2 + 10}px`;
       }
-      if (itemType == 'BIG') {
+      if (storageSize == 'BIG') {
         return `${height * 4 + 30}px`;
       }
     },
