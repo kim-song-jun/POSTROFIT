@@ -60,7 +60,7 @@ export default {
       let selectedLocker = null;
       this.locker.forEach((items) => {
         items.forEach((item) => {
-          if (item.storageStat == '??') selectedLocker = item;
+          if (item.storageStat == '선택') selectedLocker = item;
         });
       });
       this.$store.commit('setStoreData', {selectedLocker: selectedLocker});
