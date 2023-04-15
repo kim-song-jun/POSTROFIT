@@ -25,20 +25,19 @@
 <script>
 export default {
   computed: {
-    lockerInfo() {
-      return {...this.$store.state.storage};
-    },
     locker() {
-      return this.lockerInfo.locker;
+      return this.$store.state.storage.locker;
     },
     columns() {
-      return Math.max(...this.lockerInfo.locker.map((el) => el.length));
+      return Math.max(
+        ...this.$store.state.storage.locker.map((el) => el.length),
+      );
     },
     rows() {
-      return this.lockerInfo.locker.length;
+      return this.$store.state.storage.locker.length;
     },
     lockerflat() {
-      return this.lockerInfo.locker.flat();
+      return this.$store.state.storage.locker.flat();
     },
   },
   methods: {
