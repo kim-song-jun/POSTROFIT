@@ -70,11 +70,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-    # 3000 -> 80 포트로 수행하도록 지정
-    - name: Docker compose down
-      run: docker-compose down
-    - name: Docker compose up
-      run: docker-compose up
+      # 3000 -> 80 포트로 수행하도록 지정
+      - name: Docker compose down
+        run: docker-compose down
+      - name: Docker compose up
+        run: docker-compose up
       # # 3000 -> 80 포트로 수행하도록 지정
       # - name: Docker run
       #   run: |
