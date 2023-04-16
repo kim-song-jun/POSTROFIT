@@ -3,13 +3,12 @@ name: CI/CD Docker
 # 트리거를 수행할 브랜치를 지정합니다.
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     # 무슨 브랜치가 업데이트 될 때 Actions 를 작동시킬지 적는다.
     # develop 브랜치로 개발하며 완료되면 main 에 머지해 Actions 를 작동시키면 조금 더 안전하겠지.
     # 여러개 적어도 된다.
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/postrofit
@@ -24,22 +23,21 @@ jobs:
     steps:
       # github repository에서 checkout
       - uses: actions/checkout@v2
-      # docker-compose build 수행
-      - name: Build Docker image with docker-compose
-        run: docker-compose build
+      # # docker-compose build 수행
+      # - name: Build Docker image with docker-compose
+      #   run: docker-compose build
 
       # docker build 수행
-      # - name: Set up docker buildx
-      #   id: buildx
-      #   uses: docker/setup-buildx-action@v1
-      # - name: Cache docker layers
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: /tmp/.buildx-cache
-      #     key: ${{ runner.os }}-buildx-${{ env.VERSION }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-buildx-
-
+      - name: Set up docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ env.VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       # GitHub 컨테이너 레지스트리에 로그인 후 빌드 & 푸시
       - name: Login to ghcr
@@ -48,21 +46,21 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push Docker image to GitHub Container Registry
-        run: |
-          docker-compose push
-      # - name: Build and push
-      #   id: docker_build
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     builder: ${{ steps.buildx.outputs.name }}
-      #     push: true
-      #     tags: ${{ env.DOCKER_IMAGE }}:latest
+      # - name: Push Docker image to GitHub Container Registry
+      #   run: |
+      #     docker-compose push
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}:latest
   # 배포 Job
   deploy:
-    needs: build  # build 후에 실행되도록 정의
+    needs: build # build 후에 실행되도록 정의
     name: Deploy
-    runs-on: [ self-hosted, label-go ] # AWS ./configure에서 사용할 label명
+    runs-on: [self-hosted, label-go] # AWS ./configure에서 사용할 label명
     steps:
       - name: Login to ghcr
         uses: docker/login-action@v1
@@ -72,13 +70,18 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: check current path
         run: pwd
-      # 3000 -> 80 포트로 수행하도록 지정
-      - name: Docker compose down
-        run: docker-compose down
-      - name: Docker compose up
-        run: docker-compose up
       # # 3000 -> 80 포트로 수행하도록 지정
-      # - name: Docker run
-      #   run: |
-      #     docker-compose down
-      #     docker-compose up
+      # - name: Docker compose down
+      #   run: docker-compose down
+      # - name: Docker compose up
+      #   run: docker-compose up
+      # # # 3000 -> 80 포트로 수행하도록 지정
+      # # - name: Docker run
+      # #   run: |
+      # #     docker-compose down
+      # #     docker-compose up
+      # 3000 -> 80 포트로 수행하도록 지정
+      - name: Docker run
+        run: |
+          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 8080:8080 --name go_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
