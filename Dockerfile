@@ -4,7 +4,8 @@ RUN apk update
 RUN apk add bash
 
 WORKDIR "/app"
-ADD . "/app"
+# ADD . "/app"
+VOLUME ["/app"]
 
 RUN npm install
 
