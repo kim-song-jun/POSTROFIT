@@ -72,9 +72,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       # 3000 -> 80 포트로 수행하도록 지정
       - name: Docker compose down
-        run: docker-compose down
+        run: sudo docker compose down
       - name: Docker compose up
-        run: docker-compose up
+        run: sudo docker compose up
       # # 3000 -> 80 포트로 수행하도록 지정
       # - name: Docker run
       #   run: |
