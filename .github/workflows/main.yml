@@ -83,5 +83,5 @@ jobs:
       # 3000 -> 80 포트로 수행하도록 지정
       - name: Docker run
         run: |
-          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 8080:8080 --name postrofit_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker stop ${{ env.NAME }} && doscker rm ${{ env.NAME }} && docker rmi -f ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 8080:8080 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
