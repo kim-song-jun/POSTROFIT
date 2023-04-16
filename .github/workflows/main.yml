@@ -12,7 +12,7 @@ on:
 
 
 env:
-  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/POSTROFIT
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/postrofit
   version: ${{ github.sha }}
   NAME: postrofit_cicd
 
