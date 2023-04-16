@@ -14,6 +14,7 @@ export default {
   components: {MainLogo},
   mounted() {
     setTimeout(() => {
+      console.log('LoadingPage.vue: mounted(');
       this.$router.push({path: '/MainPage'});
     }, 3000);
   },
