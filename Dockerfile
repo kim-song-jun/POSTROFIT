@@ -8,7 +8,9 @@ ADD . "/app"
 # VOLUME ["/app"]
 
 RUN npm install
+RUN pwd
 
 EXPOSE 8080
 CMD ["npm", "run", "serve"]
+
 
