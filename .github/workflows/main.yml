@@ -7,7 +7,7 @@ on:
     # 무슨 브랜치가 업데이트 될 때 Actions 를 작동시킬지 적는다.
     # develop 브랜치로 개발하며 완료되면 main 에 머지해 Actions 를 작동시키면 조금 더 안전하겠지.
     # 여러개 적어도 된다.
-  pull_request: [ main ]:
+  pull_request:
     branches: [ main ]
 
 
