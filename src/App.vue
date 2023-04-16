@@ -8,6 +8,7 @@ export default {
   name: 'App',
   components: {},
   mounted() {
+    console.log('LoadingPage.vue: mounted(');
     this.$store.dispatch('initStation', {});
     this.$store.commit('initLine2Json');
   },
