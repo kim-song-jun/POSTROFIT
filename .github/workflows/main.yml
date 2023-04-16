@@ -70,6 +70,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: check current path
+        run: pwd
       # 3000 -> 80 포트로 수행하도록 지정
       - name: Docker compose down
         run: docker-compose down
