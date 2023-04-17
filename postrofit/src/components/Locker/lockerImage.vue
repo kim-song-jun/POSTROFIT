@@ -6,79 +6,107 @@
     >
       <div
         v-for="(item, index) in lockerflat"
-        :key="item.id"
+        :key="item.storageNumber"
         class="item"
         :style="`grid-row-end: span ${setRowSpan(
-          item.type,
+          item.storageSize,
         )}; height: ${setRowHeight(
-          item.type,
+          item.storageSize,
           46,
-        )}; background-color: ${setColor(item.status)}`"
+        )}; background-color: ${setColor(item.storageStat)}`"
         @click="setSelectBox(index)"
       >
-        <div style="margin: 5px">{{ item.id }}</div>
+        <div style="margin: 5px">{{ item.storageNumber }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import lockerData from '../../assets/data/lockerInfo.json';
 export default {
-  data() {
-    return {
-      locker: lockerData.locker,
-      columns: Math.max(...lockerData.locker.map((el) => el.length)),
-      rows: lockerData.locker.length,
-      lockerflat: lockerData.locker.flat(),
-    };
+  computed: {
+    locker() {
+      return this.$store.state.storage.locker;
+    },
+    columns() {
+      return Math.max(
+        ...this.$store.state.storage.locker.map((el) => el.length),
+      );
+    },
+    rows() {
+      return this.$store.state.storage.locker.length;
+    },
+    lockerflat() {
+      return this.$store.state.storage.locker.flat();
+    },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   methods: {
     setSelectBox(index) {
-      if (this.lockerflat[index].status != '사용가능') {
+      // check box storageStat '사용가능' & change storageStat '사용가능' > '선택'
+      if (this.lockerflat[index].storageStat != 'EMPTY') {
         return;
       }
       this.lockerflat.forEach((item) => {
-        if (item.status == '선택') {
-          item.status = '사용가능';
+        if (item.storageStat == '선택') {
+          item.storageStat = 'EMPTY';
         }
       });
-      this.lockerflat[index].status = '선택';
+      this.lockerflat[index].storageStat = '선택';
+
+      // store changed lockerInfo data
+      // this.$store.commit('setStorage', this.lockerInfo);
+
+      // store selected locker data
+      let selectedLocker = {};
+      this.locker.forEach((items) => {
+        items.forEach((item) => {
+          if (item.storageStat == '선택')
+            selectedLocker = {selectedLocker: item};
+        });
+      });
+      if (this.serviceType == '맡길게요')
+        this.$store.commit('setOrderData', selectedLocker);
+      if (this.serviceType == '보관할게요')
+        this.$store.commit('setStoreData', selectedLocker);
     },
-    setRowSpan(item) {
-      if (item == 'Controller') {
+    setRowSpan(storageSize) {
+      if (storageSize == 'Controller') {
         return 1;
       }
-      if (item == 'N') {
+      if (storageSize == 'SMALL') {
         return 1;
       }
-      if (item == 'M') {
+      if (storageSize == 'MID') {
         return 2;
       }
-      if (item == 'L') {
+      if (storageSize == 'BIG') {
         return 4;
       }
     },
-    setRowHeight(item, height) {
-      if (item == 'Controller') {
+    setRowHeight(storageSize, height) {
+      if (storageSize == 'Controller') {
         return `${height * 1}px`;
       }
-      if (item == 'N') {
+      if (storageSize == 'SMALL') {
         return `${height * 1}px`;
       }
-      if (item == 'M') {
+      if (storageSize == 'MID') {
         return `${height * 2 + 10}px`;
       }
-      if (item == 'L') {
+      if (storageSize == 'BIG') {
         return `${height * 4 + 30}px`;
       }
     },
-    setColor(item) {
-      if (item == '사용가능') return '#CFCFCF';
-      if (item == '사용중') return '#707070';
-      if (item == '선택') return '#D04040';
-      if (item == '제어부') return '#6FBB69';
-      if (item == '내 보관함') return '#FFC702';
+    setColor(storageStat) {
+      if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
+      if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
+      if (storageStat == 'WAIT') return '#707070';
+      if (storageStat == '선택') return '#D04040';
+      if (storageStat == '제어부') return '#6FBB69';
+      if (storageStat == '내 보관함') return '#FFC702';
     },
   },
 };

@@ -8,7 +8,7 @@ export default {
   name: 'App',
   components: {},
   mounted() {
-    this.$store.dispatch('initStation', {});
+    this.$store.dispatch('initStation');
     this.$store.commit('initLine2Json');
   },
 };

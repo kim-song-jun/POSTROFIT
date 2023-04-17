@@ -1,37 +1,36 @@
 <template>
   <div class="checkBill_container">
-    <checkModal
-      v-if="checkModalOpen"
-      @closeCheckModal="
-        checkModalOpen = false;
-        $router.push('/SelectPage/paySuccessPage');
-      "
-    />
+    <checkModal v-if="checkModalOpen" @closeCheckModal="testMove2PayPage" />
     <div class="checkBill_content">
-      <div class="movePost_location_container">
-        <div class="movePost_location">{{ selectStation.name }}</div>
-        <div class="movePost_location_sub">
+      <div class="checkBill_location_container">
+        <div class="checkBill_location">{{ selectStation.name }}</div>
+        <div class="checkBill_location_sub">
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <div class="checkBill_info">
+      <div v-if="feeData" class="checkBill_info">
         <div class="checkBill_price">
-          요금: <span class="checkBill_green">2000원</span> / 4시간
+          기본 요금:
+          <span class="checkBill_green">{{ feeData.profit }}원</span> /
+          {{ feeData.time }}시간
         </div>
         <div class="checkBill_size">
-          사이즈: <span class="checkBill_green">대형</span>
+          사이즈:
+          <span class="checkBill_green">{{
+            getSize(feeData.storageSize)
+          }}</span>
         </div>
         <div class="checkBill_term">보관 기간</div>
         <div class="checkBill_date">
           2022/10/16
-          <span class="checkBill_green">12:12:13</span> ~
+          <span class="checkBill_green">12:12</span> ~
         </div>
       </div>
       <progressMenu />
       <noticeBox class="checkBill_noticeBox"></noticeBox>
-      <div class="movePost_button_container">
-        <button class="movePost_button" @click="checkModalOpen = true">
-          {{ $route.query.serviceType }}
+      <div class="checkBill_button_container">
+        <button class="checkBill_button" @click="openCheckModal">
+          보관할게요
         </button>
       </div>
     </div>
@@ -44,20 +43,73 @@ import noticeBox from '../components/noticeBox.vue';
 import checkModal from '../components/checkModal.vue';
 
 export default {
+  data() {
+    return {
+      checkModalOpen: false,
+      feeData: null,
+    };
+  },
+  computed: {
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
+    },
+  },
+  methods: {
+    openCheckModal() {
+      this.checkModalOpen = true;
+    },
+    testMove2PayPage() {
+      // 결제 페이지로 이동
+      // 결제 완료 페이지로 이동
+      this.checkModalOpen = false;
+      // 결제 후 등록 요청
+      // issue.B 보관 등록 api 없음
+      this.$router.push('/SelectPage/paySuccessPage');
+    },
+    move2PayPage() {
+      // 결제 페이지로 이동
+    },
+    testGetFee() {
+      // this.feeData = {storageSize: 'SMALL', profit: 2000, time: 4};
+      this.$axios
+        .get(`/store/fee/테스트역1/MID`)
+        .then((response) => {
+          this.feeData = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getFee() {
+      this.$axios
+        .get(`/store/fee/${this.selectStation}/MID`)
+        .then((response) => {
+          this.feeData = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getSize(size) {
+      if (size == 'SMALL') return '소형';
+      if (size == 'MID') return '중형';
+      if (size == 'BIG') return '대형';
+    },
+  },
+  mounted() {
+    this.testGetFee();
+    // this.getFee();
+  },
   components: {
     progressMenu,
     noticeBox,
     checkModal,
-  },
-  data() {
-    return {
-      checkModalOpen: false,
-    };
-  },
-  computed: {
-    selectStation() {
-      return this.$store.state.selectStation;
-    },
   },
 };
 </script>
@@ -71,7 +123,7 @@ export default {
 .checkBill_content::-webkit-scrollbar {
   display: none;
 }
-.movePost_location_container {
+.checkBill_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
   width: 47vw;
   height: 5.5vh;
@@ -110,7 +162,7 @@ export default {
 .checkBill_size {
   margin-bottom: 2.3vh;
 }
-.movePost_location_sub {
+.checkBill_location_sub {
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-10) /
@@ -126,7 +178,7 @@ export default {
 .checkBill_noticeBox {
   width: 83vw;
 }
-.movePost_button {
+.checkBill_button {
   border: none;
   display: block;
   margin: 15vh auto 3vh;
@@ -149,7 +201,7 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
-.movePost_button:disabled {
+.checkBill_button:disabled {
   opacity: 0.5;
 }
 </style>

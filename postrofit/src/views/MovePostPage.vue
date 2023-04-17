@@ -1,50 +1,38 @@
 <template>
   <div class="movePost_container">
-    <div class="movePost_location_container">
-      <div class="movePost_location">{{ startStation.name }}</div>
-      <div class="movePost_location_sub">
-        서울특별시 동작구 남부순환로 지하2089
+    <div class="movePost_content">
+      <div class="movePost_location_container">
+        <div class="movePost_location">{{ startStation.name }}</div>
+        <div class="movePost_location_sub">
+          서울특별시 동작구 남부순환로 지하2089
+        </div>
       </div>
-    </div>
-    <div class="movePost_sizebox_container">
-      <div
-        class="movePost_sizebox"
-        :class="isSmallBoxClick"
-        @click="
-          smallBoxClicked = true;
-          middleBoxClicked = false;
-        "
-      >
-        <div class="movePost_sizebox_type">소형</div>
-        <div class="movePost_smallbox_num">4개</div>
-        <div class="movePost_sizebox_price">2000원 / 개</div>
+      <div class="movePost_sizebox_container">
+        <div
+          class="movePost_sizebox"
+          :class="isSmallBoxClick"
+          @click="selectBoxSize(true)"
+        >
+          <div class="movePost_sizebox_type">소형</div>
+          <div class="movePost_smallbox_num">4개</div>
+          <div class="movePost_sizebox_price">{{ cost.smallCost }}원 / 개</div>
+        </div>
+        <div
+          class="movePost_sizebox"
+          :class="isMiddleBoxClick"
+          @click="selectBoxSize(false)"
+        >
+          <div class="movePost_sizebox_type">중형</div>
+          <div class="movePost_middlebox_num">4개</div>
+          <div class="movePost_sizebox_price">{{ cost.midCost }}원 / 개</div>
+        </div>
       </div>
-      <div
-        class="movePost_sizebox"
-        :class="isMiddleBoxClick"
-        @click="
-          smallBoxClicked = false;
-          middleBoxClicked = true;
-        "
-      >
-        <div class="movePost_sizebox_type">중형</div>
-        <div class="movePost_middlebox_num">4개</div>
-        <div class="movePost_sizebox_price">2000원 / 개</div>
+      <progressMenu />
+      <div class="movePost_button_container">
+        <button class="movePost_button" @click="move2LockerPage">
+          맡길게요
+        </button>
       </div>
-    </div>
-    <progressMenu />
-    <div class="movePost_button_container">
-      <button
-        class="movePost_button"
-        @click="
-          $router.push({
-            path: '/SelectPage/lockerPage',
-            query: {serviceType: '맡길게요'},
-          })
-        "
-      >
-        맡길게요
-      </button>
     </div>
   </div>
 </template>
@@ -57,6 +45,7 @@ export default {
     return {
       smallBoxClicked: true,
       middleBoxClicked: false,
+      cost: {},
     };
   },
   computed: {
@@ -74,6 +63,30 @@ export default {
       return this.$store.state.startStation;
     },
   },
+  methods: {
+    move2LockerPage() {
+      this.$router.push('/SelectPage/lockerPage');
+    },
+    selectBoxSize(isSmall) {
+      this.smallBoxClicked = isSmall;
+      this.middleBoxClicked = !isSmall;
+    },
+    testGetCost() {
+      // issue.B 개수 정보도 필요
+      this.$axios
+        .get('/order/cost/테스트역1/테스트역2')
+        .then((response) => {
+          console.log(response);
+          this.cost = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.testGetCost();
+  },
   components: {
     ProgressMenu,
   },
@@ -81,9 +94,14 @@ export default {
 </script>
 
 <style>
+.movePost_content {
+  overflow: scroll;
+  height: 92.7vh;
+}
 .movePost_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
-  width: 47vw;
+  min-width: 47vw;
+  max-width: 90vw;
   height: 5.5vh;
 }
 .movePost_location {
@@ -116,7 +134,7 @@ export default {
   display: flex;
   align-items: center;
   height: 25.5vh;
-  width: 85vw;
+  width: 84vw;
   margin: 0vh 8vw 7vh;
   justify-content: space-between;
 }

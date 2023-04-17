@@ -7,18 +7,10 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <lockerInfo />
-      <noticeBox class="lockerPage_noticeBox"></noticeBox>
-      <button
-        class="lockerPage_button"
-        @click="
-          $router.push({
-            path: getPath(),
-            query: {serviceType: $route.query.serviceType},
-          })
-        "
-      >
-        {{ $route.query.serviceType }}
+      <lockerInfo v-if="storage" />
+      <noticeBox class="lockerPage_noticeBox" />
+      <button class="lockerPage_button" @click="move2CheckPage">
+        {{ serviceType }}
       </button>
     </div>
   </div>
@@ -27,25 +19,11 @@
 <script>
 import lockerInfo from '../components/lockerInfo.vue';
 import noticeBox from '../components/noticeBox.vue';
+import lockerData from '../assets/data/lockerInfo.json';
 
 export default {
-  components: {
-    lockerInfo,
-    noticeBox,
-  },
-  methods: {
-    getStationName() {
-      return (
-        this.startStation.name ??
-        this.endStation.name ??
-        this.selectStation.name
-      );
-    },
-    getPath() {
-      return this.$route.query.serviceType == '보관할게요'
-        ? '/SelectPage/checkBillPage'
-        : '/SelectPage/checkDeliveryPage';
-    },
+  data() {
+    return {};
   },
   computed: {
     startStation() {
@@ -57,6 +35,123 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    storage() {
+      return this.$store.state.storage;
+    },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
+  },
+  methods: {
+    getStationName() {
+      return this.serviceType == '맡길게요'
+        ? this.startStation.name
+        : this.serviceType == '옮길게요'
+        ? this.endStation.name
+        : this.selectStation.name;
+    },
+    getPathByServiceType() {
+      return this.serviceType == '보관할게요'
+        ? '/SelectPage/checkBillPage'
+        : '/SelectPage/checkDeliveryPage';
+    },
+    move2CheckPage() {
+      const nextPath = this.getPathByServiceType();
+      // 앞으로 결제할 보관함 정보 넘겨 보관함 선점하기
+      this.$router.push(nextPath);
+    },
+    testInitStorage() {
+      // this.$store.commit('setStorage', lockerData);
+      console.log(lockerData);
+      const newLocker = [];
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/테스트역1`)
+          .then((response) => {
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: {
+                startStation: this.startStation,
+                endStation: this.endStation,
+              },
+              locker: newLocker,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(`/delivery/storage/테스트역1/테스트역2`)
+          .then((response) => {
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: {
+                startStation: this.startStation,
+                endStation: this.endStation,
+              },
+              locker: newLocker,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get('/store/storage/테스트역1')
+          .then((response) => {
+            newLocker.push(response.data);
+            newLocker.push([]);
+            this.$store.commit('setStorage', {
+              station: this.selectStation,
+              locker: newLocker,
+            });
+            console.log(newLocker);
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    initStorage() {
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/${this.startStation}/${this.endStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(`/delivery/storage/${this.startStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get(`/store/storage/${this.selectStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+  },
+  mounted() {
+    this.testInitStorage();
+    // this.initStorage();
+  },
+  components: {
+    lockerInfo,
+    noticeBox,
   },
 };
 </script>
