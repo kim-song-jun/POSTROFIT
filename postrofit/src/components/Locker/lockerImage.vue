@@ -103,6 +103,7 @@ export default {
     setColor(storageStat) {
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
       if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
+      if (storageStat == 'WAIT') return '#707070';
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
       if (storageStat == '내 보관함') return '#FFC702';
