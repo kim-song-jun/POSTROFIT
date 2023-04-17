@@ -1,13 +1,8 @@
 <template>
   <div class="bottomMenu_container">
-    <MenuBar></MenuBar>
+    <MenuBar />
     <div class="bottomMenu_content">
-      <div
-        class="bottomMenu_column"
-        @click="
-          $router.push({path: '/SelectPage', query: {serviceType: '맡길게요'}})
-        "
-      >
+      <div class="bottomMenu_column" @click="move2SelectPage">
         <div class="bottomMenu_source">{{ this.startStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
@@ -25,15 +20,7 @@
         </div>
       </div>
       <img class="bottomMenu_arrow" src="../assets/images/arrow.png" alt="" />
-      <div
-        class="bottomMenu_column"
-        @click="
-          $router.push({
-            path: '/SelectPage/lockerPage',
-            query: {serviceType: '옮길게요'},
-          })
-        "
-      >
+      <div class="bottomMenu_column" @click="move2LockerPage">
         <div class="bottomMenu_destination">{{ this.endStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
@@ -58,9 +45,6 @@
 import MenuBar from './MenuBar.vue';
 
 export default {
-  components: {
-    MenuBar,
-  },
   computed: {
     startStation() {
       return this.$store.state.startStation;
@@ -71,6 +55,19 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+  },
+  methods: {
+    move2SelectPage() {
+      this.$store.commit('setServiceType', '맡길게요');
+      this.$router.push('/SelectPage');
+    },
+    move2LockerPage() {
+      this.$store.commit('setServiceType', '옮길게요');
+      this.$router.push('/SelectPage/lockerPage');
+    },
+  },
+  components: {
+    MenuBar,
   },
 };
 </script>

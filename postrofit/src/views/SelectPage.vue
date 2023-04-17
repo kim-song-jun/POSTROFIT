@@ -5,9 +5,7 @@
         <div class="menuBar_subway_line">2</div>
         <div v-if="0" class="menuBar_subway_line">4</div>
         <div class="menuBar_round_bar"></div>
-        <div class="menuBar_close_btn" @click="$router.push('/MainPage')">
-          X
-        </div>
+        <div class="menuBar_close_btn" @click="move2Main">X</div>
       </div>
     </div>
     <router-view />
@@ -15,7 +13,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    move2Main() {
+      this.$store.dispatch('initStation');
+      this.$router.push('/MainPage');
+    },
+  },
+};
 </script>
 
 <style>

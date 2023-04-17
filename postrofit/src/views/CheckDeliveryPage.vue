@@ -1,12 +1,6 @@
 <template>
   <div class="checkDeliveryPage_container">
-    <checkModal
-      v-if="checkModalOpen"
-      @closeCheckModal="
-        checkModalOpen = false;
-        $router.push('/SelectPage/paySuccessPage');
-      "
-    />
+    <checkModal v-if="checkModalOpen" @closeCheckModal="testMove2PayPage" />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">
         <locationBox />
@@ -21,7 +15,7 @@
       <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
       <div class="checkDeliveryPage_button_container">
         <button class="checkDeliveryPage_button" @click="checkModalOpen = true">
-          {{ $route.query.serviceType }}
+          {{ serviceType }}
         </button>
       </div>
     </div>
@@ -39,6 +33,81 @@ export default {
     return {
       checkModalOpen: false,
     };
+  },
+  computed: {
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
+  },
+  methods: {
+    testMove2PayPage() {
+      this.checkModalOpen = false;
+      // 결제 페이지로 이동
+      // 결제 후 등록 요청
+      // user_id는 어디서 받아오나? 0~3, 2는 배달부
+      const userId = 0;
+      // try. reqData ={}로 변경해보기
+      if (this.serviceType == '맡길게요') {
+        this.makeOrder(userId);
+      }
+      if (this.serviceType == '옮길게요') {
+        this.takeDelivery(userId);
+      }
+    },
+    move2PayPage() {
+      // 결제 페이지로 이동
+    },
+    findStorageId() {
+      const storage = this.$store.state.storage;
+
+      storage.locker.forEach((line) => {
+        line.forEach((container) => {
+          if (container.status == '선택') return container.id;
+        });
+      });
+    },
+    async makeOrder(userId) {
+      // storage_id: this.findStorageId(),
+      // endStationName: this.$store.state.endStation,
+      const storageId = 2;
+      const endStationName = '테스트역1';
+
+      this.$axios
+        .post('/order/make', {
+          userId: userId,
+          storageId: storageId,
+          endStationName: endStationName,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    takeDelivery(userId) {
+      // order_id는 어디서 받아오나? 0,1
+      const orderId = 1;
+
+      // issue.B 옮기는 부분에 대한 비밀번호 분리가 가능한가?
+      this.$axios
+        .post('/delivery/take', {
+          userId: userId,
+          orderId: orderId,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    // issue.F 페이지 로딩 시 옮길게요는 수익과 사이즈, 맡길게요는 요금과 사이즈
+    // /order/cost, /delivery/cost로 받아온 정보를 store에 저장했다가 사용.
   },
   components: {
     progressMenu,

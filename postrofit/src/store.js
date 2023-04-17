@@ -11,8 +11,16 @@ const store = createStore({
       bottomMenuCreated: false,
       bottomLockerCreated: false,
       LINE2_JSON: {},
-      userStore: {},
-      userHistory: [],
+      // 옮길게요 기능에 필요한 데이터
+      deliveryData: {},
+      // 맡길게요 기능에 필요한 데이터
+      orderData: {},
+      // 보관할게요 기능에 필요한 데이터
+      storeData: {},
+      // 보관함을 그리는데 필요한 데인터
+      storage: null,
+      // 이용하는 서비스 구분
+      serviceType: '',
     };
   },
   mutations: {
@@ -44,11 +52,20 @@ const store = createStore({
       };
       console.log(state.LINE2_JSON);
     },
-    setUserStore(state, userStore) {
-      state.userStore = {...userStore};
+    setDeliveryData(state, newData) {
+      state.deliveryData = {...state.deliveryData, ...newData};
     },
-    setUserHistory(state, userHistory) {
-      state.userHistory = [...userHistory];
+    setOrderData(state, newData) {
+      state.orderData = {...state.orderData, ...newData};
+    },
+    setStoreData(state, newData) {
+      state.storeData = {...state.storeData, ...newData};
+    },
+    setStorage(state, storage) {
+      state.storage = {...storage};
+    },
+    setServiceType(state, serviceeType) {
+      state.serviceType = serviceeType;
     },
   },
   actions: {
