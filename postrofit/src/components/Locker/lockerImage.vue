@@ -39,6 +39,9 @@ export default {
     lockerflat() {
       return this.$store.state.storage.locker.flat();
     },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
   },
   methods: {
     setSelectBox(index) {
@@ -57,13 +60,17 @@ export default {
       // this.$store.commit('setStorage', this.lockerInfo);
 
       // store selected locker data
-      let selectedLocker = null;
+      let selectedLocker = {};
       this.locker.forEach((items) => {
         items.forEach((item) => {
-          if (item.storageStat == '선택') selectedLocker = item;
+          if (item.storageStat == '선택')
+            selectedLocker = {selectedLocker: item};
         });
       });
-      this.$store.commit('setStoreData', {selectedLocker: selectedLocker});
+      if (this.serviceType == '맡길게요')
+        this.$store.commit('setOrderData', selectedLocker);
+      if (this.serviceType == '보관할게요')
+        this.$store.commit('setStoreData', selectedLocker);
     },
     setRowSpan(storageSize) {
       if (storageSize == 'Controller') {
