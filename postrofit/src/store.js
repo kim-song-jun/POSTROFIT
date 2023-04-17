@@ -12,11 +12,11 @@ const store = createStore({
       bottomLockerCreated: false,
       LINE2_JSON: {},
       // 옮길게요 기능에 필요한 데이터
-      deliveryData: null,
+      deliveryData: {},
       // 맡길게요 기능에 필요한 데이터
-      orderData: null,
+      orderData: {},
       // 보관할게요 기능에 필요한 데이터
-      storeData: null,
+      storeData: {},
       // 보관함을 그리는데 필요한 데인터
       storage: null,
       // 이용하는 서비스 구분
@@ -52,14 +52,14 @@ const store = createStore({
       };
       console.log(state.LINE2_JSON);
     },
-    setDeliveryData(state, deliveryData) {
-      state.deliveryData = {...deliveryData};
+    setDeliveryData(state, newData) {
+      state.deliveryData = {...state.deliveryData, ...newData};
     },
-    setOrderData(state, orderData) {
-      state.orderData = {...orderData};
+    setOrderData(state, newData) {
+      state.orderData = {...state.orderData, ...newData};
     },
-    setStoreData(state, storeData) {
-      state.storeData = {...storeData};
+    setStoreData(state, newData) {
+      state.storeData = {...state.storeData, ...newData};
     },
     setStorage(state, storage) {
       state.storage = {...storage};
