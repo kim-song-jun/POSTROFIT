@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     move2Lockerpage() {
-      // issue!! 모달 닫기
+      // issue.F 모달 닫기
       // this.$store.commit('setBottomLockerOpen', false);
       this.$store.commit('setServiceType', '보관할게요');
       // 화면 이동

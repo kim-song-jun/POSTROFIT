@@ -8,7 +8,7 @@
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">결제 완료</div>
-      <!-- issue 여기에 사이즈를 알려줄 필요가 있나?-->
+      <!-- issue.F 여기에 사이즈를 알려줄 필요가 있나?-->
       <div class="paySuccessPage_info">대형 4시간</div>
       <div class="progressMenu_container">
         <div class="progressMenu_graybar" />
@@ -79,14 +79,14 @@ export default {
     move2Main() {
       this.lockerModalOpen = false;
       // 하단 메뉴 창 닫기
-      // issue 자연스럽지 못한 애니메이션
+      // issue.F 자연스럽지 못한 애니메이션
       this.$store.dispatch('initStation');
       this.$router.push('/MainPage');
     },
     testOpenLockerModal() {
       // 보관함 비밀번호 받아오기
       this.lockerInfo = {
-        stationName: this.getStationName(), // issue 여기서도 이름은 필요한지 잘 모르겠음
+        stationName: this.getStationName(), // issue.B 여기서도 이름은 필요한지 잘 모르겠음
         storageNum: 4,
         password: 4456,
       };
@@ -120,7 +120,6 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      // issue 옮기는 부분에 대한 비밀번호 분리가 가능한가?
       // if (this.serviceType == '옮길게요')
       //   this.$axios
       //     .get('/delivery/storage/info/user_id')

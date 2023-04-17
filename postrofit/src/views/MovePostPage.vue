@@ -72,7 +72,7 @@ export default {
       this.middleBoxClicked = !isSmall;
     },
     testGetCost() {
-      // issue. 개수 정보도 필요
+      // issue.B 개수 정보도 필요
       this.$axios
         .get('/order/cost/테스트역1/테스트역2')
         .then((response) => {

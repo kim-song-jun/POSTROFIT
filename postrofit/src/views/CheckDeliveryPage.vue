@@ -88,9 +88,10 @@ export default {
         });
     },
     takeDelivery(userId) {
-      // issue order_id는 어디서 받아오나? maybe 0~3?
+      // order_id는 어디서 받아오나? 0,1
       const orderId = 1;
 
+      // issue.B 옮기는 부분에 대한 비밀번호 분리가 가능한가?
       this.$axios
         .post('/delivery/take', {
           userId: userId,
@@ -105,6 +106,8 @@ export default {
           console.log(error);
         });
     },
+    // issue.F 페이지 로딩 시 옮길게요는 수익과 사이즈, 맡길게요는 요금과 사이즈
+    // /order/cost, /delivery/cost로 받아온 정보를 store에 저장했다가 사용.
   },
   components: {
     progressMenu,

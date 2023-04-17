@@ -69,7 +69,7 @@ export default {
       // 결제 완료 페이지로 이동
       this.checkModalOpen = false;
       // 결제 후 등록 요청
-      // issue 보관 등록 api 없음
+      // issue.B 보관 등록 api 없음
       this.$router.push('/SelectPage/paySuccessPage');
     },
     move2PayPage() {
