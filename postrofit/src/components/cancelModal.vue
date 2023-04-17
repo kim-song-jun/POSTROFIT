@@ -3,7 +3,7 @@
     <div class="cancelModal_container">
       <div class="cancelModal_title">취소하기</div>
       <div class="cancelModal_warning">*약관을 잘 읽어주세요</div>
-      <locationBox></locationBox>
+      <locationBox :startStation="startStation" :endStation="endStation" />
       <div class="cancelModal_info">
         <div class="cancelModal_text4">
           요금: <span class="cancelModal_size">2000원</span>
@@ -13,7 +13,7 @@
           <span class="cancelModal_price">소형</span>
         </div>
       </div>
-      <noticeBox></noticeBox>
+      <noticeBox />
       <button class="cancelModal_button" @click="$emit('closeCancelModal')">
         닫기
       </button>
@@ -26,6 +26,10 @@ import locationBox from '../components/locationBox.vue';
 import noticeBox from '../components/noticeBox.vue';
 
 export default {
+  props: {
+    startStation: String,
+    endStation: String,
+  },
   components: {
     locationBox,
     noticeBox,

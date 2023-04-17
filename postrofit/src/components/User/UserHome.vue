@@ -15,7 +15,7 @@
         <div class="userHome_text1">내 보관함</div>
         <div class="userHome_text2">현재 보관함 이용내역</div>
       </div>
-      <usingLocker />
+      <usingLocker v-if="this.$store.state.userStore" />
     </div>
     <div class="userHome_history_container">
       <div class="userHome_text1">이용내역</div>
@@ -29,7 +29,8 @@
 
 <script>
 import historyAbout from './historyAbout.vue';
-import usingLocker from '../usingLocker.vue';
+import usingLocker from './usingLocker.vue';
+import {history} from '../../assets/data/history.json';
 
 export default {
   components: {
@@ -40,6 +41,28 @@ export default {
     return {
       nickname: '김성준',
     };
+  },
+  methods: {
+    getStore() {
+      // 내 보관함 정보 요청
+      const data = {
+        location: '서울특별시 동작구 남부순환로 지하2089',
+        station: {line: 2, name: '사당'},
+        fee: 2000,
+        size: '중형',
+        date: '2022/10/16',
+        time: '12:12:13',
+      };
+      this.$store.commit('setUserStore', data);
+    },
+    getHistory() {
+      // 이용 내역 정보 요청
+      this.$store.commit('setUserHistory', history);
+    },
+  },
+  created() {
+    this.getStore();
+    this.getHistory();
   },
 };
 </script>
@@ -115,7 +138,7 @@ export default {
 }
 .userHome_locker_container {
   width: 83vw;
-  height: 75vw;
+  /* height: 75vw; */
   margin: 7vw auto 0vw;
 }
 .userHome_text {
