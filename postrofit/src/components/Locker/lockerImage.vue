@@ -13,7 +13,7 @@
         )}; height: ${setRowHeight(
           item.storageSize,
           46,
-        )}; background-color: ${setColor(item.storageStat)}`"
+        )}; background-color: ${setColor(item.storageStat, item.storageSize)}`"
         @click="setSelectBox(index)"
       >
         <div style="margin: 5px">{{ item.storageNumber }}</div>
@@ -108,7 +108,10 @@ export default {
         return `${height * 4 + 30}px`;
       }
     },
-    setColor(storageStat) {
+    setColor(storageStat, storageSize) {
+      // 선택가능
+      if (storageStat == 'EMPTY' && storageSize == this.orderData.size)
+        return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
       if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
       if (storageStat == 'WAIT') return '#707070';
