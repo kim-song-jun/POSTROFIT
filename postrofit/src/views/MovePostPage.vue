@@ -15,7 +15,10 @@
         >
           <div class="movePost_sizebox_type">소형</div>
           <div class="movePost_smallbox_num">{{ orderEmpty.smallCount }}개</div>
-          <div class="movePost_sizebox_price">{{ cost.smallCost }}원 / 개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.smallCost }}원
+            <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
         </div>
         <div
           class="movePost_sizebox"
@@ -24,7 +27,9 @@
         >
           <div class="movePost_sizebox_type">중형</div>
           <div class="movePost_middlebox_num">{{ orderEmpty.midCount }}개</div>
-          <div class="movePost_sizebox_price">{{ cost.midCost }}원 / 개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.midCost }}원 <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
         </div>
       </div>
       <progressMenu />
@@ -161,6 +166,7 @@ export default {
   margin: 0vh 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
+  color: #6fbb69;
 }
 .movePost_sizebox_unclicked {
   font-size: 10px;
@@ -211,8 +217,10 @@ export default {
   text-align: left;
   font: normal normal bold 1.5em Roboto;
   letter-spacing: 0px;
-  color: #707070;
   opacity: 1;
+}
+.movePost_sizebox_gray {
+  color: #707070;
 }
 .movePost_button {
   border: none;
