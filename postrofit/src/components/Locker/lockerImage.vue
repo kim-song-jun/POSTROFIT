@@ -42,11 +42,19 @@ export default {
     serviceType() {
       return this.$store.state.serviceType;
     },
+    orderData() {
+      return this.$store.state.orderData;
+    },
   },
   methods: {
     setSelectBox(index) {
-      // check box storageStat '사용가능' & change storageStat '사용가능' > '선택'
-      if (this.lockerflat[index].storageStat != 'EMPTY') {
+      // 보관함 상태가 EMPTY 이고, size가 앞에서 고른 사이즈와 동일할 때
+      if (
+        !(
+          this.lockerflat[index].storageStat == 'EMPTY' &&
+          this.lockerflat[index].storageSize == this.orderData.size
+        )
+      ) {
         return;
       }
       this.lockerflat.forEach((item) => {
