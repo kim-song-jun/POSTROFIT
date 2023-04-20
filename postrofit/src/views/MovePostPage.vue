@@ -14,7 +14,7 @@
           @click="selectBoxSize(true)"
         >
           <div class="movePost_sizebox_type">소형</div>
-          <div class="movePost_smallbox_num">4개</div>
+          <div class="movePost_smallbox_num">{{ orderEmpty.smallCount }}개</div>
           <div class="movePost_sizebox_price">{{ cost.smallCost }}원 / 개</div>
         </div>
         <div
@@ -23,7 +23,7 @@
           @click="selectBoxSize(false)"
         >
           <div class="movePost_sizebox_type">중형</div>
-          <div class="movePost_middlebox_num">4개</div>
+          <div class="movePost_middlebox_num">{{ orderEmpty.midCount }}개</div>
           <div class="movePost_sizebox_price">{{ cost.midCost }}원 / 개</div>
         </div>
       </div>
@@ -45,7 +45,8 @@ export default {
     return {
       smallBoxClicked: true,
       middleBoxClicked: false,
-      cost: {},
+      cost: {smallCost: '?', midCost: '?'},
+      orderEmpty: {smallCount: '?', midCount: '?'},
     };
   },
   computed: {
@@ -71,21 +72,22 @@ export default {
       this.smallBoxClicked = isSmall;
       this.middleBoxClicked = !isSmall;
     },
+    testGetOrderEmpty() {
+      return this.$axios.get(`/order/empty/테스트역1`);
+    },
     testGetCost() {
-      // issue.B 개수 정보도 필요
-      this.$axios
-        .get('/order/cost/테스트역1/테스트역2')
-        .then((response) => {
-          console.log(response);
-          this.cost = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      return this.$axios.get('/order/cost/테스트역1/테스트역2');
     },
   },
   mounted() {
-    this.testGetCost();
+    Promise.all([this.testGetOrderEmpty(), this.testGetCost()])
+      .then((values) => {
+        this.orderEmpty = values[0].data;
+        this.cost = values[1].data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   components: {
     ProgressMenu,
