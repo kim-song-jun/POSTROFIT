@@ -25,9 +25,6 @@
 <script>
 export default {
   computed: {
-    locker() {
-      return this.$store.state.storage.locker;
-    },
     columns() {
       return Math.max(
         ...this.$store.state.storage.locker.map((el) => el.length),
@@ -47,6 +44,14 @@ export default {
     },
   },
   methods: {
+    findSelectedLocker(lockerflat) {
+      // 선택된 locker 정보 저장
+      let selectedLocker = {};
+      lockerflat.forEach((item) => {
+        if (item.storageStat == '선택') selectedLocker = {selectedLocker: item};
+      });
+      return selectedLocker;
+    },
     setSelectBox(index) {
       // 보관함 상태가 EMPTY 이고, size가 앞에서 고른 사이즈와 동일할 때
       if (
@@ -62,23 +67,18 @@ export default {
           item.storageStat = 'EMPTY';
         }
       });
+
       this.lockerflat[index].storageStat = '선택';
-
-      // store changed lockerInfo data
-      // this.$store.commit('setStorage', this.lockerInfo);
-
-      // store selected locker data
-      let selectedLocker = {};
-      this.locker.forEach((items) => {
-        items.forEach((item) => {
-          if (item.storageStat == '선택')
-            selectedLocker = {selectedLocker: item};
-        });
-      });
       if (this.serviceType == '맡길게요')
-        this.$store.commit('setOrderData', selectedLocker);
+        this.$store.commit(
+          'setOrderData',
+          this.findSelectedLocker(this.lockerflat),
+        );
       if (this.serviceType == '보관할게요')
-        this.$store.commit('setStoreData', selectedLocker);
+        this.$store.commit(
+          'setStoreData',
+          this.findSelectedLocker(this.lockerflat),
+        );
     },
     setRowSpan(storageSize) {
       if (storageSize == 'Controller') {
