@@ -11,7 +11,10 @@
         <div
           class="movePost_sizebox"
           :class="isSmallBoxClick"
-          @click="selectBoxSize(true)"
+          @click="
+            selectBoxSize(true);
+            setOrderData(true);
+          "
         >
           <div class="movePost_sizebox_type">소형</div>
           <div class="movePost_smallbox_num">{{ orderEmpty.smallCount }}개</div>
@@ -23,7 +26,10 @@
         <div
           class="movePost_sizebox"
           :class="isMiddleBoxClick"
-          @click="selectBoxSize(false)"
+          @click="
+            selectBoxSize(false);
+            setOrderData(false);
+          "
         >
           <div class="movePost_sizebox_type">중형</div>
           <div class="movePost_middlebox_num">{{ orderEmpty.midCount }}개</div>
@@ -76,6 +82,13 @@ export default {
     selectBoxSize(isSmall) {
       this.smallBoxClicked = isSmall;
       this.middleBoxClicked = !isSmall;
+    },
+    setOrderData(isSmall) {
+      // 선택된 보관함 정보 store의 orderData에 저장
+      this.$store.commit('setOrderData', {
+        size: isSmall ? 'SMALL' : 'MID',
+        cost: isSmall ? this.cost.smallCost : this.cost.midCost,
+      });
     },
     testGetOrderEmpty() {
       return this.$axios.get(`/order/empty/테스트역1`);
