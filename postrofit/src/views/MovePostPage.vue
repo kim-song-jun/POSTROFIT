@@ -102,6 +102,7 @@ export default {
       .then((values) => {
         this.orderEmpty = values[0].data;
         this.cost = values[1].data;
+        this.setOrderData(true);
       })
       .catch((error) => {
         console.log(error);
