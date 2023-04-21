@@ -5,7 +5,7 @@
       :key="i"
       class="historyAbout"
       :class="historyClass(history.hisType)"
-      @click="$router.push(`/UserPage/${history.urn}/${history.id}`)"
+      @click="move2HistoryDetail(history)"
     >
       <div class="historyAbout_arrow">
         <div class="historyAbout_arrow_top"></div>
@@ -58,6 +58,9 @@ export default {
         : type == 'active'
         ? 'historyAbout_active'
         : 'historyAbout_cancel';
+    },
+    move2HistoryDetail(history) {
+      this.$router.push(`/UserPage/${history.urn}`);
     },
   },
 };
