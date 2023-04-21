@@ -113,8 +113,8 @@ export default {
       if (storageStat == 'EMPTY' && storageSize == this.orderData.size)
         return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
-      if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
-      if (storageStat == 'WAIT') return '#707070';
+      if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
+      if (storageStat == 'WAIT') return '#CFCFCF';
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
       if (storageStat == '내 보관함') return '#FFC702';
