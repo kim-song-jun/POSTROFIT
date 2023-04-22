@@ -76,6 +76,12 @@ const store = createStore({
       context.commit('setBottomMenuOpen', false);
       context.commit('setBottomLockerOpen', false);
     },
+    initServiceData(context) {
+      context.commit('setDeliveryData', {});
+      context.commit('setOrderData', {});
+      context.commit('setStoreData', {});
+      context.commit('setStorage', {locker: []});
+    },
   },
 });
 

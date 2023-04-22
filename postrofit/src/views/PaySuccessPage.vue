@@ -97,6 +97,7 @@ export default {
       // 하단 메뉴 창 닫기
       // issue.F 자연스럽지 못한 애니메이션
       this.$store.dispatch('initStation');
+      this.$store.dispatch('initServiceData');
       this.$router.push('/MainPage');
     },
     testOpenLockerModal() {
