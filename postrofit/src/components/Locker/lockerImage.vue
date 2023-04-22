@@ -124,6 +124,8 @@ export default {
         storageSize == this.orderData.size
       )
         return '#5E62D1';
+      if (this.serviceType == '보관할게요' && storageStat == 'EMPTY')
+        return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
       if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
       // 배정된 배달 보관함
