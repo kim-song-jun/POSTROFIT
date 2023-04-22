@@ -231,4 +231,7 @@ export default {
   color: #ffffff;
   opacity: 1;
 }
+.lockerPage_button:disabled {
+  opacity: 0.5;
+}
 </style>
