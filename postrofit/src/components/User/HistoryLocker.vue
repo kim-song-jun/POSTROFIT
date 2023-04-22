@@ -7,15 +7,15 @@
       </div>
     </div>
     <div class="historyLocker_station">
-      <div class="historyLocker_line">{{ userStore.station.line }}</div>
+      <div class="historyLocker_line">2</div>
       <div class="historyLocker_station_name">
         <div class="historyLocker_station_location">
           {{ userStore.location }}
         </div>
-        {{ userStore.station.line }}호선 {{ userStore.station.name }}
+        2호선 {{ userStore.station }}
       </div>
     </div>
-    <lockerInfo />
+    <!-- <lockerInfo /> -->
     <div class="historyLocker_detail_container">
       <div class="userHome_text">
         요금:
