@@ -2,6 +2,7 @@
   <div class="userPage_container">
     <lockerModal
       v-if="lockerModalOpen"
+      :lockerInfo="lockerInfo"
       @closeLockerModal="lockerModalOpen = false"
     ></lockerModal>
     <div class="userPage_top">
@@ -20,7 +21,7 @@
         내 보관함
       </div> -->
     </div>
-    <router-view @openLockerModal="lockerModalOpen = true"></router-view>
+    <router-view @openLockerModal="openLockerModal" />
   </div>
 </template>
 
@@ -28,13 +29,20 @@
 import lockerModal from '../components/lockerModal.vue';
 
 export default {
-  components: {
-    lockerModal,
-  },
   data() {
     return {
       lockerModalOpen: false,
+      lockerInfo: {},
     };
+  },
+  methods: {
+    openLockerModal() {
+      this.lockerModalOpen = true;
+      this.lockerInfo = this.$store.state.userStore.storagePasswordDTO;
+    },
+  },
+  components: {
+    lockerModal,
   },
 };
 </script>
