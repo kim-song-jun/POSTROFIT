@@ -137,26 +137,27 @@ export default {
           console.log(error);
         });
     },
-    testGetDeliveryData() {
-      this.$axios
-        .get(
-          `/delivery/order/storage/${this.$store.state.deliveryData.selectedLocker.storageId}`,
-        )
-        .then((response) => {
-          this.$store.commit('setDeliveryData', {
-            ...this.$store.state.deliveryData,
-            size: response.data.size,
-            cost: response.data.price,
-            orderId: response.data.orderId,
+    testSetDeliveryData() {
+      if (this.$store.serviceType == '옮길게요')
+        this.$axios
+          .get(
+            `/delivery/order/storage/${this.$store.state.deliveryData.selectedLocker.storageId}`,
+          )
+          .then((response) => {
+            this.$store.commit('setDeliveryData', {
+              ...this.$store.state.deliveryData,
+              size: response.data.size,
+              cost: response.data.price,
+              orderId: response.data.orderId,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
   mounted() {
-    this.testGetDeliveryData();
+    this.testSetDeliveryData();
   },
   components: {
     progressMenu,
