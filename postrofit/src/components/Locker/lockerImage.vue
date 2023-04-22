@@ -44,11 +44,12 @@ export default {
     },
   },
   methods: {
-    findSelectedLocker(lockerflat) {
+    findLocker(lockerflat, storageStat) {
       // 선택된 locker 정보 저장
       let selectedLocker = {};
       lockerflat.forEach((item) => {
-        if (item.storageStat == '선택') selectedLocker = {selectedLocker: item};
+        if (item.storageStat == storageStat)
+          selectedLocker = {selectedLocker: item};
       });
       return selectedLocker;
     },
