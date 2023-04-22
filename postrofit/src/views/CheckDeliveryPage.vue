@@ -122,7 +122,7 @@ export default {
     },
     takeDelivery(userId) {
       // order_id는 어디서 받아오나? 0,1
-      const orderId = 1;
+      const orderId = this.$store.state.deliveryData.orderId;
 
       this.$axios
         .post('/delivery/take', {
@@ -130,7 +130,6 @@ export default {
           orderId: orderId,
         })
         .then((response) => {
-          console.log(response);
           if (response.status == 200)
             this.$router.push('/SelectPage/paySuccessPage');
         })
@@ -138,12 +137,26 @@ export default {
           console.log(error);
         });
     },
+    testGetDeliveryData() {
+      this.$axios
+        .get(
+          `/delivery/order/storage/${this.$store.state.deliveryData.selectedLocker.storageId}`,
+        )
+        .then((response) => {
           this.$store.commit('setDeliveryData', {
             ...this.$store.state.deliveryData,
             size: response.data.size,
             cost: response.data.price,
             orderId: response.data.orderId,
           });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.testGetDeliveryData();
   },
   components: {
     progressMenu,
