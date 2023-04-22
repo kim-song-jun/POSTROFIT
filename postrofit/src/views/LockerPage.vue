@@ -99,10 +99,6 @@ export default {
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {
-              station: {
-                startStation: this.startStation,
-                endStation: this.endStation,
-              },
               locker: newLocker,
             });
           })
@@ -115,10 +111,6 @@ export default {
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {
-              station: {
-                startStation: this.startStation,
-                endStation: this.endStation,
-              },
               locker: newLocker,
             });
           })
@@ -131,7 +123,6 @@ export default {
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {
-              station: this.selectStation,
               locker: newLocker,
             });
           })
