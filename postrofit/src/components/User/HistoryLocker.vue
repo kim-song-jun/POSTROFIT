@@ -54,10 +54,19 @@ export default {
     },
   },
   methods: {
-    getStorage() {
+    setUserStore() {
       // 보관함 데이터 서버 요청
-      return {};
+      const storageId = this.$store.state.userStore.storageId;
+      this.$axios.get(`/user/store/storage/${storageId}`).then((response) => {
+        this.$store.commit('setUserStore', {
+          ...this.$store.state.userStore,
+          ...response.data,
+        });
+      });
     },
+  },
+  mounted() {
+    this.setUserStore();
   },
   components: {
     lockerInfo,
