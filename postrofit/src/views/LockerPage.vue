@@ -9,7 +9,11 @@
       </div>
       <lockerInfo v-if="storage" />
       <noticeBox class="lockerPage_noticeBox" />
-      <button class="lockerPage_button" @click="move2CheckPage">
+      <button
+        class="lockerPage_button"
+        @click="move2CheckPage"
+        :disabled="isSelect"
+      >
         {{ serviceType }}
       </button>
     </div>
@@ -40,6 +44,14 @@ export default {
     },
     serviceType() {
       return this.$store.state.serviceType;
+    },
+    isSelect() {
+      if (this.serviceType == '맡길게요')
+        return !this.$store.state.orderData.hasOwnProperty('selectedLocker');
+      if (this.serviceType == '옮길게요')
+        return !this.$store.state.deliveryData.hasOwnProperty('selectedLocker');
+      if (this.serviceType == '보관할게요')
+        return !this.$store.state.storeData.hasOwnProperty('selectedLocker');
     },
   },
   methods: {
