@@ -118,10 +118,17 @@ export default {
     },
     setColor(storageStat, storageSize) {
       // 선택가능
-      if (storageStat == 'EMPTY' && storageSize == this.orderData.size)
+      if (
+        this.serviceType == '맡길게요' &&
+        storageStat == 'EMPTY' &&
+        storageSize == this.orderData.size
+      )
         return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
       if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
+      // 배정된 배달 보관함
+      if (this.serviceType == '옮길게요' && storageStat == 'WAIT')
+        return '#D04040';
       if (storageStat == 'WAIT') return '#CFCFCF';
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
