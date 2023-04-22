@@ -55,31 +55,43 @@ export default {
     },
     setSelectBox(index) {
       // 보관함 상태가 EMPTY 이고, size가 앞에서 고른 사이즈와 동일할 때
-      if (
-        !(
-          this.lockerflat[index].storageStat == 'EMPTY' &&
-          this.lockerflat[index].storageSize == this.orderData.size
-        )
-      ) {
-        return;
-      }
-      this.lockerflat.forEach((item) => {
-        if (item.storageStat == '선택') {
-          item.storageStat = 'EMPTY';
+      if (this.serviceType == '맡길게요') {
+        if (
+          !(
+            this.lockerflat[index].storageStat == 'EMPTY' &&
+            this.lockerflat[index].storageSize == this.orderData.size
+          )
+        ) {
+          return;
         }
-      });
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
 
-      this.lockerflat[index].storageStat = '선택';
-      if (this.serviceType == '맡길게요')
+        this.lockerflat[index].storageStat = '선택';
         this.$store.commit('setOrderData', {
           ...this.$store.state.orderData,
           ...this.findLocker(this.lockerflat, '선택'),
         });
-      if (this.serviceType == '보관할게요')
+      }
+      if (this.serviceType == '보관할게요') {
+        if (this.lockerflat[index].storageStat != 'EMPTY') {
+          return;
+        }
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
+
+        this.lockerflat[index].storageStat = '선택';
         this.$store.commit('setStoreData', {
           ...this.$store.state.storeData,
           ...this.findLocker(this.lockerflat, '선택'),
         });
+      }
     },
     setDeliveryData() {
       if (this.serviceType == '옮길게요')
