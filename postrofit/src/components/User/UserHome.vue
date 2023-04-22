@@ -15,7 +15,7 @@
         <div class="userHome_text1">내 보관함</div>
         <div class="userHome_text2">현재 보관함 이용내역</div>
       </div>
-      <usingLocker v-if="this.$store.state.userStore" />
+      <usingLocker />
     </div>
     <div class="userHome_history_container">
       <div class="userHome_text1">이용내역</div>
@@ -30,7 +30,6 @@
 <script>
 import historyAbout from './historyAbout.vue';
 import usingLocker from './usingLocker.vue';
-import {history} from '../../assets/data/history.json';
 
 export default {
   components: {
@@ -43,26 +42,75 @@ export default {
     };
   },
   methods: {
-    getStore() {
-      // 내 보관함 정보 요청
-      const data = {
-        location: '서울특별시 동작구 남부순환로 지하2089',
-        station: {line: 2, name: '사당'},
-        fee: 2000,
-        size: '중형',
-        date: '2022/10/16',
-        time: '12:12:13',
-      };
-      this.$store.commit('setUserStore', data);
+    testGetStore(userId) {
+      // issue.B 역정보 추가
+      return this.$axios.get(`/user/store/${userId}`);
     },
-    getHistory() {
-      // 이용 내역 정보 요청
-      this.$store.commit('setUserHistory', history);
+    testGetHistory(userId) {
+      // issue.B size 추가
+      return this.$axios.get(`/user/history/${userId}`);
+    },
+    mapUserStore(store) {
+      return {
+        location: '서울특별시 동작구 남부순환로 지하2089',
+        station: store?.station ?? '?',
+        storageId: store.storageId,
+        storeId: store.storeId,
+        size:
+          store.storageSize == 'MID'
+            ? '중형'
+            : store.storageSize == 'SMALL'
+            ? '소형'
+            : '대형',
+        date: `${store.timestamp.slice(0, 4)}/${store.timestamp.slice(
+          5,
+          7,
+        )}/${store.timestamp.slice(8, 10)}`,
+        time: store.timestamp.slice(11, 19),
+        fee: store.price,
+      };
+    },
+    mapUserHistory(history) {
+      return history.map((el) => {
+        return {
+          orderId: el?.orderId ?? null,
+          storeId: el?.storeId ?? null,
+          deliveryId: el?.deliveryId ?? null,
+          place: [el.startStationName, el.endStationName],
+          price: el.price,
+          date: el.createAt.slice(5, 10),
+          urn: el.orderStat == 'WAIT' ? 'active' : 'end',
+          hisType: el.orderStat == 'WAIT' ? 'active' : 'end',
+          type: el?.orderId
+            ? '맡길게요'
+            : el?.storeId
+            ? '보관할게요'
+            : '옮길게요',
+          size: el?.size ?? '?',
+        };
+      });
+    },
+    setUserData() {
+      Promise.all([this.testGetStore(0), this.testGetHistory(1)])
+        .then((responses) => {
+          console.log(this.mapUserStore(responses[0].data));
+          console.log(this.mapUserHistory(responses[1].data));
+          this.$store.commit(
+            'setUserStore',
+            this.mapUserStore(responses[0].data),
+          );
+          this.$store.commit(
+            'setUserHistory',
+            this.mapUserHistory(responses[1].data),
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
-  created() {
-    this.getStore();
-    this.getHistory();
+  mounted() {
+    this.setUserData();
   },
 };
 </script>

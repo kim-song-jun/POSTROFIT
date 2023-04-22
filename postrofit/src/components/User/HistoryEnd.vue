@@ -22,18 +22,33 @@ import noticeBox from '../noticeBox.vue';
 export default {
   data() {
     return {
-      historyDetail: {},
+      historyDetail: {
+        startStation: '?',
+        endStation: '?',
+      },
     };
   },
   methods: {
     getHistoryDetail() {
       // 출발역, 도착역 또는 보관역 정보 서버에 요청
-      const data = {
-        startStation: '사당',
-        endStation: '강남',
-        selectStation: '사당',
-      };
-      return data;
+      const reqData = this.$store.state.userHistoryDetail?.orderId
+        ? {orderId: this.$store.state.userHistoryDetail.orderId}
+        : this.$store.state.userHistoryDetail?.storeId
+        ? {storeId: this.$store.state.userHistoryDetail.storeId}
+        : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
+      this.$axios
+        .post('/user/history/detail', reqData)
+        .then((response) => {
+          this.historyDetail = {
+            ...this.historyDetail,
+            price: response.data.price,
+            startStation: this.$store.state.userHistoryDetail.place[0],
+            endStation: this.$store.state.userHistoryDetail.place[1],
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   created() {

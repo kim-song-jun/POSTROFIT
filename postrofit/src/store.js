@@ -21,6 +21,9 @@ const store = createStore({
       storage: {locker: []},
       // 이용하는 서비스 구분
       serviceType: '',
+      userStore: {},
+      userHistory: [],
+      userHistoryDetail: {},
     };
   },
   mutations: {
@@ -66,6 +69,15 @@ const store = createStore({
     },
     setServiceType(state, serviceeType) {
       state.serviceType = serviceeType;
+    },
+    setUserStore(state, userStore) {
+      state.userStore = {...userStore};
+    },
+    setUserHistory(state, userHistory) {
+      state.userHistory = [...userHistory];
+    },
+    setUserHistoryDetail(state, userHistoryDetail) {
+      state.userHistoryDetail = {...userHistoryDetail};
     },
   },
   actions: {
