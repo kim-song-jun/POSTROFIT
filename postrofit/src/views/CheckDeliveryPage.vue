@@ -138,6 +138,12 @@ export default {
           console.log(error);
         });
     },
+          this.$store.commit('setDeliveryData', {
+            ...this.$store.state.deliveryData,
+            size: response.data.size,
+            cost: response.data.price,
+            orderId: response.data.orderId,
+          });
   },
   components: {
     progressMenu,

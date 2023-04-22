@@ -86,6 +86,7 @@ export default {
     setOrderData(isSmall) {
       // 선택된 보관함 정보 store의 orderData에 저장
       this.$store.commit('setOrderData', {
+        ...this.$store.state.orderData,
         size: isSmall ? 'SMALL' : 'MID',
         cost: isSmall ? this.cost.smallCost : this.cost.midCost,
       });

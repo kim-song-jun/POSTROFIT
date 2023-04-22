@@ -18,7 +18,7 @@ const store = createStore({
       // 보관할게요 기능에 필요한 데이터
       storeData: {},
       // 보관함을 그리는데 필요한 데인터
-      storage: null,
+      storage: {locker: []},
       // 이용하는 서비스 구분
       serviceType: '',
     };
@@ -53,13 +53,13 @@ const store = createStore({
       console.log(state.LINE2_JSON);
     },
     setDeliveryData(state, newData) {
-      state.deliveryData = {...state.deliveryData, ...newData};
+      state.deliveryData = {...newData};
     },
     setOrderData(state, newData) {
-      state.orderData = {...state.orderData, ...newData};
+      state.orderData = {...newData};
     },
     setStoreData(state, newData) {
-      state.storeData = {...state.storeData, ...newData};
+      state.storeData = {...newData};
     },
     setStorage(state, storage) {
       state.storage = {...storage};

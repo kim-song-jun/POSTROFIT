@@ -70,15 +70,19 @@ export default {
 
       this.lockerflat[index].storageStat = '선택';
       if (this.serviceType == '맡길게요')
-        this.$store.commit(
-          'setOrderData',
-          this.findSelectedLocker(this.lockerflat),
-        );
+        this.$store.commit('setOrderData', {
+          ...this.$store.state.orderData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
       if (this.serviceType == '보관할게요')
-        this.$store.commit(
-          'setStoreData',
-          this.findSelectedLocker(this.lockerflat),
-        );
+        this.$store.commit('setStoreData', {
+          ...this.$store.state.storeData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
+        this.$store.commit('setDeliveryData', {
+          ...this.$store.state.deliveryData,
+          ...this.findLocker(this.lockerflat, 'WAIT'),
+        });
     },
     setRowSpan(storageSize) {
       if (storageSize == 'Controller') {
