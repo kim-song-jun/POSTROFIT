@@ -18,9 +18,12 @@ const store = createStore({
       // 보관할게요 기능에 필요한 데이터
       storeData: {},
       // 보관함을 그리는데 필요한 데인터
-      storage: null,
+      storage: {locker: []},
       // 이용하는 서비스 구분
       serviceType: '',
+      userStore: {},
+      userHistory: [],
+      userHistoryDetail: {},
     };
   },
   mutations: {
@@ -53,19 +56,28 @@ const store = createStore({
       console.log(state.LINE2_JSON);
     },
     setDeliveryData(state, newData) {
-      state.deliveryData = {...state.deliveryData, ...newData};
+      state.deliveryData = {...newData};
     },
     setOrderData(state, newData) {
-      state.orderData = {...state.orderData, ...newData};
+      state.orderData = {...newData};
     },
     setStoreData(state, newData) {
-      state.storeData = {...state.storeData, ...newData};
+      state.storeData = {...newData};
     },
     setStorage(state, storage) {
       state.storage = {...storage};
     },
     setServiceType(state, serviceeType) {
       state.serviceType = serviceeType;
+    },
+    setUserStore(state, userStore) {
+      state.userStore = {...userStore};
+    },
+    setUserHistory(state, userHistory) {
+      state.userHistory = [...userHistory];
+    },
+    setUserHistoryDetail(state, userHistoryDetail) {
+      state.userHistoryDetail = {...userHistoryDetail};
     },
   },
   actions: {
@@ -75,6 +87,12 @@ const store = createStore({
       context.commit('setSelectStation', {});
       context.commit('setBottomMenuOpen', false);
       context.commit('setBottomLockerOpen', false);
+    },
+    initServiceData(context) {
+      context.commit('setDeliveryData', {});
+      context.commit('setOrderData', {});
+      context.commit('setStoreData', {});
+      context.commit('setStorage', {locker: []});
     },
   },
 });

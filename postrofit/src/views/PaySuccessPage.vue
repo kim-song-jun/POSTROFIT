@@ -7,9 +7,8 @@
     />
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
-      <div class="paySuccessPage_message">결제 완료</div>
-      <!-- issue.F 여기에 사이즈를 알려줄 필요가 있나?-->
-      <div class="paySuccessPage_info">대형 4시간</div>
+      <div class="paySuccessPage_message">{{ title }}</div>
+      <div class="paySuccessPage_info">{{ getSize(size) }} {{ time }}</div>
       <div class="progressMenu_container">
         <div class="progressMenu_graybar" />
         <div class="progressMenu_menu">
@@ -34,7 +33,7 @@
           장소, 사이즈, 이용금액, 주의사항 확인
         </div>
       </div>
-      <noticeBox class="paySuccessPage_noticeBox"></noticeBox>
+      <noticeBox class="paySuccessPage_noticeBox" />
       <button class="paySuccessPage_button" @click="testOpenLockerModal">
         보관함 열기
       </button>
@@ -50,7 +49,11 @@ export default {
   data() {
     return {
       lockerModalOpen: false,
-      lockerInfo: null,
+      lockerInfo: {
+        stationName: '?',
+        storageNum: '?',
+        password: '?',
+      },
       progress: ['출발역 선택', '물품 선택', '보관함 열기', '배송 중'],
     };
   },
@@ -67,47 +70,68 @@ export default {
     serviceType() {
       return this.$store.state.serviceType;
     },
+    size() {
+      return this.serviceType == '맡길게요'
+        ? this.$store.state.orderData.size
+        : this.serviceType == '옮길게요'
+        ? this.$store.state.deliveryData.size
+        : this.$store.state.storeData.size;
+    },
+    time() {
+      return this.serviceType == '보관할게요'
+        ? this.$store.state.storeData.time
+        : null;
+    },
+    title() {
+      return this.serviceType == '옮길게요' ? '배송 시작' : '결제 완료';
+    },
   },
   methods: {
-    getStationName() {
-      return this.serviceType == '맡길게요'
-        ? this.startStation.name
-        : this.serviceType == '옮길게요'
-        ? this.endStation.name
-        : this.selectStation.name;
+    getSize(size) {
+      if (size == 'SMALL') return '소형';
+      if (size == 'MID') return '중형';
+      if (size == 'BIG') return '대형';
     },
     move2Main() {
       this.lockerModalOpen = false;
       // 하단 메뉴 창 닫기
       // issue.F 자연스럽지 못한 애니메이션
       this.$store.dispatch('initStation');
+      this.$store.dispatch('initServiceData');
       this.$router.push('/MainPage');
     },
     testOpenLockerModal() {
       // 보관함 비밀번호 받아오기
-      this.lockerInfo = {
-        stationName: this.getStationName(), // issue.B 여기서도 이름은 필요한지 잘 모르겠음
-        storageNum: 4,
-        password: 4456,
-      };
-      // if (this.serviceType == '맡길게요')
-      //   this.$axios
-      //     .get('/order/storage/info/user_id')
-      //     .then((response) => {
-      //       this.lockerInfo = response.data;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // if (this.serviceType == '보관할게요')
-      //   this.$axios
-      //     .get('/store/fee/user_id')
-      //     .then((response) => {
-      //       this.lockerInfo = response.data;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
+      const userId = 0;
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/info/${userId}`)
+          .then((response) => {
+            this.lockerInfo = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(
+            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
+          )
+          .then((response) => {
+            this.lockerInfo = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get(`/store/password/${userId}`)
+          .then((response) => {
+            this.lockerInfo = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       this.lockerModalOpen = true;
     },
     openLockerModal() {
@@ -122,7 +146,7 @@ export default {
           });
       // if (this.serviceType == '옮길게요')
       //   this.$axios
-      //     .get('/delivery/storage/info/user_id')
+      //     .get( `/delivery/take/password/${this.$store.state.startStation}/${this.$store.state.deliveryData.selectedLocker.storageNumber}`)
       //     .then((response) => {
       //       this.lockerInfo = response.data;
       //     })

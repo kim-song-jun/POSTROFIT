@@ -11,20 +11,31 @@
         <div
           class="movePost_sizebox"
           :class="isSmallBoxClick"
-          @click="selectBoxSize(true)"
+          @click="
+            selectBoxSize(true);
+            setOrderData(true);
+          "
         >
           <div class="movePost_sizebox_type">소형</div>
-          <div class="movePost_smallbox_num">4개</div>
-          <div class="movePost_sizebox_price">{{ cost.smallCost }}원 / 개</div>
+          <div class="movePost_smallbox_num">{{ orderEmpty.smallCount }}개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.smallCost }}원
+            <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
         </div>
         <div
           class="movePost_sizebox"
           :class="isMiddleBoxClick"
-          @click="selectBoxSize(false)"
+          @click="
+            selectBoxSize(false);
+            setOrderData(false);
+          "
         >
           <div class="movePost_sizebox_type">중형</div>
-          <div class="movePost_middlebox_num">4개</div>
-          <div class="movePost_sizebox_price">{{ cost.midCost }}원 / 개</div>
+          <div class="movePost_middlebox_num">{{ orderEmpty.midCount }}개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.midCost }}원 <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
         </div>
       </div>
       <progressMenu />
@@ -45,7 +56,8 @@ export default {
     return {
       smallBoxClicked: true,
       middleBoxClicked: false,
-      cost: {},
+      cost: {smallCost: '?', midCost: '?'},
+      orderEmpty: {smallCount: '?', midCount: '?'},
     };
   },
   computed: {
@@ -71,21 +83,31 @@ export default {
       this.smallBoxClicked = isSmall;
       this.middleBoxClicked = !isSmall;
     },
+    setOrderData(isSmall) {
+      // 선택된 보관함 정보 store의 orderData에 저장
+      this.$store.commit('setOrderData', {
+        ...this.$store.state.orderData,
+        size: isSmall ? 'SMALL' : 'MID',
+        cost: isSmall ? this.cost.smallCost : this.cost.midCost,
+      });
+    },
+    testGetOrderEmpty() {
+      return this.$axios.get(`/order/empty/테스트역1`);
+    },
     testGetCost() {
-      // issue.B 개수 정보도 필요
-      this.$axios
-        .get('/order/cost/테스트역1/테스트역2')
-        .then((response) => {
-          console.log(response);
-          this.cost = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      return this.$axios.get('/order/cost/테스트역1/테스트역2');
     },
   },
   mounted() {
-    this.testGetCost();
+    Promise.all([this.testGetOrderEmpty(), this.testGetCost()])
+      .then((values) => {
+        this.orderEmpty = values[0].data;
+        this.cost = values[1].data;
+        this.setOrderData(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   components: {
     ProgressMenu,
@@ -159,6 +181,7 @@ export default {
   margin: 0vh 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
+  color: #6fbb69;
 }
 .movePost_sizebox_unclicked {
   font-size: 10px;
@@ -209,8 +232,10 @@ export default {
   text-align: left;
   font: normal normal bold 1.5em Roboto;
   letter-spacing: 0px;
-  color: #707070;
   opacity: 1;
+}
+.movePost_sizebox_gray {
+  color: #707070;
 }
 .movePost_button {
   border: none;

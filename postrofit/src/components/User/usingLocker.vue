@@ -1,14 +1,10 @@
 <template>
   <div class="usingLocker_container" @click="$router.push('/UserPage/locker')">
     <div class="usingLocker_about">
-      <div class="usingLocker_line_circle usingLocker_line_text">
-        {{ userStore.station.line }}
-      </div>
+      <div class="usingLocker_line_circle usingLocker_line_text">2</div>
       <div class="usingLocker_textbox2">
         <div class="userHome_text2">{{ userStore.location }}</div>
-        <div class="userHome_text3">
-          {{ userStore.station.line }}호선 {{ userStore.station.name }}
-        </div>
+        <div class="userHome_text3">2호선 {{ userStore.station }}</div>
       </div>
       <div class="usingLocker_arrow">
         <div class="usingLocker_arrow_top"></div>

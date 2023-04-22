@@ -13,7 +13,7 @@
         )}; height: ${setRowHeight(
           item.storageSize,
           46,
-        )}; background-color: ${setColor(item.storageStat)}`"
+        )}; background-color: ${setColor(item.storageStat, item.storageSize)}`"
         @click="setSelectBox(index)"
       >
         <div style="margin: 5px">{{ item.storageNumber }}</div>
@@ -25,9 +25,6 @@
 <script>
 export default {
   computed: {
-    locker() {
-      return this.$store.state.storage.locker;
-    },
     columns() {
       return Math.max(
         ...this.$store.state.storage.locker.map((el) => el.length),
@@ -42,35 +39,66 @@ export default {
     serviceType() {
       return this.$store.state.serviceType;
     },
+    orderData() {
+      return this.$store.state.orderData;
+    },
   },
   methods: {
-    setSelectBox(index) {
-      // check box storageStat '사용가능' & change storageStat '사용가능' > '선택'
-      if (this.lockerflat[index].storageStat != 'EMPTY') {
-        return;
-      }
-      this.lockerflat.forEach((item) => {
-        if (item.storageStat == '선택') {
-          item.storageStat = 'EMPTY';
-        }
-      });
-      this.lockerflat[index].storageStat = '선택';
-
-      // store changed lockerInfo data
-      // this.$store.commit('setStorage', this.lockerInfo);
-
-      // store selected locker data
+    findLocker(lockerflat, storageStat) {
+      // 선택된 locker 정보 저장
       let selectedLocker = {};
-      this.locker.forEach((items) => {
-        items.forEach((item) => {
-          if (item.storageStat == '선택')
-            selectedLocker = {selectedLocker: item};
-        });
+      lockerflat.forEach((item) => {
+        if (item.storageStat == storageStat)
+          selectedLocker = {selectedLocker: item};
       });
-      if (this.serviceType == '맡길게요')
-        this.$store.commit('setOrderData', selectedLocker);
-      if (this.serviceType == '보관할게요')
-        this.$store.commit('setStoreData', selectedLocker);
+      return selectedLocker;
+    },
+    setSelectBox(index) {
+      // 보관함 상태가 EMPTY 이고, size가 앞에서 고른 사이즈와 동일할 때
+      if (this.serviceType == '맡길게요') {
+        if (
+          !(
+            this.lockerflat[index].storageStat == 'EMPTY' &&
+            this.lockerflat[index].storageSize == this.orderData.size
+          )
+        ) {
+          return;
+        }
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
+
+        this.lockerflat[index].storageStat = '선택';
+        this.$store.commit('setOrderData', {
+          ...this.$store.state.orderData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
+      }
+      if (this.serviceType == '보관할게요') {
+        if (this.lockerflat[index].storageStat != 'EMPTY') {
+          return;
+        }
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
+
+        this.lockerflat[index].storageStat = '선택';
+        this.$store.commit('setStoreData', {
+          ...this.$store.state.storeData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
+      }
+    },
+    setDeliveryData() {
+      if (this.serviceType == '옮길게요')
+        this.$store.commit('setDeliveryData', {
+          ...this.$store.state.deliveryData,
+          ...this.findLocker(this.lockerflat, 'WAIT'),
+        });
     },
     setRowSpan(storageSize) {
       if (storageSize == 'Controller') {
@@ -100,14 +128,29 @@ export default {
         return `${height * 4 + 30}px`;
       }
     },
-    setColor(storageStat) {
+    setColor(storageStat, storageSize) {
+      // 선택가능
+      if (
+        this.serviceType == '맡길게요' &&
+        storageStat == 'EMPTY' &&
+        storageSize == this.orderData.size
+      )
+        return '#5E62D1';
+      if (this.serviceType == '보관할게요' && storageStat == 'EMPTY')
+        return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
-      if (storageStat == 'STORE') return '#707070'; // 사용 중 STORE
-      if (storageStat == 'WAIT') return '#707070';
+      if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
+      // 배정된 배달 보관함
+      if (this.serviceType == '옮길게요' && storageStat == 'WAIT')
+        return '#D04040';
+      if (storageStat == 'WAIT') return '#CFCFCF';
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
       if (storageStat == '내 보관함') return '#FFC702';
     },
+  },
+  mounted() {
+    this.setDeliveryData();
   },
 };
 </script>
