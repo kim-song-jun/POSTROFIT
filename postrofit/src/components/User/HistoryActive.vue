@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="locationBox_container">
-      <div class="locationBoxActive_src locationBox_clicked">
+      <div class="locationBoxActive_src" :class="isClick(activeStat)">
         <div class="locationBoxActive_text1">출발</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.startStation }}</span>
@@ -30,7 +30,7 @@
       <div class="locationBox_arrow_container">
         <img class="locationBox_arrow" src="@/assets/images/arrow.png" alt="" />
       </div>
-      <div class="locationBoxActive_dst">
+      <div class="locationBoxActive_dst" :class="isClick(!activeStat)">
         <div class="locationBoxActive_text1">도착</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.endStation }}</span>
@@ -63,9 +63,14 @@ export default {
         startStation: '?',
         endStation: '?',
       },
+      activeStat: true,
     };
   },
+  computed: {},
   methods: {
+    isClick(activeStat) {
+      return activeStat ? 'locationBox_clicked' : '';
+    },
     getHistoryDetail() {
       // 출발역, 도착역 또는 보관역 정보 서버에 요청
       const reqData = this.$store.state.userHistoryDetail?.orderId
