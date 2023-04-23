@@ -56,6 +56,7 @@ export default {
         station: store?.station ?? '?',
         storageId: store.storageId,
         storeId: store.storeId,
+        station: store.stationName,
         size:
           store.storageSize == 'MID'
             ? '중형'
