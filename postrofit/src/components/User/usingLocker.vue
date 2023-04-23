@@ -1,5 +1,5 @@
 <template>
-  <div class="usingLocker_container" @click="$router.push('/UserPage/locker')">
+  <div class="usingLocker_container" @click="move2LockerDetail">
     <div class="usingLocker_about">
       <div class="usingLocker_line_circle usingLocker_line_text">2</div>
       <div class="usingLocker_textbox2">
@@ -35,6 +35,12 @@ export default {
   computed: {
     userStore() {
       return this.$store.state.userStore;
+    },
+  },
+  methods: {
+    move2LockerDetail() {
+      this.$store.commit('setServiceType', '내보관함');
+      this.$router.push('/UserPage/locker');
     },
   },
 };
