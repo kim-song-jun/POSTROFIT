@@ -38,7 +38,14 @@ export default {
   methods: {
     openLockerModal() {
       this.lockerModalOpen = true;
-      this.lockerInfo = this.$store.state.userStore.storagePasswordDTO;
+      if (this.$store.state.serviceType == '내보관함')
+        this.lockerInfo = this.$store.state.userStore.storagePasswordDTO;
+      if (this.$store.state.serviceType == '내이용내역')
+        this.lockerInfo = {
+          stationName: this.$store.state.userHistoryDetail.stationName,
+          storageNum: this.$store.state.userHistoryDetail.storageNum,
+          password: this.$store.state.userHistoryDetail.password,
+        };
     },
   },
   components: {
