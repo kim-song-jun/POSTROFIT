@@ -78,15 +78,33 @@ export default {
         : this.$store.state.userHistoryDetail?.storeId
         ? {storeId: this.$store.state.userHistoryDetail.storeId}
         : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
-      this.$axios
-        .post('/user/history/detail', reqData)
-        .then((response) => {
+      return this.$axios.post('/user/history/detail', reqData);
+    },
+    getPassword() {
+      let userId = 0;
+      if (this.activeStat) {
+        let storageNum = 2;
+        return this.$axios.get(
+          `/delivery/take/password/${this.$store.state.userHistoryDetail.place[1]}/${storageNum}`,
+        );
+      }
+      return this.$axios.get(
+        `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+      );
+    },
+    setHistoryDetail() {
+      Promise.all([this.getHistoryDetail(), this.getPassword()])
+        .then((responses) => {
           this.historyDetail = {
             ...this.historyDetail,
-            price: response.data.price,
+            price: responses[0].data.price,
             startStation: this.$store.state.userHistoryDetail.place[0],
             endStation: this.$store.state.userHistoryDetail.place[1],
           };
+          this.$store.commit('setUserHistoryDetail', {
+            ...this.$store.state.userHistoryDetail,
+            ...responses[1].data,
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -94,7 +112,7 @@ export default {
     },
   },
   created() {
-    this.getHistoryDetail();
+    this.setHistoryDetail();
   },
   components: {
     progressMenu,
