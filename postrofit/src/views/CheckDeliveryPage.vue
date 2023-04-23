@@ -86,39 +86,21 @@ export default {
     },
     makeOrder(userId) {
       const storageId = this.$store.state.orderData.selectedLocker.storageId;
-      const storageNum =
-        this.$store.state.orderData.selectedLocker.storageNumber;
       const endStationName = '테스트역2';
-      const reqData = {
-        userId: userId,
-        storageId: storageId,
-        endStationName: endStationName,
-      };
-      console.log(JSON.stringify(reqData));
       this.$axios
-        .get(`/order/make/${userId}/${endStationName}/${storageNum}`)
-        .then((res) => {
-          console.log(res);
-          if (res.status == 200)
+        .post('/order/make', {
+          userId: userId,
+          storageId: storageId,
+          endStationName: endStationName,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status == 200)
             this.$router.push('/SelectPage/paySuccessPage');
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
         });
-      // this.$axios
-      //   .post('/order/make', {
-      //     userId: userId,
-      //     storageId: storageId,
-      //     endStationName: endStationName,
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //     if (response.status == 200)
-      //       this.$router.push('/SelectPage/paySuccessPage');
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
     },
     takeDelivery(userId) {
       // order_id는 어디서 받아오나? 0,1
