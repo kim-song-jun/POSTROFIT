@@ -15,7 +15,7 @@
         2호선 {{ userStore.station }}
       </div>
     </div>
-    <!-- <lockerInfo /> -->
+    <lockerInfo />
     <div class="historyLocker_detail_container">
       <div class="userHome_text">
         요금:
@@ -54,13 +54,37 @@ export default {
     },
   },
   methods: {
+    makeLockerByData(locker) {
+      // 한 줄에 5개의 보관함이 있다고 가정
+      let newLocker = [];
+      let row = [];
+      if (Array.isArray(locker))
+        locker.forEach((el, i) => {
+          row.push(el);
+          if ((i + 1) % 5 == 0 || i + 1 == locker.length) {
+            newLocker.push(row);
+            if (
+              row.find((e) => e.storageSize == 'MID') ||
+              row.find((e) => e.storageSize == 'BIG')
+            )
+              newLocker.push([]);
+            row = [];
+          }
+        });
+      return newLocker;
+    },
     setUserStore() {
       // 보관함 데이터 서버 요청
       const storageId = this.$store.state.userStore.storageId;
       this.$axios.get(`/user/store/storage/${storageId}`).then((response) => {
         this.$store.commit('setUserStore', {
           ...this.$store.state.userStore,
-          ...response.data,
+          storageStatDTO: response.data.storageStatDTO,
+          storagePasswordDTO: response.data.storagePasswordDTO,
+        });
+        console.log(this.makeLockerByData(response.data.storageStatDTOS));
+        this.$store.commit('setStorage', {
+          locker: this.makeLockerByData(response.data.storageStatDTOS),
         });
       });
     },

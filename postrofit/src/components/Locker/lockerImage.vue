@@ -139,6 +139,9 @@ export default {
       if (this.serviceType == '보관할게요' && storageStat == 'EMPTY')
         return '#5E62D1';
       if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
+      // 내 보관함 확인
+      if (this.serviceType == '내보관함' && storageStat == 'STORE')
+        return '#FFC702';
       if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
       // 배정된 배달 보관함
       if (this.serviceType == '옮길게요' && storageStat == 'WAIT')
@@ -146,7 +149,6 @@ export default {
       if (storageStat == 'WAIT') return '#CFCFCF';
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
-      if (storageStat == '내 보관함') return '#FFC702';
     },
   },
   mounted() {

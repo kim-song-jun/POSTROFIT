@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="locationBox_container">
-      <div class="locationBoxActive_src locationBox_clicked">
+      <div class="locationBoxActive_src" :class="isClick(activeStat)">
         <div class="locationBoxActive_text1">출발</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.startStation }}</span>
@@ -30,7 +30,7 @@
       <div class="locationBox_arrow_container">
         <img class="locationBox_arrow" src="@/assets/images/arrow.png" alt="" />
       </div>
-      <div class="locationBoxActive_dst">
+      <div class="locationBoxActive_dst" :class="isClick(!activeStat)">
         <div class="locationBoxActive_text1">도착</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.endStation }}</span>
@@ -63,9 +63,14 @@ export default {
         startStation: '?',
         endStation: '?',
       },
+      activeStat: true,
     };
   },
+  computed: {},
   methods: {
+    isClick(activeStat) {
+      return activeStat ? 'locationBox_clicked' : '';
+    },
     getHistoryDetail() {
       // 출발역, 도착역 또는 보관역 정보 서버에 요청
       const reqData = this.$store.state.userHistoryDetail?.orderId
@@ -73,15 +78,33 @@ export default {
         : this.$store.state.userHistoryDetail?.storeId
         ? {storeId: this.$store.state.userHistoryDetail.storeId}
         : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
-      this.$axios
-        .post('/user/history/detail', reqData)
-        .then((response) => {
+      return this.$axios.post('/user/history/detail', reqData);
+    },
+    getPassword() {
+      let userId = 0;
+      if (this.activeStat) {
+        let storageNum = 2;
+        return this.$axios.get(
+          `/delivery/take/password/${this.$store.state.userHistoryDetail.place[1]}/${storageNum}`,
+        );
+      }
+      return this.$axios.get(
+        `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+      );
+    },
+    setHistoryDetail() {
+      Promise.all([this.getHistoryDetail(), this.getPassword()])
+        .then((responses) => {
           this.historyDetail = {
             ...this.historyDetail,
-            price: response.data.price,
+            price: responses[0].data.price,
             startStation: this.$store.state.userHistoryDetail.place[0],
             endStation: this.$store.state.userHistoryDetail.place[1],
           };
+          this.$store.commit('setUserHistoryDetail', {
+            ...this.$store.state.userHistoryDetail,
+            ...responses[1].data,
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -89,7 +112,7 @@ export default {
     },
   },
   created() {
-    this.getHistoryDetail();
+    this.setHistoryDetail();
   },
   components: {
     progressMenu,

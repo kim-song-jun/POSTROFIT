@@ -58,6 +58,7 @@ export default {
         : 'historyAbout_cancel';
     },
     move2HistoryDetail(history) {
+      this.$store.commit('setServiceType', '내이용내역');
       this.$store.commit('setUserHistoryDetail', history);
       this.$router.push(`/UserPage/${history.urn}`);
     },

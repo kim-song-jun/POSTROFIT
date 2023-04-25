@@ -5,7 +5,7 @@
         class="topMenu_user_circle"
         src="../assets/images/user.png"
         alt=""
-        @click="$router.push('/UserPage')"
+        @click="move2UserPage"
       />
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
@@ -24,7 +24,11 @@
 <script>
 export default {
   props: {},
-  methods: {},
+  methods: {
+    move2UserPage() {
+      this.$router.push('/UserPage');
+    },
+  },
 };
 </script>
 

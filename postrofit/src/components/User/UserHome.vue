@@ -56,6 +56,7 @@ export default {
         station: store?.station ?? '?',
         storageId: store.storageId,
         storeId: store.storeId,
+        station: store.stationName,
         size:
           store.storageSize == 'MID'
             ? '중형'
@@ -86,15 +87,15 @@ export default {
             : el?.storeId
             ? '보관할게요'
             : '옮길게요',
-          size: el?.size ?? '?',
+          size: el?.size == 'MID' ? '중형' : el?.size == 'SMALL' ? '소형' : '?',
         };
       });
     },
     setUserData() {
       Promise.all([this.testGetStore(0), this.testGetHistory(1)])
         .then((responses) => {
-          console.log(this.mapUserStore(responses[0].data));
-          console.log(this.mapUserHistory(responses[1].data));
+          console.log(responses[0].data);
+          console.log(responses[1].data);
           this.$store.commit(
             'setUserStore',
             this.mapUserStore(responses[0].data),
