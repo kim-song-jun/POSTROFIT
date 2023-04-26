@@ -10,30 +10,31 @@
       <div class="historyLocker_line">2</div>
       <div class="historyLocker_station_name">
         <div class="historyLocker_station_location">
-          서울특별시 동작구 남부순환로 지하2089
+          {{ userStore.location }}
         </div>
-        2호선 사당A
+        2호선 {{ userStore.station }}
       </div>
     </div>
-    <lockerInfoHistory></lockerInfoHistory>
+    <lockerInfo />
     <div class="historyLocker_detail_container">
       <div class="userHome_text">
         요금:
-        <span class="userHome_point_text">2000원</span> / 4시간
+        <span class="userHome_point_text">{{ userStore.fee }}원</span> / 4시간
       </div>
       <div class="usingLocker_empty"></div>
       <div class="userHome_text">
         사이즈:
-        <span class="userHome_point_text">중형</span>
+        <span class="userHome_point_text">{{ userStore.size }}</span>
       </div>
       <div class="usingLocker_empty2"></div>
       <div class="userHome_text4">보관 기간</div>
       <div class="userHome_text3 usingLocker_time">
-        2022/10/16 <span class="userHome_point_text">12:12:13</span> ~
+        {{ userStore.date }}
+        <span class="userHome_point_text">{{ userStore.time }}</span> ~
       </div>
       <div class="userHome_text4 usingLocker_term">현재까지</div>
     </div>
-    <noticeBox class="historyLocker_noticeBox"></noticeBox>
+    <noticeBox class="historyLocker_noticeBox" />
     <div class="movePost_button_container">
       <button class="movePost_button" @click="$emit('openLockerModal')">
         보관함 열기
@@ -43,12 +44,56 @@
 </template>
 
 <script>
-import lockerInfoHistory from '../lockerInfoHistory.vue';
+import lockerInfo from '../lockerInfo.vue';
 import noticeBox from '../noticeBox.vue';
 
 export default {
+  computed: {
+    userStore() {
+      return this.$store.state.userStore;
+    },
+  },
+  methods: {
+    makeLockerByData(locker) {
+      // 한 줄에 5개의 보관함이 있다고 가정
+      let newLocker = [];
+      let row = [];
+      if (Array.isArray(locker))
+        locker.forEach((el, i) => {
+          row.push(el);
+          if ((i + 1) % 5 == 0 || i + 1 == locker.length) {
+            newLocker.push(row);
+            if (
+              row.find((e) => e.storageSize == 'MID') ||
+              row.find((e) => e.storageSize == 'BIG')
+            )
+              newLocker.push([]);
+            row = [];
+          }
+        });
+      return newLocker;
+    },
+    setUserStore() {
+      // 보관함 데이터 서버 요청
+      const storageId = this.$store.state.userStore.storageId;
+      this.$axios.get(`/user/store/storage/${storageId}`).then((response) => {
+        this.$store.commit('setUserStore', {
+          ...this.$store.state.userStore,
+          storageStatDTO: response.data.storageStatDTO,
+          storagePasswordDTO: response.data.storagePasswordDTO,
+        });
+        console.log(this.makeLockerByData(response.data.storageStatDTOS));
+        this.$store.commit('setStorage', {
+          locker: this.makeLockerByData(response.data.storageStatDTOS),
+        });
+      });
+    },
+  },
+  mounted() {
+    this.setUserStore();
+  },
   components: {
-    lockerInfoHistory,
+    lockerInfo,
     noticeBox,
   },
 };

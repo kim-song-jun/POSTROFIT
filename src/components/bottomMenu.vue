@@ -1,13 +1,8 @@
 <template>
   <div class="bottomMenu_container">
-    <MenuBar></MenuBar>
+    <MenuBar />
     <div class="bottomMenu_content">
-      <div
-        class="bottomMenu_column"
-        @click="
-          $router.push({path: '/SelectPage', query: {serviceType: '맡길게요'}})
-        "
-      >
+      <div class="bottomMenu_column" @click="move2SelectPage">
         <div class="bottomMenu_source">{{ this.startStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
@@ -19,21 +14,17 @@
             맡길게요
           </div>
           <div class="bottomMenu_post_content2">
-            <span class="bottomMenu_size">중형 5개</span>
-            <span class="bottomMenu_size">소형 10개</span>
+            <span class="bottomMenu_size"
+              >중형 {{ orderEmpty.midCount }}개</span
+            >
+            <span class="bottomMenu_size"
+              >소형 {{ orderEmpty.smallCount }}개</span
+            >
           </div>
         </div>
       </div>
       <img class="bottomMenu_arrow" src="../assets/images/arrow.png" alt="" />
-      <div
-        class="bottomMenu_column"
-        @click="
-          $router.push({
-            path: '/SelectPage/lockerPage',
-            query: {serviceType: '옮길게요'},
-          })
-        "
-      >
+      <div class="bottomMenu_column" @click="move2LockerPage">
         <div class="bottomMenu_destination">{{ this.endStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
@@ -45,8 +36,12 @@
             옮길게요
           </div>
           <div class="bottomMenu_post_content2">
-            <span class="bottomMenu_size">중형 5개</span>
-            <span class="bottomMenu_size">소형 10개</span>
+            <span class="bottomMenu_size"
+              >중형 {{ deliveryEmpty.midCount }}개</span
+            >
+            <span class="bottomMenu_size"
+              >소형 {{ deliveryEmpty.smallCount }}개</span
+            >
           </div>
         </div>
       </div>
@@ -58,8 +53,11 @@
 import MenuBar from './MenuBar.vue';
 
 export default {
-  components: {
-    MenuBar,
+  data() {
+    return {
+      orderEmpty: {smallCount: '?', midCount: '?'},
+      deliveryEmpty: {smallCount: '?', midCount: '?'},
+    };
   },
   computed: {
     startStation() {
@@ -71,6 +69,35 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+  },
+  methods: {
+    move2SelectPage() {
+      this.$store.commit('setServiceType', '맡길게요');
+      this.$router.push('/SelectPage');
+    },
+    move2LockerPage() {
+      this.$store.commit('setServiceType', '옮길게요');
+      this.$router.push('/SelectPage/lockerPage');
+    },
+    testGetOrderEmpty() {
+      return this.$axios.get(`/order/empty/테스트역1`);
+    },
+    testGetDeliveryEmpty() {
+      return this.$axios.get(`/delivery/count/orders/테스트역1/테스트역2`);
+    },
+  },
+  mounted() {
+    Promise.all([this.testGetOrderEmpty(), this.testGetDeliveryEmpty()])
+      .then((value) => {
+        this.orderEmpty = value[0].data;
+        this.deliveryEmpty = value[1].data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  components: {
+    MenuBar,
   },
 };
 </script>

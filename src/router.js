@@ -34,11 +34,11 @@ const routes = [
         component: UserHome,
       },
       {
-        path: 'active/:id',
+        path: 'active',
         component: HistoryActive,
       },
       {
-        path: 'end/:id',
+        path: 'end',
         component: HistoryEnd,
       },
       {

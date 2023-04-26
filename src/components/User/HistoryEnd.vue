@@ -1,12 +1,16 @@
 <template>
-  <div class="historyActive_container">
-    <div class="historyActive_info_container">
-      <div class="historyActive_info userHome_text1">
+  <div class="historyEnd_container">
+    <div class="historyEnd_info_container">
+      <div class="historyEnd_info userHome_text1">
         이용내역
         <div class="userHome_text2">현재 이용하고 있는 정보</div>
       </div>
     </div>
-    <locationBox class="historyActive_locationBox"></locationBox>
+    <locationBox
+      class="historyEnd_locationBox"
+      :startStation="historyDetail.startStation"
+      :endStation="historyDetail.endStation"
+    />
     <noticeBox class="historyLocker_noticeBox"></noticeBox>
   </div>
 </template>
@@ -16,6 +20,40 @@ import locationBox from '../locationBox.vue';
 import noticeBox from '../noticeBox.vue';
 
 export default {
+  data() {
+    return {
+      historyDetail: {
+        startStation: '?',
+        endStation: '?',
+      },
+    };
+  },
+  methods: {
+    getHistoryDetail() {
+      // 출발역, 도착역 또는 보관역 정보 서버에 요청
+      const reqData = this.$store.state.userHistoryDetail?.orderId
+        ? {orderId: this.$store.state.userHistoryDetail.orderId}
+        : this.$store.state.userHistoryDetail?.storeId
+        ? {storeId: this.$store.state.userHistoryDetail.storeId}
+        : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
+      this.$axios
+        .post('/user/history/detail', reqData)
+        .then((response) => {
+          this.historyDetail = {
+            ...this.historyDetail,
+            price: response.data.price,
+            startStation: this.$store.state.userHistoryDetail.place[0],
+            endStation: this.$store.state.userHistoryDetail.place[1],
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  created() {
+    this.historyDetail = this.getHistoryDetail();
+  },
   components: {
     locationBox,
     noticeBox,
@@ -24,11 +62,11 @@ export default {
 </script>
 
 <style>
-.historyActive_container {
+.historyEnd_container {
   overflow: scroll;
   height: 92.2vh;
 }
-.historyActive_info_container {
+.historyEnd_info_container {
   display: flex;
   align-items: center;
   position: relative;
@@ -41,13 +79,18 @@ export default {
   box-shadow: 0px 3px 6px #00000029;
   opacity: 1;
 }
-.historyActive_info {
+.historyEnd_info {
   margin-left: 10.5vw;
 }
-.historyActive_locationBox {
+.historyEnd_locationBox {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9vw;
+  margin-bottom: 5vw;
 }
-.historyActive_locationBox .locationBox_text3 {
+.historyEnd_locationBox .locationBox_text3 {
   margin: 0vw auto;
 }
 .userHome_text1 {

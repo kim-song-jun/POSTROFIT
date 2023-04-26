@@ -1,50 +1,49 @@
 <template>
   <div class="movePost_container">
-    <div class="movePost_location_container">
-      <div class="movePost_location">{{ startStation.name }}</div>
-      <div class="movePost_location_sub">
-        서울특별시 동작구 남부순환로 지하2089
+    <div class="movePost_content">
+      <div class="movePost_location_container">
+        <div class="movePost_location">{{ startStation.name }}</div>
+        <div class="movePost_location_sub">
+          서울특별시 동작구 남부순환로 지하2089
+        </div>
       </div>
-    </div>
-    <div class="movePost_sizebox_container">
-      <div
-        class="movePost_sizebox"
-        :class="isSmallBoxClick"
-        @click="
-          smallBoxClicked = true;
-          middleBoxClicked = false;
-        "
-      >
-        <div class="movePost_sizebox_type">소형</div>
-        <div class="movePost_smallbox_num">4개</div>
-        <div class="movePost_sizebox_price">2000원 / 개</div>
+      <div class="movePost_sizebox_container">
+        <div
+          class="movePost_sizebox"
+          :class="isSmallBoxClick"
+          @click="
+            selectBoxSize(true);
+            setOrderData(true);
+          "
+        >
+          <div class="movePost_sizebox_type">소형</div>
+          <div class="movePost_smallbox_num">{{ orderEmpty.smallCount }}개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.smallCost }}원
+            <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
+        </div>
+        <div
+          class="movePost_sizebox"
+          :class="isMiddleBoxClick"
+          @click="
+            selectBoxSize(false);
+            setOrderData(false);
+          "
+        >
+          <div class="movePost_sizebox_type">중형</div>
+          <div class="movePost_middlebox_num">{{ orderEmpty.midCount }}개</div>
+          <div class="movePost_sizebox_price">
+            {{ cost.midCost }}원 <span class="movePost_sizebox_gray">/ 개</span>
+          </div>
+        </div>
       </div>
-      <div
-        class="movePost_sizebox"
-        :class="isMiddleBoxClick"
-        @click="
-          smallBoxClicked = false;
-          middleBoxClicked = true;
-        "
-      >
-        <div class="movePost_sizebox_type">중형</div>
-        <div class="movePost_middlebox_num">4개</div>
-        <div class="movePost_sizebox_price">2000원 / 개</div>
+      <progressMenu />
+      <div class="movePost_button_container">
+        <button class="movePost_button" @click="move2LockerPage">
+          맡길게요
+        </button>
       </div>
-    </div>
-    <progressMenu />
-    <div class="movePost_button_container">
-      <button
-        class="movePost_button"
-        @click="
-          $router.push({
-            path: '/SelectPage/lockerPage',
-            query: {serviceType: '맡길게요'},
-          })
-        "
-      >
-        맡길게요
-      </button>
     </div>
   </div>
 </template>
@@ -57,6 +56,8 @@ export default {
     return {
       smallBoxClicked: true,
       middleBoxClicked: false,
+      cost: {smallCost: '?', midCost: '?'},
+      orderEmpty: {smallCount: '?', midCount: '?'},
     };
   },
   computed: {
@@ -74,6 +75,40 @@ export default {
       return this.$store.state.startStation;
     },
   },
+  methods: {
+    move2LockerPage() {
+      this.$router.push('/SelectPage/lockerPage');
+    },
+    selectBoxSize(isSmall) {
+      this.smallBoxClicked = isSmall;
+      this.middleBoxClicked = !isSmall;
+    },
+    setOrderData(isSmall) {
+      // 선택된 보관함 정보 store의 orderData에 저장
+      this.$store.commit('setOrderData', {
+        ...this.$store.state.orderData,
+        size: isSmall ? 'SMALL' : 'MID',
+        cost: isSmall ? this.cost.smallCost : this.cost.midCost,
+      });
+    },
+    testGetOrderEmpty() {
+      return this.$axios.get(`/order/empty/테스트역1`);
+    },
+    testGetCost() {
+      return this.$axios.get('/order/cost/테스트역1/테스트역2');
+    },
+  },
+  mounted() {
+    Promise.all([this.testGetOrderEmpty(), this.testGetCost()])
+      .then((values) => {
+        this.orderEmpty = values[0].data;
+        this.cost = values[1].data;
+        this.setOrderData(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   components: {
     ProgressMenu,
   },
@@ -81,9 +116,14 @@ export default {
 </script>
 
 <style>
+.movePost_content {
+  overflow: scroll;
+  height: 92.7vh;
+}
 .movePost_location_container {
   margin: 3.8vh 0vw 3.8vh 8vw;
-  width: 47vw;
+  min-width: 47vw;
+  max-width: 90vw;
   height: 5.5vh;
 }
 .movePost_location {
@@ -116,7 +156,7 @@ export default {
   display: flex;
   align-items: center;
   height: 25.5vh;
-  width: 85vw;
+  width: 84vw;
   margin: 0vh 8vw 7vh;
   justify-content: space-between;
 }
@@ -141,6 +181,7 @@ export default {
   margin: 0vh 2vw;
   /* UI Properties */
   border: 2px solid #6fbb69;
+  color: #6fbb69;
 }
 .movePost_sizebox_unclicked {
   font-size: 10px;
@@ -191,8 +232,10 @@ export default {
   text-align: left;
   font: normal normal bold 1.5em Roboto;
   letter-spacing: 0px;
-  color: #707070;
   opacity: 1;
+}
+.movePost_sizebox_gray {
+  color: #707070;
 }
 .movePost_button {
   border: none;

@@ -6,80 +6,153 @@
     >
       <div
         v-for="(item, index) in lockerflat"
-        :key="item.id"
+        :key="item.storageNumber"
         class="item"
         :style="`grid-row-end: span ${setRowSpan(
-          item.type,
+          item.storageSize,
         )}; height: ${setRowHeight(
-          item.type,
+          item.storageSize,
           46,
-        )}; background-color: ${setColor(item.status)}`"
+        )}; background-color: ${setColor(item.storageStat, item.storageSize)}`"
         @click="setSelectBox(index)"
       >
-        <div style="margin: 5px">{{ item.id }}</div>
+        <div style="margin: 5px">{{ item.storageNumber }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import lockerData from '../../assets/data/lockerInfo.json';
 export default {
-  data() {
-    return {
-      locker: lockerData.locker,
-      columns: Math.max(...lockerData.locker.map((el) => el.length)),
-      rows: lockerData.locker.length,
-      lockerflat: lockerData.locker.flat(),
-    };
+  computed: {
+    columns() {
+      return Math.max(
+        ...this.$store.state.storage.locker.map((el) => el.length),
+      );
+    },
+    rows() {
+      return this.$store.state.storage.locker.length;
+    },
+    lockerflat() {
+      return this.$store.state.storage.locker.flat();
+    },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
+    orderData() {
+      return this.$store.state.orderData;
+    },
   },
   methods: {
-    setSelectBox(index) {
-      if (this.lockerflat[index].status != '사용가능') {
-        return;
-      }
-      this.lockerflat.forEach((item) => {
-        if (item.status == '선택') {
-          item.status = '사용가능';
-        }
+    findLocker(lockerflat, storageStat) {
+      // 선택된 locker 정보 저장
+      let selectedLocker = {};
+      lockerflat.forEach((item) => {
+        if (item.storageStat == storageStat)
+          selectedLocker = {selectedLocker: item};
       });
-      this.lockerflat[index].status = '선택';
+      return selectedLocker;
     },
-    setRowSpan(item) {
-      if (item == 'Controller') {
+    setSelectBox(index) {
+      // 보관함 상태가 EMPTY 이고, size가 앞에서 고른 사이즈와 동일할 때
+      if (this.serviceType == '맡길게요') {
+        if (
+          !(
+            this.lockerflat[index].storageStat == 'EMPTY' &&
+            this.lockerflat[index].storageSize == this.orderData.size
+          )
+        ) {
+          return;
+        }
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
+
+        this.lockerflat[index].storageStat = '선택';
+        this.$store.commit('setOrderData', {
+          ...this.$store.state.orderData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
+      }
+      if (this.serviceType == '보관할게요') {
+        if (this.lockerflat[index].storageStat != 'EMPTY') {
+          return;
+        }
+        this.lockerflat.forEach((item) => {
+          if (item.storageStat == '선택') {
+            item.storageStat = 'EMPTY';
+          }
+        });
+
+        this.lockerflat[index].storageStat = '선택';
+        this.$store.commit('setStoreData', {
+          ...this.$store.state.storeData,
+          ...this.findLocker(this.lockerflat, '선택'),
+        });
+      }
+    },
+    setDeliveryData() {
+      if (this.serviceType == '옮길게요')
+        this.$store.commit('setDeliveryData', {
+          ...this.$store.state.deliveryData,
+          ...this.findLocker(this.lockerflat, 'WAIT'),
+        });
+    },
+    setRowSpan(storageSize) {
+      if (storageSize == 'Controller') {
         return 1;
       }
-      if (item == 'N') {
+      if (storageSize == 'SMALL') {
         return 1;
       }
-      if (item == 'M') {
+      if (storageSize == 'MID') {
         return 2;
       }
-      if (item == 'L') {
+      if (storageSize == 'BIG') {
         return 4;
       }
     },
-    setRowHeight(item, height) {
-      if (item == 'Controller') {
+    setRowHeight(storageSize, height) {
+      if (storageSize == 'Controller') {
         return `${height * 1}px`;
       }
-      if (item == 'N') {
+      if (storageSize == 'SMALL') {
         return `${height * 1}px`;
       }
-      if (item == 'M') {
+      if (storageSize == 'MID') {
         return `${height * 2 + 10}px`;
       }
-      if (item == 'L') {
+      if (storageSize == 'BIG') {
         return `${height * 4 + 30}px`;
       }
     },
-    setColor(item) {
-      if (item == '사용가능') return '#CFCFCF';
-      if (item == '사용중') return '#707070';
-      if (item == '선택') return '#D04040';
-      if (item == '제어부') return '#6FBB69';
-      if (item == '내 보관함') return '#FFC702';
+    setColor(storageStat, storageSize) {
+      // 선택가능
+      if (
+        this.serviceType == '맡길게요' &&
+        storageStat == 'EMPTY' &&
+        storageSize == this.orderData.size
+      )
+        return '#5E62D1';
+      if (this.serviceType == '보관할게요' && storageStat == 'EMPTY')
+        return '#5E62D1';
+      if (storageStat == 'EMPTY') return '#CFCFCF'; // 사용가능 EMPTY
+      // 내 보관함 확인
+      if (this.serviceType == '내보관함' && storageStat == 'STORE')
+        return '#FFC702';
+      if (storageStat == 'STORE') return '#CFCFCF'; // 사용 중 STORE
+      // 배정된 배달 보관함
+      if (this.serviceType == '옮길게요' && storageStat == 'WAIT')
+        return '#D04040';
+      if (storageStat == 'WAIT') return '#CFCFCF';
+      if (storageStat == '선택') return '#D04040';
+      if (storageStat == '제어부') return '#6FBB69';
     },
+  },
+  mounted() {
+    this.setDeliveryData();
   },
 };
 </script>

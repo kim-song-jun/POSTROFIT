@@ -7,18 +7,14 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <lockerInfo />
-      <noticeBox class="lockerPage_noticeBox"></noticeBox>
+      <lockerInfo v-if="storage" />
+      <noticeBox class="lockerPage_noticeBox" />
       <button
         class="lockerPage_button"
-        @click="
-          $router.push({
-            path: getPath(),
-            query: {serviceType: $route.query.serviceType},
-          })
-        "
+        @click="move2CheckPage"
+        :disabled="isSelect"
       >
-        {{ $route.query.serviceType }}
+        {{ serviceType }}
       </button>
     </div>
   </div>
@@ -27,25 +23,11 @@
 <script>
 import lockerInfo from '../components/lockerInfo.vue';
 import noticeBox from '../components/noticeBox.vue';
+// import lockerData from '../assets/data/lockerInfo.json';
 
 export default {
-  components: {
-    lockerInfo,
-    noticeBox,
-  },
-  methods: {
-    getStationName() {
-      return (
-        this.startStation.name ??
-        this.endStation.name ??
-        this.selectStation.name
-      );
-    },
-    getPath() {
-      return this.$route.query.serviceType == '보관할게요'
-        ? '/SelectPage/checkBillPage'
-        : '/SelectPage/checkDeliveryPage';
-    },
+  data() {
+    return {};
   },
   computed: {
     startStation() {
@@ -57,6 +39,134 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    storage() {
+      return this.$store.state.storage;
+    },
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
+    isSelect() {
+      if (this.serviceType == '맡길게요')
+        return !this.$store.state.orderData.hasOwnProperty('selectedLocker');
+      if (this.serviceType == '옮길게요')
+        return !this.$store.state.deliveryData.hasOwnProperty('selectedLocker');
+      if (this.serviceType == '보관할게요')
+        return !this.$store.state.storeData.hasOwnProperty('selectedLocker');
+    },
+  },
+  methods: {
+    getStationName() {
+      return this.serviceType == '맡길게요'
+        ? this.startStation.name
+        : this.serviceType == '옮길게요'
+        ? this.endStation.name
+        : this.selectStation.name;
+    },
+    getPathByServiceType() {
+      return this.serviceType == '보관할게요'
+        ? '/SelectPage/checkBillPage'
+        : '/SelectPage/checkDeliveryPage';
+    },
+    move2CheckPage() {
+      const nextPath = this.getPathByServiceType();
+      // 앞으로 결제할 보관함 정보 넘겨 보관함 선점하기
+      this.$router.push(nextPath);
+    },
+    makeLockerByData(locker) {
+      // 한 줄에 5개의 보관함이 있다고 가정
+      let newLocker = [];
+      let row = [];
+      if (Array.isArray(locker))
+        locker.forEach((el, i) => {
+          row.push(el);
+          if ((i + 1) % 5 == 0 || i + 1 == locker.length) {
+            newLocker.push(row);
+            if (
+              row.find((e) => e.storageSize == 'MID') ||
+              row.find((e) => e.storageSize == 'BIG')
+            )
+              newLocker.push([]);
+            row = [];
+          }
+        });
+      return newLocker;
+    },
+    testInitStorage() {
+      let newLocker = [];
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/테스트역1`)
+          .then((response) => {
+            newLocker = this.makeLockerByData(response.data);
+            this.$store.commit('setStorage', {
+              locker: newLocker,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(`/delivery/storage/테스트역1/테스트역2`)
+          .then((response) => {
+            newLocker = this.makeLockerByData(response.data);
+            this.$store.commit('setStorage', {
+              locker: newLocker,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get('/store/storage/테스트역1')
+          .then((response) => {
+            newLocker = this.makeLockerByData(response.data);
+            this.$store.commit('setStorage', {
+              locker: newLocker,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    initStorage() {
+      if (this.serviceType == '맡길게요')
+        this.$axios
+          .get(`/order/storage/${this.startStation}/${this.endStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '옮길게요')
+        this.$axios
+          .get(`/delivery/storage/${this.startStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      if (this.serviceType == '보관할게요')
+        this.$axios
+          .get(`/store/storage/${this.selectStation}`)
+          .then((response) => {
+            this.$store.commit('setStorage', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+  },
+  mounted() {
+    this.testInitStorage();
+    // this.initStorage();
+  },
+  components: {
+    lockerInfo,
+    noticeBox,
   },
 };
 </script>
@@ -120,5 +230,8 @@ export default {
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+}
+.lockerPage_button:disabled {
+  opacity: 0.5;
 }
 </style>

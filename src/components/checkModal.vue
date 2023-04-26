@@ -32,11 +32,15 @@
       </div>
       <div class="checkModal_check_btn">
         <span class="checkModal_warning">
-          <input type="checkbox" name="agree" />
+          <input type="checkbox" name="agree" v-model="isCheck" />
           *동의함
         </span>
       </div>
-      <button class="checkModal_button" @click="$emit('closeCheckModal')">
+      <button
+        class="checkModal_button"
+        @click="$emit('closeCheckModal')"
+        :disabled="!isCheck"
+      >
         닫기
       </button>
     </div>
@@ -44,7 +48,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isCheck: false,
+    };
+  },
+};
 </script>
 
 <style>
