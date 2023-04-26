@@ -50,8 +50,8 @@ export default {
         return !this.$store.state.orderData.hasOwnProperty('selectedLocker');
       if (this.serviceType == '옮길게요')
         return !this.$store.state.deliveryData.hasOwnProperty('selectedLocker');
-      if (this.serviceType == '보관할게요')
-        return !this.$store.state.storeData.hasOwnProperty('selectedLocker');
+      // if (this.serviceType == '보관할게요')
+      return !this.$store.state.storeData.hasOwnProperty('selectedLocker');
     },
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
     },
     makeLockerByData(locker) {
       // 한 줄에 5개의 보관함이 있다고 가정
-      let newLocker = [];
+      const newLocker = [];
       let row = [];
       if (Array.isArray(locker))
         locker.forEach((el, i) => {

@@ -56,7 +56,7 @@ export default {
   methods: {
     makeLockerByData(locker) {
       // 한 줄에 5개의 보관함이 있다고 가정
-      let newLocker = [];
+      const newLocker = [];
       let row = [];
       if (Array.isArray(locker))
         locker.forEach((el, i) => {

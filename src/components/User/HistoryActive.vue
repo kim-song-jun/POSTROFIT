@@ -81,9 +81,9 @@ export default {
       return this.$axios.post('/user/history/detail', reqData);
     },
     getPassword() {
-      let userId = 0;
+      const userId = 0;
       if (this.activeStat) {
-        let storageNum = 2;
+        const storageNum = 2;
         return this.$axios.get(
           `/delivery/take/password/${this.$store.state.userHistoryDetail.place[1]}/${storageNum}`,
         );
