@@ -2,8 +2,8 @@
   <div class="historyActive_container">
     <cancelModal
       v-if="cancelModalOpen"
-      :startStation="historyDetail.startStation"
-      :endStation="historyDetail.endStation"
+      :startStation="userHistoryDetail.place[0]"
+      :endStation="userHistoryDetail.place[1]"
       @closeCancelModal="cancelModalOpen = false"
     />
     <div class="historyActive_info_container">
@@ -24,7 +24,7 @@
       >
         <div class="locationBoxActive_text1">출발</div>
         <div class="locationBox_text2">
-          2호선 <span>{{ historyDetail.startStation }}</span>
+          2호선 <span>{{ userHistoryDetail.place[0] }}</span>
         </div>
         <div class="locationBoxActive_text3">
           서울특별시 동작구 남부순환로 지하2089
@@ -39,7 +39,7 @@
       >
         <div class="locationBoxActive_text1">도착</div>
         <div class="locationBox_text2">
-          2호선 <span>{{ historyDetail.endStation }}</span>
+          2호선 <span>{{ userHistoryDetail.place[1] }}</span>
         </div>
         <div class="locationBoxActive_text3">
           서울특별시 동작구 남부순환로 지하2089
@@ -120,6 +120,8 @@ export default {
       const userId = 1;
       // 출발역 비밀번호
       if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
+            `/delivery/take/password/${this.$store.state.userHistoryDetail.place[0]}/${storageNum}`,
+            `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
     },
   },
   created() {
