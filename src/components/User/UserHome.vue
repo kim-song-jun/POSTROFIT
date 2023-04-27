@@ -59,10 +59,9 @@ export default {
     mapUserStore(store) {
       return {
         location: '서울특별시 동작구 남부순환로 지하2089',
-        station: store?.station ?? '?',
+        station: store?.stationName ?? '?',
         storageId: store.storageId,
         storeId: store.storeId,
-        station: store.stationName,
         size: this.getSize(store.storageSize),
         date: `${store.timestamp.slice(0, 4)}/${store.timestamp.slice(
           5,
