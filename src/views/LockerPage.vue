@@ -91,7 +91,24 @@ export default {
         });
       return newLocker;
     },
-    testInitStorage() {
+    findLocker(lockerflat, storageStat) {
+      // 선택된 locker 정보 저장
+      let selectedLocker = {};
+      lockerflat.forEach((item) => {
+        if (item.storageStat == storageStat)
+          selectedLocker = {selectedLocker: item};
+      });
+      return selectedLocker;
+    },
+    setDeliveryData() {
+      console.log('setDeliveryData');
+      console.log(this.$store.state.storage);
+      this.$store.commit('setDeliveryData', {
+        ...this.$store.state.deliveryData,
+        ...this.findLocker(this.$store.state.storage.locker.flat(), 'WAIT'),
+      });
+    },
+    async testInitStorage() {
       let newLocker = [];
       if (this.serviceType == '맡길게요')
         this.$axios
@@ -105,8 +122,9 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.serviceType == '옮길게요')
-        this.$axios
+
+      if (this.serviceType == '옮길게요') {
+        await this.$axios
           .get(`/delivery/storage/테스트역1/테스트역2`)
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
@@ -117,6 +135,8 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+        this.setDeliveryData();
+      }
       if (this.serviceType == '보관할게요')
         this.$axios
           .get('/store/storage/테스트역1')
