@@ -115,7 +115,7 @@ export default {
       if (this.serviceType == '옮길게요')
         this.$axios
           .get(
-            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
+            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.storageNum}`,
           )
           .then((response) => {
             this.lockerInfo = response.data;
@@ -126,36 +126,6 @@ export default {
       if (this.serviceType == '보관할게요')
         this.$axios
           .get(`/store/password/${userId}`)
-          .then((response) => {
-            this.lockerInfo = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      this.lockerModalOpen = true;
-    },
-    openLockerModal() {
-      if (this.serviceType == '맡길게요')
-        this.$axios
-          .get('/order/storage/info/user_id')
-          .then((response) => {
-            this.lockerInfo = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      // if (this.serviceType == '옮길게요')
-      //   this.$axios
-      //     .get( `/delivery/take/password/${this.$store.state.startStation}/${this.$store.state.deliveryData.selectedLocker.storageNumber}`)
-      //     .then((response) => {
-      //       this.lockerInfo = response.data;
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      if (this.serviceType == '보관할게요')
-        this.$axios
-          .get('/store/fee/user_id')
           .then((response) => {
             this.lockerInfo = response.data;
           })

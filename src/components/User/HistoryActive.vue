@@ -2,8 +2,8 @@
   <div class="historyActive_container">
     <cancelModal
       v-if="cancelModalOpen"
-      :startStation="historyDetail.startStation"
-      :endStation="historyDetail.endStation"
+      :startStation="userHistoryDetail.place[0]"
+      :endStation="userHistoryDetail.place[1]"
       @closeCancelModal="cancelModalOpen = false"
     />
     <div class="historyActive_info_container">
@@ -18,10 +18,13 @@
       </div>
     </div>
     <div class="locationBox_container">
-      <div class="locationBoxActive_src" :class="isClick(activeStat)">
+      <div
+        class="locationBoxActive_src"
+        :class="userHistoryDetail.stat == 'WAIT' ? 'locationBox_clicked' : ''"
+      >
         <div class="locationBoxActive_text1">출발</div>
         <div class="locationBox_text2">
-          2호선 <span>{{ historyDetail.startStation }}</span>
+          2호선 <span>{{ userHistoryDetail.place[0] }}</span>
         </div>
         <div class="locationBoxActive_text3">
           서울특별시 동작구 남부순환로 지하2089
@@ -30,10 +33,13 @@
       <div class="locationBox_arrow_container">
         <img class="locationBox_arrow" src="@/assets/images/arrow.png" alt="" />
       </div>
-      <div class="locationBoxActive_dst" :class="isClick(!activeStat)">
+      <div
+        class="locationBoxActive_dst"
+        :class="userHistoryDetail.stat != 'WAIT' ? 'locationBox_clicked' : ''"
+      >
         <div class="locationBoxActive_text1">도착</div>
         <div class="locationBox_text2">
-          2호선 <span>{{ historyDetail.endStation }}</span>
+          2호선 <span>{{ userHistoryDetail.place[1] }}</span>
         </div>
         <div class="locationBoxActive_text3">
           서울특별시 동작구 남부순환로 지하2089
@@ -43,9 +49,7 @@
     <progressMenu />
     <noticeBox class="historyLocker_noticeBox"></noticeBox>
     <div class="movePost_button_container">
-      <button class="movePost_button" @click="$emit('openLockerModal')">
-        보관함 열기
-      </button>
+      <button class="movePost_button" @click="onClick">보관함 열기</button>
     </div>
   </div>
 </template>
@@ -59,60 +63,76 @@ export default {
   data() {
     return {
       cancelModalOpen: false,
-      historyDetail: {
-        startStation: '?',
-        endStation: '?',
-      },
-      activeStat: true,
     };
   },
-  computed: {},
-  methods: {
-    isClick(activeStat) {
-      return activeStat ? 'locationBox_clicked' : '';
+  computed: {
+    userHistoryDetail() {
+      return this.$store.state.userHistoryDetail;
     },
+  },
+  methods: {
     getHistoryDetail() {
       // 출발역, 도착역 또는 보관역 정보 서버에 요청
-      const reqData = this.$store.state.userHistoryDetail?.orderId
-        ? {orderId: this.$store.state.userHistoryDetail.orderId}
-        : this.$store.state.userHistoryDetail?.storeId
-        ? {storeId: this.$store.state.userHistoryDetail.storeId}
-        : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
-      return this.$axios.post('/user/history/detail', reqData);
-    },
-    getPassword() {
-      const userId = 0;
-      if (this.activeStat) {
-        const storageNum = 2;
-        return this.$axios.get(
-          `/delivery/take/password/${this.$store.state.userHistoryDetail.place[1]}/${storageNum}`,
-        );
-      }
-      return this.$axios.get(
-        `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
-      );
-    },
-    setHistoryDetail() {
-      Promise.all([this.getHistoryDetail(), this.getPassword()])
-        .then((responses) => {
-          this.historyDetail = {
-            ...this.historyDetail,
-            price: responses[0].data.price,
-            startStation: this.$store.state.userHistoryDetail.place[0],
-            endStation: this.$store.state.userHistoryDetail.place[1],
-          };
+      const reqData = {
+        orderId: this.$store.state.userHistoryDetail.orderId,
+        storeId: this.$store.state.userHistoryDetail.storeId,
+        deliveryId: this.$store.state.userHistoryDetail.deliveryId,
+      };
+      this.$axios
+        .post('/user/history/detail', reqData)
+        .then((response) => {
+          console.log(response.data);
           this.$store.commit('setUserHistoryDetail', {
             ...this.$store.state.userHistoryDetail,
-            ...responses[1].data,
+            stat: response.data.stat,
           });
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    async getPassword() {
+      const userId = 1;
+      // 출발역 비밀번호
+      if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
+        const storageNum = 1;
+        await this.$axios
+          .get(
+            `/delivery/take/password/${this.$store.state.userHistoryDetail.place[0]}/${storageNum}`,
+          )
+          .then((response) => {
+            this.$store.commit('setUserHistoryDetail', {
+              ...this.$store.state.userHistoryDetail,
+              ...response.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      // 도착역 비밀번호
+      else
+        await this.$axios
+          .get(
+            `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+          )
+          .then((response) => {
+            this.$store.commit('setUserHistoryDetail', {
+              ...this.$store.state.userHistoryDetail,
+              ...response.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    async onClick() {
+      await this.getPassword();
+      this.$emit('openLockerModal');
+    },
   },
   created() {
-    this.setHistoryDetail();
+    this.getHistoryDetail();
   },
   components: {
     progressMenu,

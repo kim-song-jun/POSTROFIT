@@ -93,13 +93,6 @@ export default {
         });
       }
     },
-    setDeliveryData() {
-      if (this.serviceType == '옮길게요')
-        this.$store.commit('setDeliveryData', {
-          ...this.$store.state.deliveryData,
-          ...this.findLocker(this.lockerflat, 'WAIT'),
-        });
-    },
     setRowSpan(storageSize) {
       if (storageSize == 'Controller') {
         return 1;
@@ -150,9 +143,6 @@ export default {
       if (storageStat == '선택') return '#D04040';
       if (storageStat == '제어부') return '#6FBB69';
     },
-  },
-  mounted() {
-    this.setDeliveryData();
   },
 };
 </script>

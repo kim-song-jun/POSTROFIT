@@ -42,6 +42,12 @@ export default {
     };
   },
   methods: {
+    getSize(size) {
+      if (size == 'SMALL') return '소형';
+      if (size == 'MID') return '중형';
+      if (size == 'BIG') return '대형';
+      return '?';
+    },
     testGetStore(userId) {
       // issue.B 역정보 추가
       return this.$axios.get(`/user/store/${userId}`);
@@ -53,16 +59,10 @@ export default {
     mapUserStore(store) {
       return {
         location: '서울특별시 동작구 남부순환로 지하2089',
-        station: store?.station ?? '?',
+        station: store?.stationName ?? '?',
         storageId: store.storageId,
         storeId: store.storeId,
-        station: store.stationName,
-        size:
-          store.storageSize == 'MID'
-            ? '중형'
-            : store.storageSize == 'SMALL'
-            ? '소형'
-            : '대형',
+        size: this.getSize(store.storageSize),
         date: `${store.timestamp.slice(0, 4)}/${store.timestamp.slice(
           5,
           7,
@@ -87,15 +87,14 @@ export default {
             : el?.storeId
             ? '보관할게요'
             : '옮길게요',
-          size: el?.size == 'MID' ? '중형' : el?.size == 'SMALL' ? '소형' : '?',
+          size: this.getSize(el?.size),
+          stat: el.orderStat,
         };
       });
     },
     setUserData() {
       Promise.all([this.testGetStore(0), this.testGetHistory(1)])
         .then((responses) => {
-          console.log(responses[0].data);
-          console.log(responses[1].data);
           this.$store.commit(
             'setUserStore',
             this.mapUserStore(responses[0].data),
