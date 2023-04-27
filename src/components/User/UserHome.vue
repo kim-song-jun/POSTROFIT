@@ -88,14 +88,13 @@ export default {
             ? '보관할게요'
             : '옮길게요',
           size: this.getSize(el?.size),
+          stat: el.orderStat,
         };
       });
     },
     setUserData() {
       Promise.all([this.testGetStore(0), this.testGetHistory(1)])
         .then((responses) => {
-          console.log(responses[0].data);
-          console.log(responses[1].data);
           this.$store.commit(
             'setUserStore',
             this.mapUserStore(responses[0].data),

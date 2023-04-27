@@ -18,7 +18,10 @@
       </div>
     </div>
     <div class="locationBox_container">
-      <div class="locationBoxActive_src" :class="isClick(activeStat)">
+      <div
+        class="locationBoxActive_src"
+        :class="userHistoryDetail.stat == 'WAIT' ? 'locationBox_clicked' : ''"
+      >
         <div class="locationBoxActive_text1">출발</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.startStation }}</span>
@@ -30,7 +33,10 @@
       <div class="locationBox_arrow_container">
         <img class="locationBox_arrow" src="@/assets/images/arrow.png" alt="" />
       </div>
-      <div class="locationBoxActive_dst" :class="isClick(!activeStat)">
+      <div
+        class="locationBoxActive_dst"
+        :class="userHistoryDetail.stat != 'WAIT' ? 'locationBox_clicked' : ''"
+      >
         <div class="locationBoxActive_text1">도착</div>
         <div class="locationBox_text2">
           2호선 <span>{{ historyDetail.endStation }}</span>
@@ -103,12 +109,17 @@ export default {
           };
           this.$store.commit('setUserHistoryDetail', {
             ...this.$store.state.userHistoryDetail,
-            ...responses[1].data,
+            stat: response.data.stat,
           });
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    async getPassword() {
+      const userId = 1;
+      // 출발역 비밀번호
+      if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
     },
   },
   created() {
