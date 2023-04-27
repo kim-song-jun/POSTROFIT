@@ -150,35 +150,6 @@ export default {
             console.log(error);
           });
     },
-    initStorage() {
-      if (this.serviceType == '맡길게요')
-        this.$axios
-          .get(`/order/storage/${this.startStation}/${this.endStation}`)
-          .then((response) => {
-            this.$store.commit('setStorage', response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      if (this.serviceType == '옮길게요')
-        this.$axios
-          .get(`/delivery/storage/${this.startStation}`)
-          .then((response) => {
-            this.$store.commit('setStorage', response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      if (this.serviceType == '보관할게요')
-        this.$axios
-          .get(`/store/storage/${this.selectStation}`)
-          .then((response) => {
-            this.$store.commit('setStorage', response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-    },
   },
   mounted() {
     this.testInitStorage();
