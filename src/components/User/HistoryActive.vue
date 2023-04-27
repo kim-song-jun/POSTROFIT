@@ -49,9 +49,7 @@
     <progressMenu />
     <noticeBox class="historyLocker_noticeBox"></noticeBox>
     <div class="movePost_button_container">
-      <button class="movePost_button" @click="$emit('openLockerModal')">
-        보관함 열기
-      </button>
+      <button class="movePost_button" @click="onClick">보관함 열기</button>
     </div>
   </div>
 </template>
@@ -122,6 +120,9 @@ export default {
       if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
             `/delivery/take/password/${this.$store.state.userHistoryDetail.place[0]}/${storageNum}`,
             `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+    async onClick() {
+      await this.getPassword();
+      this.$emit('openLockerModal');
     },
   },
   created() {
