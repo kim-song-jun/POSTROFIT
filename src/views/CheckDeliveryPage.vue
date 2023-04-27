@@ -49,12 +49,12 @@ export default {
     size() {
       return this.$store.state.serviceType == '맡길게요'
         ? this.$store.state.orderData.size
-        : this.$store.state.deliveyrData.size;
+        : this.$store.state.deliveryData?.size ?? '?';
     },
     cost() {
       return this.$store.state.serviceType == '맡길게요'
         ? this.$store.state.orderData.cost
-        : this.$store.state.deliveyrData.cost;
+        : this.$store.state.deliveryData?.cost ?? '?';
     },
     startStation() {
       return this.$store.state.startStation;
@@ -120,7 +120,7 @@ export default {
         });
     },
     testSetDeliveryData() {
-      if (this.$store.serviceType == '옮길게요')
+      if (this.$store.state.serviceType == '옮길게요')
         this.$axios
           .get(
             `/delivery/order/storage/${this.$store.state.deliveryData.selectedLocker.storageId}`,
