@@ -1,27 +1,26 @@
 <template>
   <div class="checkDeliveryPage_container">
-    <checkModal
-      v-if="checkModalOpen"
-      @closeCheckModal="
-        checkModalOpen = false;
-        $router.push('/SelectPage/paySuccessPage');
-      "
-    />
+    <checkModal v-if="checkModalOpen" @closeCheckModal="testMove2PayPage" />
     <div class="checkDeliveryPage_content">
       <div class="checkDeliveryPage_info">
-        <locationBox />
+        <locationBox
+          :startStation="startStation.name"
+          :endStation="endStation.name"
+        />
         <div class="checkDeliveryPage_text">
-          요금: <span class="checkDeliveryPage_point">2000원</span>
+          {{ moneyType }}:
+          <span class="checkDeliveryPage_point">{{ cost }}원</span>
         </div>
         <div class="checkDeliveryPage_text">
-          사이즈: <span class="checkDeliveryPage_point">소형</span>
+          사이즈:
+          <span class="checkDeliveryPage_point">{{ getSize(size) }}</span>
         </div>
       </div>
       <progressMenu />
       <noticeBox class="checkDeliveryPage_noticeBox"></noticeBox>
       <div class="checkDeliveryPage_button_container">
         <button class="checkDeliveryPage_button" @click="checkModalOpen = true">
-          {{ $route.query.serviceType }}
+          {{ serviceType }}
         </button>
       </div>
     </div>
@@ -39,6 +38,108 @@ export default {
     return {
       checkModalOpen: false,
     };
+  },
+  computed: {
+    serviceType() {
+      return this.$store.state.serviceType;
+    },
+    moneyType() {
+      return this.$store.state.serviceType == '맡길게요' ? '요금' : '수익';
+    },
+    size() {
+      return this.$store.state.serviceType == '맡길게요'
+        ? this.$store.state.orderData.size
+        : this.$store.state.deliveyrData.size;
+    },
+    cost() {
+      return this.$store.state.serviceType == '맡길게요'
+        ? this.$store.state.orderData.cost
+        : this.$store.state.deliveyrData.cost;
+    },
+    startStation() {
+      return this.$store.state.startStation;
+    },
+    endStation() {
+      return this.$store.state.endStation;
+    },
+  },
+  methods: {
+    getSize(storageSize) {
+      return storageSize == 'SMALL' ? '소형' : '중형';
+    },
+    testMove2PayPage() {
+      this.checkModalOpen = false;
+      // 결제 페이지로 이동
+      // 결제 후 등록 요청
+      // user_id 0~3, 2는 배달부
+      const userId = 0;
+      // try. reqData ={}로 변경해보기
+      if (this.serviceType == '맡길게요') {
+        this.makeOrder(userId);
+      }
+      if (this.serviceType == '옮길게요') {
+        this.takeDelivery(userId);
+      }
+    },
+    move2PayPage() {
+      // 결제 페이지로 이동
+    },
+    makeOrder(userId) {
+      const storageId = this.$store.state.orderData.selectedLocker.storageId;
+      const endStationName = '테스트역2';
+      this.$axios
+        .post('/order/make', {
+          userId: userId,
+          storageId: storageId,
+          endStationName: endStationName,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    takeDelivery(userId) {
+      // order_id는 어디서 받아오나? 0,1
+      const orderId = this.$store.state.deliveryData.orderId;
+
+      this.$axios
+        .post('/delivery/take', {
+          userId: 2,
+          orderId: orderId,
+        })
+        .then((response) => {
+          if (response.status == 200)
+            this.$router.push('/SelectPage/paySuccessPage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    testSetDeliveryData() {
+      if (this.$store.serviceType == '옮길게요')
+        this.$axios
+          .get(
+            `/delivery/order/storage/${this.$store.state.deliveryData.selectedLocker.storageId}`,
+          )
+          .then((response) => {
+            this.$store.commit('setDeliveryData', {
+              ...this.$store.state.deliveryData,
+              size: response.data.size,
+              cost: response.data.price,
+              orderId: response.data.orderId,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+  },
+  mounted() {
+    this.testSetDeliveryData();
   },
   components: {
     progressMenu,

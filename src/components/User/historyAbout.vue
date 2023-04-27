@@ -1,11 +1,11 @@
 <template>
   <div class="historyList_container">
     <div
-      v-for="(history, i) in list"
+      v-for="(history, i) in userHistory"
       :key="i"
       class="historyAbout"
       :class="historyClass(history.hisType)"
-      @click="$router.push(`/UserPage/${history.urn}/${history.id}`)"
+      @click="move2HistoryDetail(history)"
     >
       <div class="historyAbout_arrow">
         <div class="historyAbout_arrow_top"></div>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="historyAbout_textbox4">
-        <div class="historyAbout_history_location userHome_text3">
+        <div class="historyAbout_history_location">
           <div class="historyAbout_history_src">{{ history.place[0] }}</div>
           <div v-if="history.place[1]" class="historyAbout_history_direction">
             <img
@@ -36,22 +36,18 @@
             {{ history.place[1] }}
           </div>
         </div>
-        <div class="historyAbout_history_price userHome_text1">
-          {{ history.price }}원
-        </div>
+        <div class="historyAbout_history_price">{{ history.price }}원</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {history} from '../../assets/data/history.json';
-
 export default {
-  data() {
-    return {
-      list: history,
-    };
+  computed: {
+    userHistory() {
+      return this.$store.state.userHistory;
+    },
   },
   methods: {
     historyClass(type) {
@@ -61,6 +57,11 @@ export default {
         ? 'historyAbout_active'
         : 'historyAbout_cancel';
     },
+    move2HistoryDetail(history) {
+      this.$store.commit('setServiceType', '내이용내역');
+      this.$store.commit('setUserHistoryDetail', history);
+      this.$router.push(`/UserPage/${history.urn}`);
+    },
   },
 };
 </script>
@@ -69,7 +70,7 @@ export default {
 .historyAbout {
   position: relative;
   margin-top: 2.5vw;
-  padding: 2.5vw 5vw;
+  padding: 1.1vh 5vw 1.1vh 3vw;
   /* Layout Properties */
   width: 73vw;
   height: 10.5vw;
@@ -94,6 +95,11 @@ export default {
 }
 .historyAbout_history_location {
   display: flex;
+  font: normal normal normal 18px/26px Roboto;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
 }
 .historyAbout_history_direction {
   width: 3.7vw;
@@ -101,7 +107,12 @@ export default {
   margin: 0vw 2vw;
 }
 .historyAbout_history_price {
-  margin-left: 22vw;
+  margin-left: auto;
+  font: normal normal bold 18px/26px Roboto;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
 }
 .historyAbout_history_arrow {
   position: absolute;
@@ -115,7 +126,7 @@ export default {
   position: absolute;
   /* height: 8vw; */
   /* width: 8vw; */
-  right: 1vw;
+  right: 0vw;
   top: 7.5vw;
 }
 .historyAbout_arrow .historyAbout_arrow_top,
