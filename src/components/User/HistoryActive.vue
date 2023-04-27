@@ -63,48 +63,25 @@ export default {
   data() {
     return {
       cancelModalOpen: false,
-      historyDetail: {
-        startStation: '?',
-        endStation: '?',
-      },
-      activeStat: true,
     };
   },
-  computed: {},
-  methods: {
-    isClick(activeStat) {
-      return activeStat ? 'locationBox_clicked' : '';
+  computed: {
+    userHistoryDetail() {
+      return this.$store.state.userHistoryDetail;
     },
+  },
+  methods: {
     getHistoryDetail() {
       // 출발역, 도착역 또는 보관역 정보 서버에 요청
-      const reqData = this.$store.state.userHistoryDetail?.orderId
-        ? {orderId: this.$store.state.userHistoryDetail.orderId}
-        : this.$store.state.userHistoryDetail?.storeId
-        ? {storeId: this.$store.state.userHistoryDetail.storeId}
-        : {deliveryId: this.$store.state.userHistoryDetail.deliveryId};
-      return this.$axios.post('/user/history/detail', reqData);
-    },
-    getPassword() {
-      const userId = 0;
-      if (this.activeStat) {
-        const storageNum = 2;
-        return this.$axios.get(
-          `/delivery/take/password/${this.$store.state.userHistoryDetail.place[1]}/${storageNum}`,
-        );
-      }
-      return this.$axios.get(
-        `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
-      );
-    },
-    setHistoryDetail() {
-      Promise.all([this.getHistoryDetail(), this.getPassword()])
-        .then((responses) => {
-          this.historyDetail = {
-            ...this.historyDetail,
-            price: responses[0].data.price,
-            startStation: this.$store.state.userHistoryDetail.place[0],
-            endStation: this.$store.state.userHistoryDetail.place[1],
-          };
+      const reqData = {
+        orderId: this.$store.state.userHistoryDetail.orderId,
+        storeId: this.$store.state.userHistoryDetail.storeId,
+        deliveryId: this.$store.state.userHistoryDetail.deliveryId,
+      };
+      this.$axios
+        .post('/user/history/detail', reqData)
+        .then((response) => {
+          console.log(response.data);
           this.$store.commit('setUserHistoryDetail', {
             ...this.$store.state.userHistoryDetail,
             stat: response.data.stat,
@@ -118,15 +95,44 @@ export default {
       const userId = 1;
       // 출발역 비밀번호
       if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
+        const storageNum = 1;
+        await this.$axios
+          .get(
             `/delivery/take/password/${this.$store.state.userHistoryDetail.place[0]}/${storageNum}`,
+          )
+          .then((response) => {
+            this.$store.commit('setUserHistoryDetail', {
+              ...this.$store.state.userHistoryDetail,
+              ...response.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      // 도착역 비밀번호
+      else
+        await this.$axios
+          .get(
             `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+          )
+          .then((response) => {
+            this.$store.commit('setUserHistoryDetail', {
+              ...this.$store.state.userHistoryDetail,
+              ...response.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
     async onClick() {
       await this.getPassword();
       this.$emit('openLockerModal');
     },
   },
   created() {
-    this.setHistoryDetail();
+    this.getHistoryDetail();
   },
   components: {
     progressMenu,
