@@ -115,7 +115,7 @@ export default {
       if (this.serviceType == '옮길게요')
         this.$axios
           .get(
-            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
+            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.storageNum}`,
           )
           .then((response) => {
             this.lockerInfo = response.data;

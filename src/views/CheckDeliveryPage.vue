@@ -131,6 +131,7 @@ export default {
               size: response.data.size,
               cost: response.data.price,
               orderId: response.data.orderId,
+              storageNum: response.data.storageNum,
             });
           })
           .catch((error) => {
