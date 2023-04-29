@@ -8,16 +8,16 @@
           서울특별시 동작구 남부순환로 지하2089
         </div>
       </div>
-      <div v-if="feeData" class="checkBill_info">
+      <div class="checkBill_info">
         <div class="checkBill_price">
           기본 요금:
-          <span class="checkBill_green">{{ feeData.profit }}원</span> /
-          {{ feeData.time }}시간
+          <span class="checkBill_green">{{ storeData.profit }}원</span> /
+          {{ storeData.time }}시간
         </div>
         <div class="checkBill_size">
           사이즈:
           <span class="checkBill_green">{{
-            getSize(feeData.storageSize)
+            getSize(storeData.selectedLocker.storageSize)
           }}</span>
         </div>
         <div class="checkBill_term">보관 기간</div>
@@ -46,18 +46,14 @@ export default {
   data() {
     return {
       checkModalOpen: false,
-      feeData: null,
     };
   },
   computed: {
-    startStation() {
-      return this.$store.state.startStation;
-    },
-    endStation() {
-      return this.$store.state.endStation;
-    },
     selectStation() {
       return this.$store.state.selectStation;
+    },
+    storeData() {
+      return this.$store.state.storeData;
     },
   },
   methods: {
@@ -86,11 +82,21 @@ export default {
           console.log(error);
         });
     },
-    getFee() {
+    move2PayPage() {
+      // 결제 페이지로 이동
+    },
+    testGetFee() {
+      // this.feeData = {storageSize: 'SMALL', profit: 2000, time: 4};
       this.$axios
-        .get(`/store/fee/${this.selectStation}/MID`)
+        .get(
+          `/store/fee/테스트역1/${this.$store.state.storeData.selectedLocker.storageSize}`,
+        )
         .then((response) => {
-          this.feeData = response.data;
+          this.$store.commit('setStoreData', {
+            ...this.$store.state.storeData,
+            profit: response.data.profit,
+            time: response.data.time,
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -104,7 +110,6 @@ export default {
   },
   mounted() {
     this.testGetFee();
-    // this.getFee();
   },
   components: {
     progressMenu,
