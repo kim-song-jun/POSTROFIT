@@ -79,7 +79,7 @@ export default {
     },
     time() {
       return this.serviceType == '보관할게요'
-        ? this.$store.state.storeData.time
+        ? `${this.$store.state.storeData.time}시간`
         : null;
     },
     title() {
