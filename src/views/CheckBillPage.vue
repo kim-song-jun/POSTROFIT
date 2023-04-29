@@ -65,22 +65,22 @@ export default {
       // 결제 완료 페이지로 이동
       this.checkModalOpen = false;
       // 결제 후 등록 요청
-      // issue.B 보관 등록 api 없음
-      this.$router.push('/SelectPage/paySuccessPage');
-    },
-    move2PayPage() {
-      // 결제 페이지로 이동
-    },
-    testGetFee() {
-      // this.feeData = {storageSize: 'SMALL', profit: 2000, time: 4};
+      const reqData = {
+        userId: 0,
+        storageId: this.$store.state.storeData.selectedLocker.storageId,
+      };
       this.$axios
-        .get(`/store/fee/테스트역1/MID`)
+        .post('/store/', reqData)
         .then((response) => {
-          this.feeData = response.data;
+          this.$store.commit('setStoreData', {
+            ...this.$store.state.storeData,
+            ...response.data,
+          });
         })
         .catch((error) => {
           console.log(error);
         });
+      this.$router.push('/SelectPage/paySuccessPage');
     },
     move2PayPage() {
       // 결제 페이지로 이동
