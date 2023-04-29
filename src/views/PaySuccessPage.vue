@@ -8,7 +8,7 @@
     <div class="paySuccessPage_content">
       <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">{{ title }}</div>
-      <div class="paySuccessPage_info">{{ getSize(size) }} {{ time }}</div>
+      <div class="paySuccessPage_info">{{ size }} {{ time }}</div>
       <div class="progressMenu_container">
         <div class="progressMenu_graybar" />
         <div class="progressMenu_menu">
@@ -71,11 +71,13 @@ export default {
       return this.$store.state.serviceType;
     },
     size() {
-      return this.serviceType == '맡길게요'
-        ? this.$store.state.orderData.size
-        : this.serviceType == '옮길게요'
-        ? this.$store.state.deliveryData.size
-        : this.$store.state.storeData.size;
+      return this.getSize(
+        this.serviceType == '맡길게요'
+          ? this.$store.state.orderData.size
+          : this.serviceType == '옮길게요'
+          ? this.$store.state.deliveryData.size
+          : this.$store.state.storeData.size,
+      );
     },
     time() {
       return this.serviceType == '보관할게요'
