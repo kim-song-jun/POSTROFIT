@@ -49,11 +49,9 @@ export default {
       return '?';
     },
     testGetStore(userId) {
-      // issue.B 역정보 추가
       return this.$axios.get(`/user/store/${userId}`);
     },
     testGetHistory(userId) {
-      // issue.B size 추가
       return this.$axios.get(`/user/history/${userId}`);
     },
     mapUserStore(store) {
