@@ -50,7 +50,7 @@ export default {
       return this.getSize(
         this.$store.state.serviceType == '맡길게요'
           ? this.$store.state.orderData.size
-          : this.$store.state.deliveryData?.size,
+          : this.$store.state.deliveryData.selectedLocker.storageSize,
       );
     },
     cost() {
@@ -107,7 +107,6 @@ export default {
         });
     },
     takeDelivery(userId) {
-      // order_id는 어디서 받아오나? 0,1
       const orderId = this.$store.state.deliveryData.orderId;
 
       this.$axios
@@ -132,10 +131,8 @@ export default {
           .then((response) => {
             this.$store.commit('setDeliveryData', {
               ...this.$store.state.deliveryData,
-              size: response.data.size,
               cost: response.data.price,
               orderId: response.data.orderId,
-              storageNum: response.data.storageNum,
             });
           })
           .catch((error) => {

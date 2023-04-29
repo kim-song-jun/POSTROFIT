@@ -75,7 +75,7 @@ export default {
         this.serviceType == '맡길게요'
           ? this.$store.state.orderData.size
           : this.serviceType == '옮길게요'
-          ? this.$store.state.deliveryData.size
+          ? this.$store.state.deliveryData.selectedLocker.storageSize
           : this.$store.state.storeData.size,
       );
     },
@@ -117,7 +117,7 @@ export default {
       if (this.serviceType == '옮길게요')
         this.$axios
           .get(
-            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.storageNum}`,
+            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
           )
           .then((response) => {
             this.lockerInfo = response.data;
