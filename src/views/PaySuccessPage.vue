@@ -123,15 +123,21 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.serviceType == '보관할게요')
+      if (this.serviceType == '보관할게요') {
+        const query = {params: {storeId: this.$store.state.storeData.storeId}};
         this.$axios
-          .get(`/store/password/${userId}`)
+          .get(`/store/id/store`, query)
           .then((response) => {
-            this.lockerInfo = response.data;
+            this.lockerInfo = {
+              stationName: response.data.stationName,
+              storageNum: response.data.storageNumber,
+              password: response.data.storagePassword,
+            };
           })
           .catch((error) => {
             console.log(error);
           });
+      }
       this.lockerModalOpen = true;
     },
   },
