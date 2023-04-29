@@ -13,7 +13,7 @@
         </div>
         <div class="checkDeliveryPage_text">
           사이즈:
-          <span class="checkDeliveryPage_point">{{ getSize(size) }}</span>
+          <span class="checkDeliveryPage_point">{{ size }}</span>
         </div>
       </div>
       <progressMenu />
@@ -47,9 +47,11 @@ export default {
       return this.$store.state.serviceType == '맡길게요' ? '요금' : '수익';
     },
     size() {
-      return this.$store.state.serviceType == '맡길게요'
-        ? this.$store.state.orderData.size
-        : this.$store.state.deliveryData?.size ?? '?';
+      return this.getSize(
+        this.$store.state.serviceType == '맡길게요'
+          ? this.$store.state.orderData.size
+          : this.$store.state.deliveryData?.size,
+      );
     },
     cost() {
       return this.$store.state.serviceType == '맡길게요'
@@ -65,7 +67,9 @@ export default {
   },
   methods: {
     getSize(storageSize) {
-      return storageSize == 'SMALL' ? '소형' : '중형';
+      if (storageSize == 'SMALL') return '소형';
+      if (storageSize == 'MID') return '중형';
+      return '?';
     },
     testMove2PayPage() {
       this.checkModalOpen = false;
