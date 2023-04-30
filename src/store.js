@@ -93,6 +93,7 @@ const store = createStore({
       context.commit('setOrderData', {});
       context.commit('setStoreData', {});
       context.commit('setStorage', {locker: []});
+      context.commit('setServiceType', '');
     },
   },
 });

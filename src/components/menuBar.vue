@@ -2,7 +2,7 @@
   <div class="menuBar_container">
     <div class="menuBar_bottom_menu_bar">
       <div class="menuBar_subway_line">2</div>
-      <div v-if="0" class="menuBar_subway_line">4</div>
+      <div v-if="hasEndStation" class="menuBar_subway_line">4</div>
       <div class="menuBar_round_bar"></div>
       <div class="menuBar_close_btn" @click="closeMenu">X</div>
     </div>
@@ -11,6 +11,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      hasEndStation: false,
+    };
+  },
   methods: {
     closeMenu() {
       const start = this.startStation?.name?.length ?? 0;

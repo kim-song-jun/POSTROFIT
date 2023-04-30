@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import lockerModal from '../components/lockerModal.vue';
+import lockerModal from '../../components/lockerModal.vue';
 
 export default {
   data() {

@@ -13,7 +13,7 @@
         </div>
         <div class="checkDeliveryPage_text">
           사이즈:
-          <span class="checkDeliveryPage_point">{{ getSize(size) }}</span>
+          <span class="checkDeliveryPage_point">{{ size }}</span>
         </div>
       </div>
       <progressMenu />
@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import progressMenu from '../components/progressMenu3.vue';
-import locationBox from '../components/locationBox.vue';
+import progressMenu from '../../components/progressMenu3.vue';
+import locationBox from '../../components/locationBox.vue';
 import noticeBox from '@/components/noticeBox.vue';
-import checkModal from '../components/checkModal.vue';
+import checkModal from '../../components/Select/checkModal.vue';
 
 export default {
   data() {
@@ -47,9 +47,11 @@ export default {
       return this.$store.state.serviceType == '맡길게요' ? '요금' : '수익';
     },
     size() {
-      return this.$store.state.serviceType == '맡길게요'
-        ? this.$store.state.orderData.size
-        : this.$store.state.deliveryData?.size ?? '?';
+      return this.getSize(
+        this.$store.state.serviceType == '맡길게요'
+          ? this.$store.state.orderData.size
+          : this.$store.state.deliveryData.selectedLocker.storageSize,
+      );
     },
     cost() {
       return this.$store.state.serviceType == '맡길게요'
@@ -65,7 +67,9 @@ export default {
   },
   methods: {
     getSize(storageSize) {
-      return storageSize == 'SMALL' ? '소형' : '중형';
+      if (storageSize == 'SMALL') return '소형';
+      if (storageSize == 'MID') return '중형';
+      return '?';
     },
     testMove2PayPage() {
       this.checkModalOpen = false;
@@ -103,7 +107,6 @@ export default {
         });
     },
     takeDelivery(userId) {
-      // order_id는 어디서 받아오나? 0,1
       const orderId = this.$store.state.deliveryData.orderId;
 
       this.$axios
@@ -128,10 +131,8 @@ export default {
           .then((response) => {
             this.$store.commit('setDeliveryData', {
               ...this.$store.state.deliveryData,
-              size: response.data.size,
               cost: response.data.price,
               orderId: response.data.orderId,
-              storageNum: response.data.storageNum,
             });
           })
           .catch((error) => {

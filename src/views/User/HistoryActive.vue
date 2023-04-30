@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import progressMenu from '../progressMenu.vue';
-import noticeBox from '../noticeBox.vue';
-import cancelModal from '../cancelModal.vue';
+import progressMenu from '../../components/progressMenu.vue';
+import noticeBox from '../../components/noticeBox.vue';
+import cancelModal from '../../components/User/cancelModal.vue';
 
 export default {
   data() {

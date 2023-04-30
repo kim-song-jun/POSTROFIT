@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import historyAbout from './historyAbout.vue';
-import usingLocker from './usingLocker.vue';
+import historyAbout from '../../components/User/historyAbout.vue';
+import usingLocker from '../../components/User/usingLocker.vue';
 
 export default {
   components: {
@@ -49,11 +49,9 @@ export default {
       return '?';
     },
     testGetStore(userId) {
-      // issue.B 역정보 추가
       return this.$axios.get(`/user/store/${userId}`);
     },
     testGetHistory(userId) {
-      // issue.B size 추가
       return this.$axios.get(`/user/history/${userId}`);
     },
     mapUserStore(store) {

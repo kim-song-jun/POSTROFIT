@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import lockerInfo from '../components/lockerInfo.vue';
-import noticeBox from '../components/noticeBox.vue';
+import lockerInfo from '../../components/lockerInfo.vue';
+import noticeBox from '../../components/noticeBox.vue';
 // import lockerData from '../assets/data/lockerInfo.json';
 
 export default {
