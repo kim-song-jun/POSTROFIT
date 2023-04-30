@@ -1,16 +1,16 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import MainPage from './views/MainPage.vue';
-import UserPage from './views/UserPage.vue';
-import UserHome from './components/User/UserHome';
-import HistoryLocker from './components/User/HistoryLocker.vue';
-import HistoryEnd from './components/User/HistoryEnd.vue';
-import HistoryActive from './components/User/HistoryActive.vue';
-import MovePostPage from './views/MovePostPage.vue';
-import CheckBillPage from './views/CheckBillPage.vue';
-import LockerPage from './views/LockerPage.vue';
-import CheckDeliveryPage from './views/CheckDeliveryPage.vue';
-import PaySuccessPage from './views/PaySuccessPage.vue';
-import SelectPage from './views/SelectPage.vue';
+import UserPage from './views/User/UserPage.vue';
+import UserHome from './views/User/UserHome';
+import HistoryLocker from './views/User/HistoryLocker.vue';
+import HistoryEnd from './views/User/HistoryEnd.vue';
+import HistoryActive from './views/User/HistoryActive.vue';
+import MovePostPage from './views/Select/MovePostPage.vue';
+import CheckBillPage from './views/Select/CheckBillPage.vue';
+import LockerPage from './views/Select/LockerPage.vue';
+import CheckDeliveryPage from './views/Select/CheckDeliveryPage.vue';
+import PaySuccessPage from './views/Select/PaySuccessPage.vue';
+import SelectPage from './views/Select/SelectPage.vue';
 
 const routes = [
   {

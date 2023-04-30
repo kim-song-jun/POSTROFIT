@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import historyAbout from './historyAbout.vue';
-import usingLocker from './usingLocker.vue';
+import historyAbout from '../../components/User/historyAbout.vue';
+import usingLocker from '../../components/User/usingLocker.vue';
 
 export default {
   components: {

@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import locationBox from '../components/locationBox.vue';
-import noticeBox from '../components/noticeBox.vue';
+import locationBox from '../locationBox.vue';
+import noticeBox from '../noticeBox.vue';
 
 export default {
   props: {

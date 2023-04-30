@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import topMenu from '../components/topMenu.vue';
-import bottomMenu from '../components/bottomMenu.vue';
-import bottomLocker from '../components/bottomLocker.vue';
+import topMenu from '../components/Main/topMenu.vue';
+import bottomMenu from '../components/Main/bottomMenu.vue';
+import bottomLocker from '../components/Main/bottomLocker.vue';
 import subwayLine2 from '../components/SubWay/subwayLine2.vue';
 import MainButton from '../components/mainButton.vue';
 import 'animate.css';

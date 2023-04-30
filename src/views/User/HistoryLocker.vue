@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import lockerInfo from '../lockerInfo.vue';
-import noticeBox from '../noticeBox.vue';
+import lockerInfo from '../../components/lockerInfo.vue';
+import noticeBox from '../../components/noticeBox.vue';
 
 export default {
   computed: {

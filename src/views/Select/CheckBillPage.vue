@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import progressMenu from '../components/progressMenu.vue';
-import noticeBox from '../components/noticeBox.vue';
-import checkModal from '../components/checkModal.vue';
+import progressMenu from '../../components/progressMenu.vue';
+import noticeBox from '../../components/noticeBox.vue';
+import checkModal from '../../components/Select/checkModal.vue';
 
 export default {
   data() {

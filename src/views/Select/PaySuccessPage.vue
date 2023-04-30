@@ -6,7 +6,7 @@
       @closeLockerModal="move2Main"
     />
     <div class="paySuccessPage_content">
-      <img src="../assets/images/dice1.png" alt="" width="76" height="76" />
+      <img src="../../assets/images/dice1.png" alt="" width="76" height="76" />
       <div class="paySuccessPage_message">{{ title }}</div>
       <div class="paySuccessPage_info">{{ size }} {{ time }}</div>
       <div class="progressMenu_container">
@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import noticeBox from '../components/noticeBox.vue';
-import lockerModal from '../components/lockerModal.vue';
+import noticeBox from '../../components/noticeBox.vue';
+import lockerModal from '../../components/lockerModal.vue';
 
 export default {
   data() {

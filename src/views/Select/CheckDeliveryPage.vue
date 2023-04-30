@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import progressMenu from '../components/progressMenu3.vue';
-import locationBox from '../components/locationBox.vue';
+import progressMenu from '../../components/progressMenu3.vue';
+import locationBox from '../../components/locationBox.vue';
 import noticeBox from '@/components/noticeBox.vue';
-import checkModal from '../components/checkModal.vue';
+import checkModal from '../../components/Select/checkModal.vue';
 
 export default {
   data() {

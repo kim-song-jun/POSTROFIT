@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import ProgressMenu from '../components/progressMenu.vue';
+import ProgressMenu from '../../components/progressMenu.vue';
 
 export default {
   data() {

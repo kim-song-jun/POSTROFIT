@@ -1,6 +1,6 @@
 <template>
   <div class="bottomMenu_container">
-    <MenuBar />
+    <menuBar />
     <div class="bottomMenu_content">
       <div class="bottomMenu_column" @click="move2SelectPage">
         <div class="bottomMenu_source">{{ this.startStation.name }}</div>
@@ -8,7 +8,7 @@
           <div class="bottomMenu_post_content1">
             <img
               class="bottomMenu_image"
-              src="../assets/images/dice1.png"
+              src="../../assets/images/dice1.png"
               alt=""
             />
             맡길게요
@@ -23,14 +23,18 @@
           </div>
         </div>
       </div>
-      <img class="bottomMenu_arrow" src="../assets/images/arrow.png" alt="" />
+      <img
+        class="bottomMenu_arrow"
+        src="../../assets/images/arrow.png"
+        alt=""
+      />
       <div class="bottomMenu_column" @click="move2LockerPage">
         <div class="bottomMenu_destination">{{ this.endStation.name }}</div>
         <div class="bottomMenu_post_container">
           <div class="bottomMenu_post_content1">
             <img
               class="bottomMenu_image"
-              src="../assets/images/dice1.png"
+              src="../../assets/images/dice1.png"
               alt=""
             />
             옮길게요
@@ -50,7 +54,7 @@
 </template>
 
 <script>
-import MenuBar from './MenuBar.vue';
+import menuBar from '../menuBar.vue';
 
 export default {
   data() {
@@ -97,7 +101,7 @@ export default {
       });
   },
   components: {
-    MenuBar,
+    menuBar,
   },
 };
 </script>

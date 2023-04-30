@@ -1,6 +1,6 @@
 <template>
   <div class="bottomLocker_container">
-    <MenuBar />
+    <menuBar />
     <div class="bottomLocker_stations">
       <div class="bottomLocker_stations_sub bottomLocker_text">
         <div class="bottomLocker_stations_start">
@@ -18,7 +18,7 @@
       <div class="bottomLocker_image_container bottomLocker_text">
         <img
           class="bottomLocker_image"
-          src="../assets/images/dice1.png"
+          src="../../assets/images/dice1.png"
           alt=""
         />
         보관할게요
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue';
+import menuBar from '../menuBar.vue';
 
 export default {
   data() {
@@ -74,7 +74,7 @@ export default {
     this.testGetStoreEmpty();
   },
   components: {
-    MenuBar,
+    menuBar,
   },
 };
 </script>
