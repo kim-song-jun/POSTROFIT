@@ -65,7 +65,7 @@ export default {
           5,
           7,
         )}/${store.timestamp.slice(8, 10)}`,
-        time: store.timestamp.slice(11, 19),
+        time: store.timestamp.slice(11, 16),
         fee: store.price,
       };
     },
