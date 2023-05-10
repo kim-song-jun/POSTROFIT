@@ -113,7 +113,7 @@ export default {
   bottom: 0px;
   left: 0px;
   width: 100vw;
-  height: 50vw;
+  height: 23vh;
   /* UI Properties */
   background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
   background: #fff 0% 0% no-repeat padding-box;
