@@ -9,11 +9,11 @@
       />
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
-        <p class="topMenu_source">
+        <p class="topMenu_source" @click="setStartStation">
           {{ this.$store.state.startStation?.name ?? '출발역' }}
         </p>
         <img class="topMenu_arrow" src="../../assets/images/arrow.png" alt="" />
-        <p class="topMenu_destination">
+        <p class="topMenu_destination" @click="setEndStation">
           {{ this.$store.state.endStation?.name ?? '도착역' }}
         </p>
       </div>
@@ -26,7 +26,22 @@ export default {
   props: {},
   methods: {
     move2UserPage() {
+      this.$store.commit('setBottomMenuOpen', false);
+      this.$store.commit('setBottomLockerOpen', false);
+      this.$store.commit('setBottomStationOpen', false);
       this.$router.push('/UserPage');
+    },
+    setStartStation() {
+      if (this.$store.state.bottomMenuOpen == true)
+        this.$store.commit('setBottomMenuOpen', false);
+      this.$store.commit('setBottomStationCreated', true);
+      this.$store.commit('setBottomStationOpen', true);
+    },
+    setEndStation() {
+      if (this.$store.state.bottomMenuOpen == true)
+        this.$store.commit('setBottomMenuOpen', false);
+      this.$store.commit('setBottomStationCreated', true);
+      this.$store.commit('setBottomStationOpen', true);
     },
   },
 };
