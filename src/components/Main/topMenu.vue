@@ -9,13 +9,30 @@
       />
       <div class="topMenu_bar"></div>
       <div class="topMenu_stations">
-        <p class="topMenu_source" @click="setStartStation">
-          {{ this.$store.state.startStation?.name ?? '출발역' }}
-        </p>
-        <img class="topMenu_arrow" src="../../assets/images/arrow.png" alt="" />
-        <p class="topMenu_destination" @click="setEndStation">
-          {{ this.$store.state.endStation?.name ?? '도착역' }}
-        </p>
+        <input
+          type="text"
+          placeholder="출발역을 입력해주세요"
+          class="topMenu_source"
+          :value="startStation?.name ?? ''"
+          @input="setStartStation"
+        />
+        <!-- {{ this.$store.state.startStation?.name ?? '출발역' }} -->
+        <input
+          type="text"
+          placeholder="도착역을 입력해주세요"
+          class="topMenu_destination"
+          :value="endStation?.name ?? ''"
+          @input="setEndStation"
+        />
+        <!-- {{ this.$store.state.endStation?.name ?? '도착역' }} -->
+      </div>
+      <div class="topMenu_changebtn">
+        <img
+          class="topMenu_changeArrow"
+          src="../../assets/images/changeArrow.png"
+          alt=""
+          @click="changeStation"
+        />
       </div>
     </div>
   </div>
@@ -62,16 +79,19 @@ export default {
   border-radius: 5vw;
   opacity: 1;
   z-index: 10;
+  padding: 8px 0px 10px;
 }
 .topMenu_content {
   width: 86vw;
   display: flex;
+  margin-right: auto;
+  margin-left: auto;
   /* justify-content: center; */
   align-items: center;
-  position: absolute;
+  /* position: absolute; */
   /* Layout Properties */
-  top: 5vw;
-  left: 4vw;
+  /* top: 5vw;
+  left: 4vw; */
 }
 .topMenu_user_circle {
   width: 7.5vw;
@@ -83,22 +103,28 @@ export default {
 }
 .topMenu_stations {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: space-evenly;
+  align-items: center; */
   width: 100%;
 }
 .topMenu_bar {
   border-right: 1.5px darkgray solid;
-  height: 7.5vw;
+  height: 13.5vw;
   margin: 0vw 2.5vw;
 }
-.topMenu_arrow {
-  width: 6.2vw;
-  height: 4.2vw;
+.topMenu_changebtn {
+  padding: 0px 0px 0px 5px;
+}
+.topMenu_changeArrow {
+  position: relative;
+  width: 5.2vw;
+  height: 5.2vw;
+  margin: 3px;
 }
 .topMenu_source,
 .topMenu_destination {
-  margin: 0;
+  margin: 1.5px 0px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-20) / 26px Roboto;
