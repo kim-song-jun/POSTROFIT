@@ -162,6 +162,24 @@ export default {
         `/delivery/count/orders/${startStation}/${endStation}`,
       );
     },
+    changeStation() {
+      const tempStation = {...this.startStation};
+      this.$store.commit('setStartStation', this.endStation);
+      this.$store.commit('setEndStation', tempStation);
+      // 추가적으로 보관함 개수도 변경해줘야 한다.
+      Promise.all([
+        this.testGetOrderEmpty('테스트역2'),
+        this.testGetDeliveryEmpty('테스트역2', '테스트역1'),
+      ])
+        .then((value) => {
+          this.$store.commit('setMainData', {
+            orderEmpty: {...value[0].data},
+            deliveryEmpty: {...value[1].data},
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
