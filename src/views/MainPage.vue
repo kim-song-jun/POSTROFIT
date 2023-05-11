@@ -1,6 +1,6 @@
 <template>
   <div class="MainPage-Container">
-    <topMenu></topMenu>
+    <topMenu @translate="setTranslate" :scale="this.scale"></topMenu>
     <MainButton @scale="setScale" :translate="this.translate"></MainButton>
     <subwayLine2 @translate="setTranslate" :scale="this.scale"></subwayLine2>
     <bottomMenu
