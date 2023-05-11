@@ -70,7 +70,7 @@ export default {
 .historyAbout {
   position: relative;
   margin-top: 2.5vw;
-  padding: 1.1vh 5vw 1.1vh 3vw;
+  padding: 1.1vh 7vw 1.1vh 3vw;
   /* Layout Properties */
   width: 73vw;
   height: 10.5vw;
@@ -88,10 +88,11 @@ export default {
 .historyAbout_textbox4 {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 0.5vw;
 }
 .historyAbout_history_type {
-  margin: 0vw 28vw 0vw 11vw;
+  margin: 0vw 37vw 0vw 4vw;
 }
 .historyAbout_history_location {
   display: flex;
@@ -107,7 +108,6 @@ export default {
   margin: 0vw 2vw;
 }
 .historyAbout_history_price {
-  margin-left: auto;
   font: normal normal bold 18px/26px Roboto;
   text-align: left;
   letter-spacing: 0px;
