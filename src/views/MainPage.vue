@@ -4,14 +4,13 @@
     <MainButton @scale="setScale" :translate="this.translate"></MainButton>
     <subwayLine2 @translate="setTranslate" :scale="this.scale"></subwayLine2>
     <bottomMenu
-      v-if="this.$store.state.bottomMenuCreated"
+      v-if="this.$store.state.bottomMenuOpen"
       class="animate__animated animate__fast"
       :class="setSlider(this.$store.state.bottomMenuOpen)"
     />
     <bottomLocker
       v-if="
-        this.$store.state.bottomLockerCreated &&
-        !this.$store.state.bottomMenuOpen &&
+        this.$store.state.bottomLockerOpen && !this.$store.state.bottomMenuOpen
       "
       class="animate__animated animate__fast"
       :class="setSlider(this.$store.state.bottomLockerOpen)"
