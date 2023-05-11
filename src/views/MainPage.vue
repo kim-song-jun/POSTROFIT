@@ -12,15 +12,9 @@
       v-if="
         this.$store.state.bottomLockerCreated &&
         !this.$store.state.bottomMenuOpen &&
-        !this.$store.state.bottomStationOpen
       "
       class="animate__animated animate__fast"
       :class="setSlider(this.$store.state.bottomLockerOpen)"
-    />
-    <bottomStation
-      v-if="this.$store.state.bottomStationCreated"
-      class="animate__animated animate__fast"
-      :class="setSlider(this.$store.state.bottomStationOpen)"
     />
   </div>
 </template>
@@ -29,7 +23,6 @@
 import topMenu from '../components/Main/topMenu.vue';
 import bottomMenu from '../components/Main/bottomMenu.vue';
 import bottomLocker from '../components/Main/bottomLocker.vue';
-import bottomStation from '../components/Main/bottomStation.vue';
 import subwayLine2 from '../components/SubWay/subwayLine2.vue';
 import MainButton from '../components/mainButton.vue';
 import 'animate.css';
@@ -38,7 +31,6 @@ export default {
     topMenu,
     bottomMenu,
     bottomLocker,
-    bottomStation,
     subwayLine2,
     MainButton,
   },

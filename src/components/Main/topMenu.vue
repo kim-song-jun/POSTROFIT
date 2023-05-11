@@ -45,20 +45,9 @@ export default {
     move2UserPage() {
       this.$store.commit('setBottomMenuOpen', false);
       this.$store.commit('setBottomLockerOpen', false);
-      this.$store.commit('setBottomStationOpen', false);
       this.$router.push('/UserPage');
     },
-    setStartStation() {
-      if (this.$store.state.bottomMenuOpen == true)
-        this.$store.commit('setBottomMenuOpen', false);
-      this.$store.commit('setBottomStationCreated', true);
-      this.$store.commit('setBottomStationOpen', true);
     },
-    setEndStation() {
-      if (this.$store.state.bottomMenuOpen == true)
-        this.$store.commit('setBottomMenuOpen', false);
-      this.$store.commit('setBottomStationCreated', true);
-      this.$store.commit('setBottomStationOpen', true);
     },
   },
 };
