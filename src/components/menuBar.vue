@@ -26,6 +26,7 @@ export default {
       }
       this.$store.commit('setBottomMenuOpen', false);
       this.$store.commit('setBottomLockerOpen', false);
+      this.$store.commit('setBottomStationOpen', false);
     },
   },
   computed: {

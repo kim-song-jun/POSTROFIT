@@ -8,8 +8,10 @@ const store = createStore({
       selectStation: {},
       bottomMenuOpen: false,
       bottomLockerOpen: false,
+      bottomStationOpen: false,
       bottomMenuCreated: false,
       bottomLockerCreated: false,
+      bottomStationCreated: false,
       LINE2_JSON: {},
       // 옮길게요 기능에 필요한 데이터
       deliveryData: {},
@@ -33,11 +35,17 @@ const store = createStore({
     setBottomLockerCreated(state, bool) {
       state.bottomLockerCreated = bool;
     },
-    setBottomLockerOpen(state, bool) {
-      state.bottomLockerOpen = bool;
+    setBottomStationCreated(state, bool) {
+      state.bottomStationCreated = bool;
     },
     setBottomMenuOpen(state, bool) {
       state.bottomMenuOpen = bool;
+    },
+    setBottomLockerOpen(state, bool) {
+      state.bottomLockerOpen = bool;
+    },
+    setBottomStationOpen(state, bool) {
+      state.bottomStationOpen = bool;
     },
     setSelectStation(state, selectStation) {
       state.selectStation = {...selectStation};
