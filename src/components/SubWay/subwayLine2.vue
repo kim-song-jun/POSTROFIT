@@ -60,8 +60,6 @@ export default {
       startY: 0,
       translateX: 0,
       translateY: 0,
-      x: 0,
-      y: 0,
       rect: {},
     };
   },
@@ -70,6 +68,14 @@ export default {
       this.line2 = this.line2.map((item) => ({...item, open: false}));
     },
     mapClickHandler(event, key) {
+      const img = document.querySelector('.Line2-Image');
+      const targetX = event.target.coords.split(',')[0];
+      const targetY = event.target.coords.split(',')[1];
+      this.translateX =
+        ((340 - (targetX - 15)) / 390) * window.innerWidth * this.scale;
+      this.translateY =
+        ((280 - (targetY - 128)) / 844) * window.innerHeight * this.scale;
+      img.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
       this.line2 = this.line2.map((item) => ({...item, open: false}));
       const imageRect = this.$refs.image.getBoundingClientRect();
       this.rect = {
@@ -78,12 +84,14 @@ export default {
         width: imageRect.width,
         height: imageRect.height,
       };
-      this.x = event.clientX;
-      this.y = event.clientY;
       this.line2[key].open = true;
       this.$store.commit('setSelectStation', this.line2[key]);
       this.$store.commit('setBottomLockerCreated', true);
       this.$store.commit('setBottomLockerOpen', true);
+      this.$emit(
+        'translate',
+        `translate(${this.translateX}px, ${this.translateY}px)`,
+      );
     },
     imgHandleTouchStart(event) {
       const touch = event.touches[0];
