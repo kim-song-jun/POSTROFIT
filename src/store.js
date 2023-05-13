@@ -8,11 +8,13 @@ const store = createStore({
       selectStation: {},
       bottomMenuOpen: false,
       bottomLockerOpen: false,
-      bottomStationOpen: false,
       bottomMenuCreated: false,
       bottomLockerCreated: false,
-      bottomStationCreated: false,
       LINE2_JSON: {},
+      mainData: {
+        orderEmpty: {},
+        deliveryEmpty: {},
+      },
       // 옮길게요 기능에 필요한 데이터
       deliveryData: {},
       // 맡길게요 기능에 필요한 데이터
@@ -35,17 +37,11 @@ const store = createStore({
     setBottomLockerCreated(state, bool) {
       state.bottomLockerCreated = bool;
     },
-    setBottomStationCreated(state, bool) {
-      state.bottomStationCreated = bool;
-    },
     setBottomMenuOpen(state, bool) {
       state.bottomMenuOpen = bool;
     },
     setBottomLockerOpen(state, bool) {
       state.bottomLockerOpen = bool;
-    },
-    setBottomStationOpen(state, bool) {
-      state.bottomStationOpen = bool;
     },
     setSelectStation(state, selectStation) {
       state.selectStation = {...selectStation};
@@ -62,6 +58,9 @@ const store = createStore({
         stations: Line2.stations.map((item) => ({...item, open: false})),
       };
       console.log(state.LINE2_JSON);
+    },
+    setMainData(state, newData) {
+      state.mainData = {...newData};
     },
     setDeliveryData(state, newData) {
       state.deliveryData = {...newData};

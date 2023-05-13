@@ -1,26 +1,19 @@
 <template>
   <div class="MainPage-Container">
-    <topMenu></topMenu>
+    <topMenu @translate="setTranslate" :scale="this.scale"></topMenu>
     <MainButton @scale="setScale" :translate="this.translate"></MainButton>
     <subwayLine2 @translate="setTranslate" :scale="this.scale"></subwayLine2>
     <bottomMenu
-      v-if="this.$store.state.bottomMenuCreated"
+      v-if="this.$store.state.bottomMenuOpen"
       class="animate__animated animate__fast"
       :class="setSlider(this.$store.state.bottomMenuOpen)"
     />
     <bottomLocker
       v-if="
-        this.$store.state.bottomLockerCreated &&
-        !this.$store.state.bottomMenuOpen &&
-        !this.$store.state.bottomStationOpen
+        this.$store.state.bottomLockerOpen && !this.$store.state.bottomMenuOpen
       "
       class="animate__animated animate__fast"
       :class="setSlider(this.$store.state.bottomLockerOpen)"
-    />
-    <bottomStation
-      v-if="this.$store.state.bottomStationCreated"
-      class="animate__animated animate__fast"
-      :class="setSlider(this.$store.state.bottomStationOpen)"
     />
   </div>
 </template>
@@ -29,7 +22,6 @@
 import topMenu from '../components/Main/topMenu.vue';
 import bottomMenu from '../components/Main/bottomMenu.vue';
 import bottomLocker from '../components/Main/bottomLocker.vue';
-import bottomStation from '../components/Main/bottomStation.vue';
 import subwayLine2 from '../components/SubWay/subwayLine2.vue';
 import MainButton from '../components/mainButton.vue';
 import 'animate.css';
@@ -38,7 +30,6 @@ export default {
     topMenu,
     bottomMenu,
     bottomLocker,
-    bottomStation,
     subwayLine2,
     MainButton,
   },
