@@ -110,9 +110,27 @@ export default {
     },
     async testInitStorage() {
       let newLocker = [];
+      const station =
+        this.selectStation.name == '신당'
+          ? '테스트역0'
+          : this.selectStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      const sStation =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      const eStation =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
       if (this.serviceType == '맡길게요')
         this.$axios
-          .get(`/order/storage/테스트역1`)
+          .get(`/order/storage/${sStation}`)
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {
@@ -125,7 +143,7 @@ export default {
 
       if (this.serviceType == '옮길게요') {
         await this.$axios
-          .get(`/delivery/storage/테스트역1/테스트역2`)
+          .get(`/delivery/storage/${sStation}/${eStation}`)
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {
@@ -139,7 +157,7 @@ export default {
       }
       if (this.serviceType == '보관할게요')
         this.$axios
-          .get('/store/storage/테스트역1')
+          .get(`/store/storage/${station}`)
           .then((response) => {
             newLocker = this.makeLockerByData(response.data);
             this.$store.commit('setStorage', {

@@ -113,10 +113,16 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      if (this.serviceType == '옮길게요')
+      if (this.serviceType == '옮길게요') {
+        const station =
+          this.startStation.name == '신당'
+            ? '테스트역0'
+            : this.startStation.name == '사당'
+            ? '테스트역1'
+            : '테스트역2';
         this.$axios
           .get(
-            `/delivery/take/password/테스트역1/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
+            `/delivery/take/password/${station}/${this.$store.state.deliveryData.selectedLocker.storageNumber}`,
           )
           .then((response) => {
             this.lockerInfo = response.data;
@@ -124,6 +130,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+      }
       if (this.serviceType == '보관할게요') {
         const query = {params: {storeId: this.$store.state.storeData.storeId}};
         this.$axios

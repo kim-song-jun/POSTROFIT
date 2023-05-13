@@ -67,16 +67,37 @@ export default {
     clickHandler(event) {
       this.line2 = this.line2.map((item) => ({...item, open: false}));
     },
+    testGetStoreEmpty() {
+      const station =
+        this.selectStation.name == '신당'
+          ? '테스트역0'
+          : this.selectStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      this.$axios
+        .get(`/store/empty/${station}`)
+        .then((response) => {
+          this.$store.commit('setMainData', {
+            ...this.$store.state.mainData,
+            storeEmpty: response.data,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     mapClickHandler(event, key) {
       const img = document.querySelector('.Line2-Image');
       const targetX = event.target.coords.split(',')[0];
       const targetY = event.target.coords.split(',')[1];
+
       this.translateX =
         ((340 - (targetX - 15)) / 390) * window.innerWidth * this.scale;
       this.translateY =
         ((280 - (targetY - 128)) / 844) * window.innerHeight * this.scale;
       img.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
       this.line2 = this.line2.map((item) => ({...item, open: false}));
+
       const imageRect = this.$refs.image.getBoundingClientRect();
       this.rect = {
         x: imageRect.x,
@@ -84,10 +105,13 @@ export default {
         width: imageRect.width,
         height: imageRect.height,
       };
+
       this.line2[key].open = true;
       this.$store.commit('setSelectStation', this.line2[key]);
+      this.testGetStoreEmpty();
       this.$store.commit('setBottomLockerCreated', true);
       this.$store.commit('setBottomLockerOpen', true);
+
       this.$emit(
         'translate',
         `translate(${this.translateX}px, ${this.translateY}px)`,
@@ -159,6 +183,9 @@ export default {
     },
     bottomLockerOpen() {
       return this.$store.state.bottomLockerOpen;
+    },
+    selectStation() {
+      return this.$store.state.selectStation;
     },
   },
   watch: {

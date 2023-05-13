@@ -15,10 +15,10 @@
           </div>
           <div class="bottomMenu_post_content2">
             <span class="bottomMenu_size"
-              >중형 {{ orderEmpty.midCount }}개</span
+              >중형 {{ orderEmpty?.midCount ?? '?' }}개</span
             >
             <span class="bottomMenu_size"
-              >소형 {{ orderEmpty.smallCount }}개</span
+              >소형 {{ orderEmpty?.smallCount ?? '?' }}개</span
             >
           </div>
         </div>
@@ -41,10 +41,10 @@
           </div>
           <div class="bottomMenu_post_content2">
             <span class="bottomMenu_size"
-              >중형 {{ deliveryEmpty.midCount }}개</span
+              >중형 {{ deliveryEmpty?.midCount ?? '?' }}개</span
             >
             <span class="bottomMenu_size"
-              >소형 {{ deliveryEmpty.smallCount }}개</span
+              >소형 {{ deliveryEmpty?.smallCount ?? '?' }}개</span
             >
           </div>
         </div>
@@ -58,10 +58,7 @@ import menuBar from '../menuBar.vue';
 
 export default {
   data() {
-    return {
-      orderEmpty: {smallCount: '?', midCount: '?'},
-      deliveryEmpty: {smallCount: '?', midCount: '?'},
-    };
+    return {};
   },
   computed: {
     startStation() {
@@ -73,6 +70,12 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    orderEmpty() {
+      return this.$store.state.mainData.orderEmpty;
+    },
+    deliveryEmpty() {
+      return this.$store.state.mainData.deliveryEmpty;
+    },
   },
   methods: {
     move2SelectPage() {
@@ -83,22 +86,6 @@ export default {
       this.$store.commit('setServiceType', '옮길게요');
       this.$router.push('/SelectPage/lockerPage');
     },
-    testGetOrderEmpty() {
-      return this.$axios.get(`/order/empty/테스트역1`);
-    },
-    testGetDeliveryEmpty() {
-      return this.$axios.get(`/delivery/count/orders/테스트역1/테스트역2`);
-    },
-  },
-  mounted() {
-    Promise.all([this.testGetOrderEmpty(), this.testGetDeliveryEmpty()])
-      .then((value) => {
-        this.orderEmpty = value[0].data;
-        this.deliveryEmpty = value[1].data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
   components: {
     menuBar,

@@ -25,6 +25,43 @@ export default {
     return {};
   },
   methods: {
+    testGetOrderEmpty() {
+      const station =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      return this.$axios.get(`/order/empty/${station}`);
+    },
+    testGetDeliveryEmpty() {
+      const sStation =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      const eStation =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      return this.$axios.get(`/delivery/count/orders/${sStation}/${eStation}`);
+    },
+    getEmpty() {
+      Promise.all([this.testGetOrderEmpty(), this.testGetDeliveryEmpty()])
+        .then((value) => {
+          this.$store.commit('setMainData', {
+            ...this.$store.state.mainData,
+            orderEmpty: value[0].data,
+            deliveryEmpty: value[1].data,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     clickedStart() {
       this.$store.commit('setStartStation', this.selectStation);
       if (this.endStation?.name == this.selectStation.name) {
@@ -34,6 +71,7 @@ export default {
       const start = this.startStation?.name?.length ?? 0;
       const end = this.endStation?.name?.length ?? 0;
       if (start && end) {
+        this.getEmpty();
         this.$store.commit('setBottomMenuCreated', true);
         this.$store.commit('setBottomMenuOpen', true);
       }
@@ -47,6 +85,7 @@ export default {
       const start = this.startStation?.name?.length ?? 0;
       const end = this.endStation?.name?.length ?? 0;
       if (start && end) {
+        this.getEmpty();
         this.$store.commit('setBottomMenuCreated', true);
         this.$store.commit('setBottomMenuOpen', true);
       }

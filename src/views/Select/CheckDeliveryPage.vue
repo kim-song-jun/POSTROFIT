@@ -87,12 +87,17 @@ export default {
     },
     makeOrder() {
       const storageId = this.$store.state.orderData.selectedLocker.storageId;
-      const endStationName = '테스트역2';
+      const station =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
       this.$axios
         .post('/order/make', {
           userId: this.$store.state.userID,
           storageId: storageId,
-          endStationName: endStationName,
+          endStationName: station,
         })
         .then((response) => {
           console.log(response);

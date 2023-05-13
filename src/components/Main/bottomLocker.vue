@@ -23,9 +23,15 @@
         />
         보관할게요
       </div>
-      <span class="bottomLocker_size">대형 {{ storeEmpty.bigCount }}개,</span>
-      <span class="bottomLocker_size">중형 {{ storeEmpty.midCount }}개,</span>
-      <span class="bottomLocker_size">소형 {{ storeEmpty.smallCount }}개</span>
+      <span class="bottomLocker_size"
+        >대형 {{ storeEmpty?.bigCount ?? '?' }}개,</span
+      >
+      <span class="bottomLocker_size"
+        >중형 {{ storeEmpty?.midCount ?? '?' }}개,</span
+      >
+      <span class="bottomLocker_size"
+        >소형 {{ storeEmpty?.smallCount ?? '?' }}개</span
+      >
       사용가능
     </div>
   </div>
@@ -36,9 +42,7 @@ import menuBar from '../menuBar.vue';
 
 export default {
   data() {
-    return {
-      storeEmpty: {smallCount: '?', midCount: '?', bigCount: '?'},
-    };
+    return {};
   },
   computed: {
     startStation() {
@@ -50,6 +54,9 @@ export default {
     selectStation() {
       return this.$store.state.selectStation;
     },
+    storeEmpty() {
+      return this.$store.state.mainData.storeEmpty;
+    },
   },
   methods: {
     move2Lockerpage() {
@@ -59,19 +66,6 @@ export default {
       // 화면 이동
       this.$router.push('/SelectPage/lockerPage');
     },
-    testGetStoreEmpty() {
-      this.$axios
-        .get('/store/empty/테스트역1')
-        .then((response) => {
-          this.storeEmpty = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  },
-  mounted() {
-    this.testGetStoreEmpty();
   },
   components: {
     menuBar,
