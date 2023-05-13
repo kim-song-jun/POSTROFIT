@@ -66,7 +66,7 @@ export default {
       this.checkModalOpen = false;
       // 결제 후 등록 요청
       const reqData = {
-        userId: 0,
+        userId: this.$store.state.userID,
         storageId: this.$store.state.storeData.selectedLocker.storageId,
       };
       this.$axios

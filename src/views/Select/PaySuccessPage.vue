@@ -104,10 +104,9 @@ export default {
     },
     testOpenLockerModal() {
       // 보관함 비밀번호 받아오기
-      const userId = 0;
       if (this.serviceType == '맡길게요')
         this.$axios
-          .get(`/order/storage/info/${userId}`)
+          .get(`/order/storage/info/${this.$store.state.userID}`)
           .then((response) => {
             this.lockerInfo = response.data;
           })

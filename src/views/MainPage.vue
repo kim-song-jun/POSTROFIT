@@ -60,6 +60,9 @@ export default {
       this.scale = value;
     },
   },
+  created() {
+    if (this.$store.state.userID == Infinity) this.$router.push('/LoginPage');
+  },
 };
 </script>
 

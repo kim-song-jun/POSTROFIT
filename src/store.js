@@ -3,6 +3,8 @@ import Line2 from '../src/assets/data/Line2.json';
 const store = createStore({
   state() {
     return {
+      // test. userID
+      userID: Infinity,
       startStation: {},
       endStation: {},
       selectStation: {},
@@ -29,6 +31,9 @@ const store = createStore({
     };
   },
   mutations: {
+    setUserID(state, id) {
+      state.userID = id;
+    },
     setBottomMenuCreated(state, bool) {
       state.bottomMenuCreated = bool;
     },

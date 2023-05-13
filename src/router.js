@@ -18,6 +18,10 @@ const routes = [
     component: () => import('../src/views/LoadingPage.vue'),
   },
   {
+    path: '/LoginPage',
+    component: () => import('../src/views/LoginPage.vue'),
+  },
+  {
     path: '/MainPage',
     component: MainPage,
   },

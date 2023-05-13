@@ -14,7 +14,7 @@ export default {
   components: {MainLogo},
   mounted() {
     setTimeout(() => {
-      this.$router.push({path: '/MainPage'});
+      this.$router.push({path: '/LoginPage'});
     }, 3000);
   },
 };
