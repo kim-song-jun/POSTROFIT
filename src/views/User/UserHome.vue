@@ -156,10 +156,11 @@ export default {
 .userHome_name_container {
   display: flex;
   position: absolute;
-  left: 52vw;
+  right: 15vw;
   top: 6vw;
 }
 .userHome_name {
+  margin-right: 5px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-36) / var(--unnamed-line-spacing-39)
