@@ -10,10 +10,8 @@ const store = createStore({
       selectStation: {},
       bottomMenuOpen: false,
       bottomLockerOpen: false,
-      bottomStationOpen: false,
       bottomMenuCreated: false,
       bottomLockerCreated: false,
-      bottomStationCreated: false,
       LINE2_JSON: {},
       mainData: {
         orderEmpty: {},
@@ -45,17 +43,11 @@ const store = createStore({
     setBottomLockerCreated(state, bool) {
       state.bottomLockerCreated = bool;
     },
-    setBottomStationCreated(state, bool) {
-      state.bottomStationCreated = bool;
-    },
     setBottomMenuOpen(state, bool) {
       state.bottomMenuOpen = bool;
     },
     setBottomLockerOpen(state, bool) {
       state.bottomLockerOpen = bool;
-    },
-    setBottomStationOpen(state, bool) {
-      state.bottomStationOpen = bool;
     },
     setSelectStation(state, selectStation) {
       state.selectStation = {...selectStation};
