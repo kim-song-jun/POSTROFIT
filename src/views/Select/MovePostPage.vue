@@ -74,6 +74,9 @@ export default {
     startStation() {
       return this.$store.state.startStation;
     },
+    endStation() {
+      return this.$store.state.endStation;
+    },
   },
   methods: {
     move2LockerPage() {
@@ -92,10 +95,28 @@ export default {
       });
     },
     testGetOrderEmpty() {
-      return this.$axios.get(`/order/empty/테스트역1`);
+      const sStation =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      return this.$axios.get(`/order/empty/${sStation}`);
     },
     testGetCost() {
-      return this.$axios.get('/order/cost/테스트역1/테스트역2');
+      const sStation =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      const eStation =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      return this.$axios.get(`/order/cost/${sStation}/${eStation}`);
     },
   },
   mounted() {

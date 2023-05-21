@@ -92,7 +92,6 @@ export default {
         });
     },
     async getPassword() {
-      const userId = 1;
       // 출발역 비밀번호
       if (this.$store.state.userHistoryDetail.stat == 'WAIT') {
         const storageNum = 1;
@@ -114,7 +113,7 @@ export default {
       else
         await this.$axios
           .get(
-            `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${userId}`,
+            `/delivery/password/${this.$store.state.userHistoryDetail.place[0]}/${this.$store.state.userHistoryDetail.place[1]}/${this.$store.state.userID}`,
           )
           .then((response) => {
             this.$store.commit('setUserHistoryDetail', {

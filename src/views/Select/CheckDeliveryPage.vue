@@ -75,27 +75,29 @@ export default {
       this.checkModalOpen = false;
       // 결제 페이지로 이동
       // 결제 후 등록 요청
-      // user_id 0~3, 2는 배달부
-      const userId = 0;
-      // try. reqData ={}로 변경해보기
       if (this.serviceType == '맡길게요') {
-        this.makeOrder(userId);
+        this.makeOrder();
       }
       if (this.serviceType == '옮길게요') {
-        this.takeDelivery(userId);
+        this.takeDelivery();
       }
     },
     move2PayPage() {
       // 결제 페이지로 이동
     },
-    makeOrder(userId) {
+    makeOrder() {
       const storageId = this.$store.state.orderData.selectedLocker.storageId;
-      const endStationName = '테스트역2';
+      const station =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
       this.$axios
         .post('/order/make', {
-          userId: userId,
+          userId: this.$store.state.userID,
           storageId: storageId,
-          endStationName: endStationName,
+          endStationName: station,
         })
         .then((response) => {
           console.log(response);
@@ -106,12 +108,12 @@ export default {
           console.log(error);
         });
     },
-    takeDelivery(userId) {
+    takeDelivery() {
       const orderId = this.$store.state.deliveryData.orderId;
 
       this.$axios
         .post('/delivery/take', {
-          userId: 2,
+          userId: this.$store.state.userID,
           orderId: orderId,
         })
         .then((response) => {

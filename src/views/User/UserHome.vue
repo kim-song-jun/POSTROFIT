@@ -8,7 +8,9 @@
         <div class="userHome_name">{{ nickname }}</div>
         <div class="userHome_name_sub">님</div>
       </div>
-      <div class="userHome_modify_btn userHome_text2">수정하기</div>
+      <div class="userHome_modify_btn userHome_text2" @click="logout">
+        로그아웃
+      </div>
     </div>
     <div class="userHome_locker_container">
       <div class="userHome_textbox">
@@ -38,21 +40,25 @@ export default {
   },
   data() {
     return {
-      nickname: '김성준',
+      nickname: 'User' + this.$store.state.userID,
     };
   },
   methods: {
+    logout() {
+      this.$store.commit('setUserID', Infinity);
+      this.$router.push({path: '/LoginPage'});
+    },
     getSize(size) {
       if (size == 'SMALL') return '소형';
       if (size == 'MID') return '중형';
       if (size == 'BIG') return '대형';
       return '?';
     },
-    testGetStore(userId) {
-      return this.$axios.get(`/user/store/${userId}`);
+    testGetStore() {
+      return this.$axios.get(`/user/store/${this.$store.state.userID}`);
     },
-    testGetHistory(userId) {
-      return this.$axios.get(`/user/history/${userId}`);
+    testGetHistory() {
+      return this.$axios.get(`/user/history/${this.$store.state.userID}`);
     },
     mapUserStore(store) {
       return {
@@ -91,7 +97,7 @@ export default {
       });
     },
     setUserData() {
-      Promise.all([this.testGetStore(0), this.testGetHistory(1)])
+      Promise.all([this.testGetStore(), this.testGetHistory()])
         .then((responses) => {
           this.$store.commit(
             'setUserStore',
@@ -150,10 +156,11 @@ export default {
 .userHome_name_container {
   display: flex;
   position: absolute;
-  left: 52vw;
+  right: 15vw;
   top: 6vw;
 }
 .userHome_name {
+  margin-right: 5px;
   /* UI Properties */
   /* font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-36) / var(--unnamed-line-spacing-39)

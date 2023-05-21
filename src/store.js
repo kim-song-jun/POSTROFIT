@@ -3,6 +3,8 @@ import Line2 from '../src/assets/data/Line2.json';
 const store = createStore({
   state() {
     return {
+      // test. userID
+      userID: Infinity,
       startStation: {},
       endStation: {},
       selectStation: {},
@@ -14,6 +16,7 @@ const store = createStore({
       mainData: {
         orderEmpty: {},
         deliveryEmpty: {},
+        storeEmpty: {},
       },
       // 옮길게요 기능에 필요한 데이터
       deliveryData: {},
@@ -31,6 +34,9 @@ const store = createStore({
     };
   },
   mutations: {
+    setUserID(state, id) {
+      state.userID = id;
+    },
     setBottomMenuCreated(state, bool) {
       state.bottomMenuCreated = bool;
     },

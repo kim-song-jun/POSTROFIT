@@ -86,27 +86,6 @@ export default {
       this.$store.commit('setServiceType', '옮길게요');
       this.$router.push('/SelectPage/lockerPage');
     },
-    testGetOrderEmpty() {
-      return this.$axios.get(`/order/empty/테스트역1`);
-    },
-    testGetDeliveryEmpty() {
-      return this.$axios.get(`/delivery/count/orders/테스트역1/테스트역2`);
-    },
-    getEmptyData() {
-      Promise.all([this.testGetOrderEmpty(), this.testGetDeliveryEmpty()])
-        .then((value) => {
-          this.$store.commit('setMainData', {
-            orderEmpty: {...value[0].data},
-            deliveryEmpty: {...value[1].data},
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  },
-  mounted() {
-    this.getEmptyData();
   },
   components: {
     menuBar,
