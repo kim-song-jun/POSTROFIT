@@ -1,22 +1,11 @@
 <template>
   <div class="usingLocker" v-if="storeList.length > 0">
     <div
-      v-show="this.page != 0"
-      class="usingLocker_prevArrow"
-      @click="prevLocker"
+      class="usingLocker_container"
+      @touchstart="touchstartLocker"
+      @touchmove="touchmoveLocker"
+      @touchend="touchendLocker"
     >
-      <div class="usingLocker_prevArrow_top"></div>
-      <div class="usingLocker_prevArrow_bottom"></div>
-    </div>
-    <div
-      v-show="this.page != this.storeList.length - 1"
-      class="usingLocker_arrow"
-      @click="nextLocker"
-    >
-      <div class="usingLocker_arrow_top"></div>
-      <div class="usingLocker_arrow_bottom"></div>
-    </div>
-    <div class="usingLocker_container" @click="move2LockerDetail">
       <div class="usingLocker_about">
         <div class="usingLocker_line_circle usingLocker_line_text">2</div>
         <div class="usingLocker_textbox2">
@@ -59,6 +48,8 @@ export default {
     return {
       page: 0,
       widthStyle: {},
+      startX: 0,
+      endX: 0,
     };
   },
   computed: {
@@ -76,6 +67,22 @@ export default {
     },
     nextLocker() {
       if (this.page < this.storeList.length - 1) this.page += 1;
+    },
+    touchstartLocker(event) {
+      // 첫 클릭 시 좌표 저장
+      this.startX = event.touches[0].clientX;
+      this.endX = event.touches[0].clientX;
+    },
+    touchmoveLocker(event) {
+      // 스와이프 시 마지막 좌표 저장
+      this.endX = event.touches[0].clientX;
+    },
+    touchendLocker() {
+      // 단순 클릭이라면 화면 이동
+      if (this.startX == this.endX) this.move2LockerDetail();
+      // 스와이프 시 좌표 비교 후 보관함 정보 갱신
+      else if (this.startX > this.endX) this.nextLocker();
+      else this.prevLocker();
     },
   },
   mounted() {
