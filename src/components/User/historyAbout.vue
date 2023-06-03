@@ -44,9 +44,17 @@
 
 <script>
 export default {
+  props: {
+    historyFilter: String,
+  },
   computed: {
     userHistory() {
-      return this.$store.state.userHistory;
+      let newUserHistory = [...this.$store.state.userHistory];
+      newUserHistory = newUserHistory.filter((el) => {
+        if (this.historyFilter == '') return true;
+        else return this.historyFilter == el.type;
+      });
+      return newUserHistory;
     },
   },
   methods: {

@@ -20,10 +20,20 @@
       <usingLocker />
     </div>
     <div class="userHome_history_container">
-      <div class="userHome_text1">이용내역</div>
+      <div class="userHoem_history_title userHome_text1">
+        이용내역
+        <div class="userHome_filter">
+          <select v-model="historyFilter" name="historyFilter">
+            <option value="">전체</option>
+            <option value="맡길게요">맡길게요</option>
+            <option value="옮길게요">옮길게요</option>
+            <option value="보관할게요">보관할게요</option>
+          </select>
+        </div>
+      </div>
       <div class="userHome_text2">최근 10일간 이용내역</div>
       <div class="userHome_history_content">
-        <historyAbout />
+        <historyAbout :historyFilter="historyFilter" />
       </div>
     </div>
   </div>
@@ -41,6 +51,7 @@ export default {
   data() {
     return {
       nickname: 'User' + this.$store.state.userID,
+      historyFilter: '',
     };
   },
   methods: {
@@ -263,5 +274,10 @@ export default {
 .userHome_history_container {
   width: 83vw;
   margin: 7vw auto;
+}
+.userHoem_history_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
