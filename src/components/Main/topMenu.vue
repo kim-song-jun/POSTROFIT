@@ -166,10 +166,21 @@ export default {
       const tempStation = {...this.startStation};
       this.$store.commit('setStartStation', this.endStation);
       this.$store.commit('setEndStation', tempStation);
-      // 추가적으로 보관함 개수도 변경해줘야 한다.
+      const sStation =
+        this.startStation.name == '신당'
+          ? '테스트역0'
+          : this.startStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
+      const eStation =
+        this.endStation.name == '신당'
+          ? '테스트역0'
+          : this.endStation.name == '사당'
+          ? '테스트역1'
+          : '테스트역2';
       Promise.all([
-        this.testGetOrderEmpty('테스트역2'),
-        this.testGetDeliveryEmpty('테스트역2', '테스트역1'),
+        this.testGetOrderEmpty(sStation),
+        this.testGetDeliveryEmpty(sStation, eStation),
       ])
         .then((value) => {
           this.$store.commit('setMainData', {
