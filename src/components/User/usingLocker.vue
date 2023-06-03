@@ -1,5 +1,5 @@
 <template>
-  <div class="usingLocker">
+  <div class="usingLocker" v-if="storeList.length > 0">
     <div
       v-show="this.page != 0"
       class="usingLocker_prevArrow"
@@ -9,7 +9,7 @@
       <div class="usingLocker_prevArrow_bottom"></div>
     </div>
     <div
-      v-show="this.page != this.circles.length - 1"
+      v-show="this.page != this.storeList.length - 1"
       class="usingLocker_arrow"
       @click="nextLocker"
     >
@@ -20,34 +20,35 @@
       <div class="usingLocker_about">
         <div class="usingLocker_line_circle usingLocker_line_text">2</div>
         <div class="usingLocker_textbox2">
-          <div class="userHome_text2">{{ userStore.location }}</div>
-          <div class="userHome_text3">{{ userStore.station }}</div>
+          <div class="userHome_text2">{{ storeList[page].location }}</div>
+          <div class="userHome_text3">{{ storeList[page].station }}</div>
         </div>
       </div>
       <div class="userHome_text">
         요금:
-        <span class="userHome_point_text">{{ userStore.fee }}원</span> / 4시간
+        <span class="userHome_point_text">{{ storeList[page].fee }}원</span> /
+        4시간
       </div>
       <div class="usingLocker_empty"></div>
       <div class="userHome_text">
         사이즈:
-        <span class="userHome_point_text">{{ userStore.size }}</span>
+        <span class="userHome_point_text">{{ storeList[page].size }}</span>
       </div>
       <div class="usingLocker_empty2"></div>
       <div class="userHome_text4">보관 기간</div>
       <div class="userHome_text3 usingLocker_time">
-        {{ userStore.date }}
-        <span class="userHome_point_text">{{ userStore.time }}</span> ~
+        {{ storeList[page].date }}
+        <span class="userHome_point_text">{{ storeList[page].time }}</span> ~
       </div>
       <!-- <div class="userHome_text4 usingLocker_term">현재까지</div> -->
     </div>
-    <div class="circles_container" v-if="circles.length > 1">
+    <div class="circles_container" :style="widthStyle">
       <div
         class="gray_circles"
-        v-for="(circle, i) in circles"
+        v-for="i in storeList.length"
         :key="i"
-        :style="{backgroundColor: page == i ? '#666' : '#ccc'}"
-      ></div>
+        :style="{backgroundColor: page == i - 1 ? '#666' : '#ccc'}"
+      />
     </div>
   </div>
 </template>
@@ -56,30 +57,31 @@
 export default {
   data() {
     return {
-      circles: [0, 0, 0, 0, 0, 0],
       page: 0,
+      widthStyle: {},
     };
   },
   computed: {
-    userStore() {
-      return this.$store.state.userStore;
+    storeList() {
+      return this.$store.state.userStore.storeList;
     },
   },
   methods: {
     move2LockerDetail() {
       this.$store.commit('setServiceType', '내보관함');
-      this.$router.push('/UserPage/locker');
+      this.$router.push({path: '/UserPage/locker', query: {page: this.page}});
     },
     prevLocker() {
       if (this.page > 0) this.page -= 1;
     },
     nextLocker() {
-      if (this.page < this.circles.length - 1) this.page += 1;
+      if (this.page < this.storeList.length - 1) this.page += 1;
     },
   },
   mounted() {
-    const circlesContainer = document.querySelector('.circles_container');
-    circlesContainer.style.width = `${this.circles.length * 12}px`;
+    // const circlesContainer = document.querySelector('.circles_container');
+    // circlesContainer.style.width = `${this.storeList.length * 12}px`;
+    this.widthStyle = {width: `${this.storeList.length * 12}px`};
   },
 };
 </script>

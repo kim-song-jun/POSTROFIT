@@ -10,27 +10,28 @@
       <div class="historyLocker_line">2</div>
       <div class="historyLocker_station_name">
         <div class="historyLocker_station_location">
-          {{ userStore.location }}
+          {{ storeList[page].location }}
         </div>
-        2호선 {{ userStore.station }}
+        2호선 {{ storeList[page].station }}
       </div>
     </div>
     <lockerInfo />
     <div class="historyLocker_detail_container">
       <div class="userHome_text">
         요금:
-        <span class="userHome_point_text">{{ userStore.fee }}원</span> / 4시간
+        <span class="userHome_point_text">{{ storeList[page].fee }}원</span> /
+        4시간
       </div>
       <div class="usingLocker_empty"></div>
       <div class="userHome_text">
         사이즈:
-        <span class="userHome_point_text">{{ userStore.size }}</span>
+        <span class="userHome_point_text">{{ storeList[page].size }}</span>
       </div>
       <div class="usingLocker_empty2"></div>
       <div class="userHome_text4">보관 기간</div>
       <div class="userHome_text3 usingLocker_time">
-        {{ userStore.date }}
-        <span class="userHome_point_text">{{ userStore.time }}</span> ~
+        {{ storeList[page].date }}
+        <span class="userHome_point_text">{{ storeList[page].time }}</span> ~
       </div>
       <div class="userHome_text4 usingLocker_term">현재까지</div>
     </div>
@@ -49,8 +50,11 @@ import noticeBox from '../../components/noticeBox.vue';
 
 export default {
   computed: {
-    userStore() {
-      return this.$store.state.userStore;
+    storeList() {
+      return this.$store.state.userStore.storeList;
+    },
+    page() {
+      return parseInt(this.$route.query.page);
     },
   },
   methods: {
@@ -75,14 +79,15 @@ export default {
     },
     setUserStore() {
       // 보관함 데이터 서버 요청
-      const storageId = this.$store.state.userStore.storageId;
+      const storageId =
+        this.$store.state.userStore.storeList[this.page].storageId;
       this.$axios.get(`/user/store/storage/${storageId}`).then((response) => {
         this.$store.commit('setUserStore', {
           ...this.$store.state.userStore,
           storageStatDTO: response.data.storageStatDTO,
           storagePasswordDTO: response.data.storagePasswordDTO,
         });
-        console.log(this.makeLockerByData(response.data.storageStatDTOS));
+        // console.log(this.makeLockerByData(response.data.storageStatDTOS));
         this.$store.commit('setStorage', {
           locker: this.makeLockerByData(response.data.storageStatDTOS),
         });

@@ -6,7 +6,7 @@
       @closeLockerModal="lockerModalOpen = false"
     ></lockerModal>
     <div class="userPage_top">
-      <div class="userPage_arrow" @click="$router.go(-1)">
+      <div class="userPage_arrow" @click="moveBeforePage">
         <div class="userPage_arrow_top"></div>
         <div class="userPage_arrow_bottom"></div>
       </div>
@@ -47,6 +47,13 @@ export default {
           password: this.$store.state.userHistoryDetail.password,
         };
     },
+    moveBeforePage() {
+      if (this.$store.state.userID == Infinity) this.$router.push('/LoginPage');
+      this.$router.go(-1);
+    },
+  },
+  created() {
+    if (this.$store.state.userID == Infinity) this.$router.push('/LoginPage');
   },
   components: {
     lockerModal,

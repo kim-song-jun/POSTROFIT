@@ -60,20 +60,22 @@ export default {
     testGetHistory() {
       return this.$axios.get(`/user/history/${this.$store.state.userID}`);
     },
-    mapUserStore(store) {
-      return {
-        location: '서울특별시 동작구 남부순환로 지하2089',
-        station: store?.stationName ?? '?',
-        storageId: store.storageId,
-        storeId: store.storeId,
-        size: this.getSize(store.storageSize),
-        date: `${store.timestamp.slice(0, 4)}/${store.timestamp.slice(
-          5,
-          7,
-        )}/${store.timestamp.slice(8, 10)}`,
-        time: store.timestamp.slice(11, 16),
-        fee: store.price,
-      };
+    mapUserStore(stores) {
+      return stores.map((store) => {
+        return {
+          location: '서울특별시 동작구 남부순환로 지하2089',
+          station: store?.stationName ?? '?',
+          storageId: store.storageId,
+          storeId: store.storeId,
+          size: this.getSize(store.storageSize),
+          date: `${store.timestamp.slice(0, 4)}/${store.timestamp.slice(
+            5,
+            7,
+          )}/${store.timestamp.slice(8, 10)}`,
+          time: store.timestamp.slice(11, 16),
+          fee: store.price,
+        };
+      });
     },
     mapUserHistory(history) {
       return history.map((el) => {
@@ -99,22 +101,23 @@ export default {
     setUserData() {
       Promise.all([this.testGetStore(), this.testGetHistory()])
         .then((responses) => {
-          this.$store.commit(
-            'setUserStore',
-            this.mapUserStore(responses[0].data),
-          );
-          this.$store.commit(
-            'setUserHistory',
-            this.mapUserHistory(responses[1].data),
-          );
+          if (Array.isArray(responses[0].data) && responses[0].data.length > 0)
+            this.$store.commit('setUserStore', {
+              storeList: [...this.mapUserStore(responses[0].data)],
+            });
+          if (Array.isArray(responses[1].data) && responses[1].data.length > 0)
+            this.$store.commit(
+              'setUserHistory',
+              this.mapUserHistory(responses[1].data),
+            );
         })
         .catch((error) => {
           console.log(error);
         });
     },
   },
-  mounted() {
-    this.setUserData();
+  created() {
+    // this.setUserData();
   },
 };
 </script>

@@ -28,7 +28,7 @@ const store = createStore({
       storage: {locker: []},
       // 이용하는 서비스 구분
       serviceType: '',
-      userStore: {},
+      userStore: {storeList: []},
       userHistory: [],
       userHistoryDetail: {},
     };
