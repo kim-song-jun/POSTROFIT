@@ -123,7 +123,7 @@ export default {
     if (this.$store.state.userID == Infinity) this.$router.push('/LoginPage');
   },
   mounted() {
-    this.setUserData();
+    if (this.$store.state.userID != Infinity) this.setUserData();
   },
 };
 </script>
